@@ -1,8 +1,11 @@
 package engineer.davidauza.veterinariavetcare.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import engineer.davidauza.veterinariavetcare.R;
@@ -14,6 +17,7 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
         configurarSpinner();
+        configurarBotonContinuar();
     }
 
     /**
@@ -30,5 +34,21 @@ public class RegistroActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Aplicar el adaptador al Spinner
         spinner.setAdapter(adapter);
+    }
+
+    /**
+     * Este método configura el botón para continuar al correspondiente formulario según el registro
+     * que se vaya a realizar. //TODO validar esta descripción y método
+     */
+    private void configurarBotonContinuar() {
+        Button botonContinuar = findViewById(R.id.btn_continuar);
+        botonContinuar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegistroActivity.this,
+                        RegistroFormularioActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

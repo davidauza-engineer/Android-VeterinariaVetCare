@@ -17,4 +17,23 @@
     <string name="registro_btn_continuar">Continuar</string>
     <!-- Strings para activity_registro.xml Fin -->
 
+    <!-- Strings para activity_registro_mascota.xml Inicio -->
+    <string name="registro_mascota_txt_titulo">Registro Mascota</string>
+    <string name="registro_mascota_hint_nombre">Nombre</string>
+    <string name="registro_mascota_txt_sexo">Sexo</string>
+    <string name="registro_mascota_txt_sexo_m">M</string>
+    <string name="registro_mascota_txt_sexo_f">F</string>
+    <string name="registro_mascota_txt_fecha_nacimiento">Fecha de Nacimiento</string>
+    <string name="registro_mascota_hint_padre">Padre</string>
+    <string name="registro_mascota_hint_madre">Madre</string>
+    <string name="registro_mascota_hint_raza">Raza</string>
+    <string name="registro_mascota_hint_especie">Especie</string>
+    <string name="registro_mascota_hint_enfermedades">Enfermedades</string>
+    <string name="registro_mascota_hint_consultas">Consultas</string>
+    <string name="registro_mascota_hint_examenes">Exámenes</string>
+    <string name="registro_mascota_hint_tratamientos">Tratamientos</string>
+    <string name="registro_mascota_hint_propietarios">Propietarios</string>
+    <string name="registro_mascota_btn_registrar">Registrar</string>
+    <!-- Strings para activity_registro_mascota.xml Fin -->
+
 </resources>

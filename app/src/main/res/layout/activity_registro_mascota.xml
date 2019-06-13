@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.RegistroFormularioActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margen_estandar"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registro_mascota_txt_titulo"
+            android:textAppearance="?android:textAppearanceLarge" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_nombre" />
+
+        <TextView
+            style="@style/TextViewsRegistro"
+            android:text="@string/registro_mascota_txt_sexo" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margen_estandar"
+            android:orientation="horizontal">
+
+            <RadioButton
+                style="@style/RadioButtonRegistro"
+                android:text="@string/registro_mascota_txt_sexo_m" />
+
+            <RadioButton
+                style="@style/RadioButtonRegistro"
+                android:text="@string/registro_mascota_txt_sexo_f" />
+
+        </RadioGroup>
+
+        <TextView
+            style="@style/TextViewsRegistro"
+            android:text="@string/registro_mascota_txt_fecha_nacimiento" />
+
+        <DatePicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margen_estandar"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_padre" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_madre" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_raza" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_especie" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_enfermedades" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_consultas" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_examenes" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_tratamientos" />
+
+        <EditText
+            style="@style/EditTextRegistro"
+            android:hint="@string/registro_mascota_hint_propietarios" />
+
+        <Button
+            android:layout_width="@dimen/activity_main_ancho_botones"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margen_doble"
+            android:layout_marginBottom="@dimen/margen_doble"
+            android:text="@string/registro_mascota_btn_registrar" />
+
+    </LinearLayout>
+
+</ScrollView>
