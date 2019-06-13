@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Veterinaria Vet Care</string>
+
+    <!-- Strings para activity_main.xml Inicio -->
+    <string name="main_btn_registro">Registrar</string>
+    <string name="main_btn_consulta">Consultar</string>
+    <string name="main_btn_reportes">Reportes</string>
+    <!-- Strings para activity_main.xml Fin -->
+
+    <!-- Strings para activity_registro.xml Inicio -->
+    <string-array name="registro_spn_opciones">
+        <item>Mascota</item>
+        <item>Veterinario</item>
+        <item>Consulta</item>
+    </string-array>
+    <string name="registro_txt_spinner">Selecciona el tipo de registro que deseas realizar</string>
+    <string name="registro_btn_continuar">Continuar</string>
+    <!-- Strings para activity_registro.xml Fin -->
+
 </resources>

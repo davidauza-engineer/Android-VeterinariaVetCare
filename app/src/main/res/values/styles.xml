@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Estilo para los botones de activity_main.xml -->
+    <style name="BotonesMainActivity">
+        <item name="android:layout_width">@dimen/activity_main_ancho_botones</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
