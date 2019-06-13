@@ -36,4 +36,16 @@
     <string name="registro_mascota_btn_registrar">Registrar</string>
     <!-- Strings para activity_registro_mascota.xml Fin -->
 
+    <!-- Strings para activity_registro_veterinario.xml Fin -->
+    <string name="registro_veterinario_txt_titulo">Registro Veterinario</string>
+    <string name="registro_veterinario_hint_nombre">Nombre</string>
+    <string name="registro_veterinario_hint_numero_identidad">Número de Identidad</string>
+    <string name="registro_veterinario_hint_direccion">Dirección</string>
+    <string name="registro_veterinario_hint_tarjeta_profesional">Tarjeta Profesional</string>
+    <string name="registro_veterinario_hint_especialidad">Especialidad</string>
+    <string name="registro_veterinario_hint_consultas">Consultas Realizadas</string>
+    <string name="registro_veterinario_hint_telefono">Teléfono</string>
+    <string name="registro_veterinario_btn_registrar">Registrar</string>
+    <!-- String para activity_registro_mascota.xml Fin -->
+
 </resources>

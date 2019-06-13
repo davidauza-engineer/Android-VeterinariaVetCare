@@ -14,8 +14,9 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <!-- Estilo para los EditText de activity_registro_mascota.xml -->
-    <style name="EditTextRegistro">
+    <!-- Estilo para los EditText de activity_registro_mascota.xml,
+        activity_registro_veterinario.xml y activity_registro_consulta -->
+    <style name="EditTextRegistros">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/margen_estandar</item>
@@ -36,6 +37,25 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/margen_estandar</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <!-- Estilo para los TextViews que sirven como títulos en las activities de registro:
+        activity_registro_mascota.xml, activity_registro_veterinario.xml y
+        activity_registro_consulta.xml -->
+    <style name="TitulosRegistros">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+    </style>
+
+    <!-- Estilo para los botones para registrar en activity_registro_mascota.xml,
+        activity_registro_veterinario.xml y activity_registro_consulta.xml -->
+    <style name="BotonesRegistrar">
+        <item name="android:layout_width">@dimen/activity_main_ancho_botones</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/margen_doble</item>
+        <item name="android:layout_marginBottom">@dimen/margen_doble</item>
     </style>
 
 </resources>

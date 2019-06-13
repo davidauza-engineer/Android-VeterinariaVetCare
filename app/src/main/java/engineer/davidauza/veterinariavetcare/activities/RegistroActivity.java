@@ -4,13 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
 import engineer.davidauza.veterinariavetcare.R;
 
-public class RegistroActivity extends AppCompatActivity {
+public class RegistroActivity extends AppCompatActivity
+        implements AdapterView.OnItemSelectedListener {
+
+    /**
+     * Esta constante contiene la llave con la cual se identifica el extra que se añade al intent
+     * antes de iniciar la RegistroFormularioActivity.
+     */
+    public static final String EXTRA_POSICION_SPINNER =
+            "engineer.davidauza.veterinariavetcare.activities.ExtraPosicionSpinner";
+
+    /**
+     * Esta variable contiene el ítem que está seleccionado actualmente en el Spinner.
+     */
+    private int mItemSeleccionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +32,17 @@ public class RegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
         configurarSpinner();
         configurarBotonContinuar();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // Se seleccionó un item en el Spinner.
+        mItemSeleccionado = position;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Por defecto está seleccionado mascota.
     }
 
     /**
@@ -34,6 +59,8 @@ public class RegistroActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Aplicar el adaptador al Spinner
         spinner.setAdapter(adapter);
+        // Aplicar el escucha para la selección del usuario
+        spinner.setOnItemSelectedListener(RegistroActivity.this);
     }
 
     /**
@@ -47,6 +74,8 @@ public class RegistroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegistroActivity.this,
                         RegistroFormularioActivity.class);
+                // Se envía la posición a RegistroFormularioActivity.class
+                intent.putExtra(EXTRA_POSICION_SPINNER, mItemSeleccionado);
                 startActivity(intent);
             }
         });

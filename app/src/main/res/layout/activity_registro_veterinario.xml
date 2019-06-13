@@ -3,4 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margen_estandar"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TitulosRegistros"
+            android:text="@string/registro_veterinario_txt_titulo" />
+
+        <EditText
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_veterinario_hint_nombre" />
+
+        <EditText
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_veterinario_hint_numero_identidad" />
+
+        <EditText
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_veterinario_hint_tarjeta_profesional" />
+
+        <EditText
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_veterinario_hint_especialidad" />
+
+        <EditText
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_veterinario_hint_consultas" />
+
+        <EditText
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_veterinario_hint_telefono" />
+
+        <Button
+            style="@style/BotonesRegistrar"
+            android:text="@string/registro_veterinario_btn_registrar" />
+
+    </LinearLayout>
+
 </ScrollView>

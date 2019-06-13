@@ -12,13 +12,11 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/registro_mascota_txt_titulo"
-            android:textAppearance="?android:textAppearanceLarge" />
+            style="@style/TitulosRegistros"
+            android:text="@string/registro_mascota_txt_titulo" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_nombre" />
 
         <TextView
@@ -53,47 +51,43 @@
             android:datePickerMode="spinner" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_padre" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_madre" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_raza" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_especie" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_enfermedades" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_consultas" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_examenes" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_tratamientos" />
 
         <EditText
-            style="@style/EditTextRegistro"
+            style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_propietarios" />
 
         <Button
-            android:layout_width="@dimen/activity_main_ancho_botones"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/margen_doble"
-            android:layout_marginBottom="@dimen/margen_doble"
+            style="@style/BotonesRegistrar"
             android:text="@string/registro_mascota_btn_registrar" />
 
     </LinearLayout>
