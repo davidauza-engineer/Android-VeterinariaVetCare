@@ -100,13 +100,15 @@ public class RegistroFormularioActivity extends AppCompatActivity {
                 crearMascota();
                 registarMascota();
                 break;
+            case 1:
+                crearVeterinario();
         }
     }
 
 
     /**
-     * Este método crea un nuevo objeto mascota con base en los valores suministrados por el usuario
-     * en la interfaz gráfica.
+     * Este método crea un nuevo objeto {@link Mascota} con base en los valores suministrados por el
+     * usuario en la interfaz gráfica.
      */
     private void crearMascota() {
         // Crear ID para la mascota.
@@ -205,5 +207,13 @@ public class RegistroFormularioActivity extends AppCompatActivity {
             }
         };
         mRequest.add(mStringRequest);
+    }
+
+    /**
+     * Este método crea un nuevo objeto mascota con base en los valores suministrados por el usuario
+     * en la interfaz gráfica.
+     */
+    private void crearVeterinario() {
+
     }
 }
