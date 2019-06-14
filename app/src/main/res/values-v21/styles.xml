@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Estilo para los DatePickers presentes en activity_registro_mascota.xml y
+        activity_registro_consulta.xml en APIs mayores o iguales a 21 -->
+    <style name="FechaRegistros">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margen_estandar</item>
+        <item name="android:calendarViewShown">false</item>
+        <item name="android:datePickerMode">spinner</item>
+    </style>
+
+</resources>

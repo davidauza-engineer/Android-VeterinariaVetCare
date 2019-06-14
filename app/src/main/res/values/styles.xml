@@ -31,8 +31,8 @@
     </style>
 
     <!-- Estilo para los TextViews que indican el campo a rellenar en activity_registro_mascota.xml
-        -->
-    <style name="TextViewsRegistro">
+        y activity_registro_consulta.xml -->
+    <style name="TextViewsRegistros">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/margen_estandar</item>
@@ -56,6 +56,23 @@
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_marginTop">@dimen/margen_doble</item>
         <item name="android:layout_marginBottom">@dimen/margen_doble</item>
+    </style>
+
+    <!-- Estilo para los LinearLayouts presentes en activity_registro_mascota.xml,
+        activity_registro_veterinario.xml y activity_registro_consulta.xml -->
+    <style name="LinearLayoutsRegistros">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margen_estandar</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Estilo para los DatePickers presentes en activity_registro_mascota.xml y
+        activity_registro_consulta.xml -->
+    <style name="FechaRegistros">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margen_estandar</item>
     </style>
 
 </resources>

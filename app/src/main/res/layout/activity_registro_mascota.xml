@@ -5,22 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".activities.RegistroFormularioActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margen_estandar"
-        android:orientation="vertical">
+    <LinearLayout style="@style/LinearLayoutsRegistros">
 
         <TextView
             style="@style/TitulosRegistros"
             android:text="@string/registro_mascota_txt_titulo" />
 
         <EditText
+            android:id="@+id/txt_nombre_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_nombre" />
 
         <TextView
-            style="@style/TextViewsRegistro"
+            style="@style/TextViewsRegistros"
             android:text="@string/registro_mascota_txt_sexo" />
 
         <RadioGroup
@@ -30,63 +27,72 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/btn_sexo_masculino"
                 style="@style/RadioButtonRegistro"
-                android:text="@string/registro_mascota_txt_sexo_m" />
+                android:text="@string/registro_mascota_txt_sexo_masculino" />
 
             <RadioButton
+                android:id="@+id/btn_sexo_femenino"
                 style="@style/RadioButtonRegistro"
-                android:text="@string/registro_mascota_txt_sexo_f" />
+                android:text="@string/registro_mascota_txt_sexo_femenino" />
 
         </RadioGroup>
 
         <TextView
-            style="@style/TextViewsRegistro"
+            style="@style/TextViewsRegistros"
             android:text="@string/registro_mascota_txt_fecha_nacimiento" />
 
         <DatePicker
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margen_estandar"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
+            android:id="@+id/dte_fecha"
+            style="@style/FechaRegistros" />
 
         <EditText
+            android:id="@+id/txt_padre_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_padre" />
 
         <EditText
+            android:id="@+id/txt_madre_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_madre" />
 
         <EditText
+            android:id="@+id/txt_raza_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_raza" />
 
         <EditText
+            android:id="@+id/txt_especie_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_especie" />
 
         <EditText
+            android:id="@+id/txt_enfermedades_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_enfermedades" />
 
         <EditText
+            android:id="@+id/txt_consultas_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_consultas" />
 
         <EditText
+            android:id="@+id/txt_examenes_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_examenes" />
 
         <EditText
+            android:id="@+id/txt_tratamientos_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_tratamientos" />
 
         <EditText
+            android:id="@+id/txt_propietarios_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_propietarios" />
 
         <Button
+            android:id="@+id/btn_registrar"
             style="@style/BotonesRegistrar"
             android:text="@string/registro_mascota_btn_registrar" />
 

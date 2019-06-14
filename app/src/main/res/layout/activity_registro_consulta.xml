@@ -7,36 +7,42 @@
 
         <TextView
             style="@style/TitulosRegistros"
-            android:text="@string/registro_veterinario_txt_titulo" />
+            android:text="@string/registro_consulta_txt_titulo" />
+
+        <TextView
+            style="@style/TextViewsRegistros"
+            android:text="@string/registro_consulta_txt_fecha" />
+
+        <DatePicker style="@style/FechaRegistros" />
 
         <EditText
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_nombre" />
+            android:hint="@string/registro_consulta_hint_motivo" />
 
         <EditText
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_numero_identidad" />
+            android:hint="@string/registro_consulta_hint_patologia" />
 
         <EditText
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_tarjeta_profesional" />
+            android:hint="@string/registro_consulta_hint_veterinario" />
 
         <EditText
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_especialidad" />
+            android:hint="@string/registro_consulta_hint_examenes" />
 
         <EditText
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_consultas" />
+            android:hint="@string/registro_consulta_hint_tratamientos" />
 
         <EditText
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_telefono" />
+            android:hint="@string/registro_consulta_hint_mascota" />
 
         <Button
             android:id="@+id/btn_registrar"
             style="@style/BotonesRegistrar"
-            android:text="@string/registro_veterinario_btn_registrar" />
+            android:text="@string/registro_consulta_btn_registrar" />
 
     </LinearLayout>
 

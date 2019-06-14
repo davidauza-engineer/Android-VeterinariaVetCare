@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Veterinaria Vet Care</string>
+
 
     <!-- Strings para activity_main.xml Inicio -->
+    <string name="app_name">Veterinaria Vet Care</string>
     <string name="main_btn_registro">Registrar</string>
     <string name="main_btn_consulta">Consultar</string>
     <string name="main_btn_reportes">Reportes</string>
@@ -21,8 +22,8 @@
     <string name="registro_mascota_txt_titulo">Registro Mascota</string>
     <string name="registro_mascota_hint_nombre">Nombre</string>
     <string name="registro_mascota_txt_sexo">Sexo</string>
-    <string name="registro_mascota_txt_sexo_m">M</string>
-    <string name="registro_mascota_txt_sexo_f">F</string>
+    <string name="registro_mascota_txt_sexo_masculino">Masculino</string>
+    <string name="registro_mascota_txt_sexo_femenino">Femenino</string>
     <string name="registro_mascota_txt_fecha_nacimiento">Fecha de Nacimiento</string>
     <string name="registro_mascota_hint_padre">Padre</string>
     <string name="registro_mascota_hint_madre">Madre</string>
@@ -34,9 +35,11 @@
     <string name="registro_mascota_hint_tratamientos">Tratamientos</string>
     <string name="registro_mascota_hint_propietarios">Propietarios</string>
     <string name="registro_mascota_btn_registrar">Registrar</string>
+    <string name="registro_mascota_toast_exito">La mascota fue registrada exitosamente</string>
+    <string name="registro_mascota_toast_error">Error:</string>
     <!-- Strings para activity_registro_mascota.xml Fin -->
 
-    <!-- Strings para activity_registro_veterinario.xml Fin -->
+    <!-- Strings para activity_registro_veterinario.xml Inicio -->
     <string name="registro_veterinario_txt_titulo">Registro Veterinario</string>
     <string name="registro_veterinario_hint_nombre">Nombre</string>
     <string name="registro_veterinario_hint_numero_identidad">Número de Identidad</string>
@@ -47,5 +50,18 @@
     <string name="registro_veterinario_hint_telefono">Teléfono</string>
     <string name="registro_veterinario_btn_registrar">Registrar</string>
     <!-- String para activity_registro_mascota.xml Fin -->
+
+    <!-- Strings para activity_registro_consulta.xml Inicio -->
+    <string name="registro_consulta_txt_titulo">Registro Consulta</string>
+    <string name="registro_consulta_txt_fecha">Fecha</string>
+    <string name="registro_consulta_hint_motivo">Motivo</string>
+    <string name="registro_consulta_hint_patologia">Patología Asociada</string>
+    <string name="registro_consulta_hint_veterinario">Veterinario</string>
+    <string name="registro_consulta_hint_examenes">Exámenes</string>
+    <string name="registro_consulta_hint_tratamientos">Tratamientos</string>
+    <string name="registro_consulta_hint_mascota">Mascota Atendida</string>
+    <string name="registro_consulta_btn_registrar">Registrar</string>
+    <!-- Strings para activity_registro_consulta.xml Fin -->
+
 
 </resources>
