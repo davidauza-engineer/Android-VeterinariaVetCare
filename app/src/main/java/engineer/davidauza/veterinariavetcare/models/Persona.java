@@ -1,5 +1,9 @@
 package engineer.davidauza.veterinariavetcare.models;
 
+/**
+ * {@link Persona} representa a una persona. Un persona tiene un ID único que la identifica, un
+ * nombre, un número de identidad y una dirección.
+ */
 public class Persona {
 
     /**

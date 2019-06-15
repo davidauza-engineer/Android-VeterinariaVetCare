@@ -1,10 +1,10 @@
 package engineer.davidauza.veterinariavetcare.models;
 
 /**
- * Esta clase representa una mascota. Una mascota tiene un id, un nombre, un sexo, una fecha de
- * nacimiento, un padre, una madre, una raza, una especie, enfermedades que puede padecer, consultas
- * a las que ha asistido, exámenes que se ha realizado, tratamientos a los que se ha sometido, y
- * propietarios a los que ha pertenecido.
+ * Esta clase representa una {@link Mascota}. Una mascota tiene un id, un nombre, un sexo, una fecha
+ * de nacimiento, un padre, una madre, una raza, una especie, enfermedades que puede padecer,
+ * consultas a las que ha asistido, exámenes que se ha realizado, tratamientos a los que se ha
+ * sometido, y propietarios a los que ha pertenecido.
  */
 public class Mascota {
 
@@ -60,6 +60,13 @@ public class Mascota {
      * Llave para acceder a los propietarios de la mascota en la base de datos.
      */
     public static final String PROPIETARIOS = "propietarios";
+
+    /**
+     * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevas
+     * mascotas.
+     */
+    public static final String URL =
+            "https://davidauza-engineer.000webhostapp.com/web_service/set_mascota.php";
     /**
      * El ID único para cada mascota.
      */

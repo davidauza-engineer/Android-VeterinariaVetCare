@@ -22,23 +22,27 @@ import java.util.Map;
 
 import engineer.davidauza.veterinariavetcare.R;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
+import engineer.davidauza.veterinariavetcare.models.Veterinario;
 
 public class RegistroFormularioActivity extends AppCompatActivity {
 
     private RequestQueue mRequest;
 
-    private StringRequest mStringRequest;
-
     /**
-     * Esta variable almacena el objeto mascota que será registrado en la base de datos.
+     * Esta variable almacena el objeto {@link Mascota} que será registrado en la base de datos.
      */
     private Mascota mMascota;
 
     /**
+     * Esta variable almacena el objeto {@link Veterinario} que será registrado en la base de datos.
+     */
+    private Veterinario mVeterinario;
+
+    /**
      * Esta variable almacena la posición seleccionada en el Spinner en activity_registro.xml.
-     * 0 indica que se cargue la interfaz gráfica para registrar una mascota.
-     * 1 indica que se cargue la interfaz gráfica para registrar un veterinario.
-     * 2 indica que se cargue la interfaz gráfica para registrar una consulta.
+     * 0 indica que se cargue la interfaz gráfica para registrar una {@link Mascota}.
+     * 1 indica que se cargue la interfaz gráfica para registrar un {@link Veterinario}.
+     * 2 indica que se cargue la interfaz gráfica para registrar una consulta. // TODO
      */
     private int mRegistroSeleccionadoSpinner;
 
@@ -88,21 +92,60 @@ public class RegistroFormularioActivity extends AppCompatActivity {
     }
 
     /**
-     * Este método realiza el registro en la base de datos con base en la selección que el usuario
-     * realizón en activity_registro.xml
-     * 0 indica que se va a registrar una mascota.
-     * 1 indica que se va a registrar un veterinario.
-     * 2 indica que se va a registrar una consulta.
+     * Este método hace el registro pertinente en la base de datos, según el valor que contiene
+     * mRegistroSeleccionadoSpinner. Dicho valor es provisto por el usuario en activity_registro.xml
+     * Si es 0 se registrará una {@link Mascota}, si es 1 se registrará un {@link Veterinario}, y si
+     * es 2 se registrará una consulta. // TODO.
      */
     private void registrarEnBaseDeDatos() {
+        String url = "";
+        String toastExito = "";
+        String toastError = "";
+        // Crear un Map que será enviado al servidor para hacer el registro en la base de datos
+        Map<String, String> parametros = null;
         switch (mRegistroSeleccionadoSpinner) {
             case 0:
                 crearMascota();
-                registarMascota();
+                url = Mascota.URL;
+                toastExito = getString(R.string.registro_mascota_toast_exito);
+                toastError = getString(R.string.registro_mascota_toast_error);
+                parametros = crearParametrosMascota();
                 break;
             case 1:
                 crearVeterinario();
+                url = Veterinario.URL;
+                toastExito = getString(R.string.registro_veterinario_toast_exito);
+                toastError = getString(R.string.registro_veterinario_toast_error);
+                parametros = crearParametrosVeterinario();
+                break;
         }
+        final String toastExitoFinal = toastExito;
+        final String toastErrorFinal = toastError;
+        final Map<String, String> parametrosFinal = parametros;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Cuando se obtenga respuesta del servidor crear toast informando al
+                        // usuario
+                        Toast.makeText(RegistroFormularioActivity.this, toastExitoFinal,
+                                Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Si se presenta algún error, imprimirlo en forma de Toast
+                Toast.makeText(RegistroFormularioActivity.this,
+                        toastErrorFinal + " " + error, Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return parametrosFinal;
+            }
+        };
+        mRequest.add(stringRequest);
     }
 
 
@@ -128,7 +171,8 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         // Obtener la fecha de nacimiento de la mascota
         DatePicker fechaDatePicker = findViewById(R.id.dte_fecha);
         int dia = fechaDatePicker.getDayOfMonth();
-        int mes = fechaDatePicker.getMonth();
+        // Se añade 1 porque el DatePicker devuelve el índice para el mes
+        int mes = fechaDatePicker.getMonth() + 1;
         int ano = fechaDatePicker.getYear();
         String fechaDeNacimiento = dia + "/" + mes + "/" + ano;
         // Obtener padre
@@ -164,56 +208,76 @@ public class RegistroFormularioActivity extends AppCompatActivity {
     }
 
     /**
-     * Este método realiza el registro de la mascota en la base de datos.
+     * Este método crea un Map que contiene los valores para ser enviados al servidor y
+     * posteriormente a la base de datos, para el caso de las {@link Mascota}s.
      */
-    private void registarMascota() {
-        String url = "https://davidauza-engineer.000webhostapp.com/web_service/set_mascota.php";
-        mStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Cuando se obtenga respuesta del servidor crear toast informando al usuario
-                Toast.makeText(RegistroFormularioActivity.this,
-                        getString(R.string.registro_mascota_toast_exito), Toast.LENGTH_LONG).show();
-                finish();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // Si se presenta algún error, imprimirlo en forma de Toast
-                Toast.makeText(RegistroFormularioActivity.this,
-                        getString(R.string.registro_mascota_toast_error) + " " + error,
-                        Toast.LENGTH_LONG).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                // Crear un HashMap que será enviado al servidor para hacer el registro en la base
-                // de datos
-                Map<String, String> parametros = new HashMap<>();
-                parametros.put(Mascota.ID, mMascota.getId());
-                parametros.put(Mascota.NOMBRE, mMascota.getNombre());
-                parametros.put(Mascota.SEXO, mMascota.getSexo());
-                parametros.put(Mascota.FECHA_DE_NACIMIENTO, mMascota.getFechaDeNacimiento());
-                parametros.put(Mascota.PADRE, mMascota.getPadre());
-                parametros.put(Mascota.MADRE, mMascota.getMadre());
-                parametros.put(Mascota.RAZA, mMascota.getRaza());
-                parametros.put(Mascota.ESPECIE, mMascota.getEspecie());
-                parametros.put(Mascota.ENFERMEDADES, mMascota.getEnfermedades());
-                parametros.put(Mascota.CONSULTAS, mMascota.getConsultas());
-                parametros.put(Mascota.EXAMENES, mMascota.getExamenes());
-                parametros.put(Mascota.TRATAMIENTOS, mMascota.getTratamientos());
-                parametros.put(Mascota.PROPIETARIOS, mMascota.getPropietarios());
-                return parametros;
-            }
-        };
-        mRequest.add(mStringRequest);
+    private Map<String, String> crearParametrosMascota() {
+        Map<String, String> parametros = new HashMap<>();
+        parametros.put(Mascota.ID, mMascota.getId());
+        parametros.put(Mascota.NOMBRE, mMascota.getNombre());
+        parametros.put(Mascota.SEXO, mMascota.getSexo());
+        parametros.put(Mascota.FECHA_DE_NACIMIENTO, mMascota.getFechaDeNacimiento());
+        parametros.put(Mascota.PADRE, mMascota.getPadre());
+        parametros.put(Mascota.MADRE, mMascota.getMadre());
+        parametros.put(Mascota.RAZA, mMascota.getRaza());
+        parametros.put(Mascota.ESPECIE, mMascota.getEspecie());
+        parametros.put(Mascota.ENFERMEDADES, mMascota.getEnfermedades());
+        parametros.put(Mascota.CONSULTAS, mMascota.getConsultas());
+        parametros.put(Mascota.EXAMENES, mMascota.getExamenes());
+        parametros.put(Mascota.TRATAMIENTOS, mMascota.getTratamientos());
+        parametros.put(Mascota.PROPIETARIOS, mMascota.getPropietarios());
+        return parametros;
     }
 
     /**
-     * Este método crea un nuevo objeto mascota con base en los valores suministrados por el usuario
-     * en la interfaz gráfica.
+     * Este método crea un nuevo objeto {@link Veterinario} con base en los valores suministrados
+     * por el usuario en la interfaz gráfica.
      */
     private void crearVeterinario() {
+        // Crear ID para el Veterinario
+        String id = Double.toString(Math.random() * 1_000);
+        // Obtener nombre del Veterinario
+        EditText nombreEditText = findViewById(R.id.txt_nombre_veterinario);
+        String nombre = nombreEditText.getText().toString();
+        // Obtener el número de identidad del Veterinario
+        EditText numeroDeIdentidadEditText = findViewById(R.id.txt_numero_identidad_veterinario);
+        String numeroDeIdentidad = numeroDeIdentidadEditText.getText().toString();
+        // Obtener dirección del Veterinario
+        EditText direccionEditText = findViewById(R.id.txt_direccion_veterinario);
+        String direccion = direccionEditText.getText().toString();
+        // Obtener el número de tarjeta profesional del Veterinario
+        EditText tarjetaProfesionalEditText =
+                findViewById(R.id.txt_tarjeta_profesional_veterinario);
+        String tarjetaProfesional = tarjetaProfesionalEditText.getText().toString();
+        // Obtener especialidad del Veterinario
+        EditText especialidadEditText = findViewById(R.id.txt_especialidad_veterinario);
+        String especialidad = especialidadEditText.getText().toString();
+        // Obtener cosultas realizadas por el Veterinario
+        EditText consultasRealizadasEditText =
+                findViewById(R.id.txt_consultas_realizadas_veterinario);
+        String consultasRealizadas = consultasRealizadasEditText.getText().toString();
+        // Obtener teléfono Veterinario
+        EditText telefonoEditText = findViewById(R.id.txt_telefono_veterinario);
+        String telefono = telefonoEditText.getText().toString();
+        // Crear Veterinario
+        mVeterinario = new Veterinario(id, nombre, numeroDeIdentidad, direccion, tarjetaProfesional,
+                especialidad, consultasRealizadas, telefono);
+    }
 
+    /**
+     * Este método crea un Map que contiene los valores para ser enviados al servidor y
+     * posteriormente a la base de datos, para el caso de los {@link Veterinario}s.
+     */
+    private Map<String, String> crearParametrosVeterinario() {
+        Map<String, String> parametros = new HashMap<>();
+        parametros.put(Veterinario.ID, mVeterinario.getId());
+        parametros.put(Veterinario.NOMBRE, mVeterinario.getNombre());
+        parametros.put(Veterinario.NUMERO_DE_IDENTIDAD, mVeterinario.getNumeroDeIdentidad());
+        parametros.put(Veterinario.DIRECCION, mVeterinario.getDireccion());
+        parametros.put(Veterinario.TARJETA_PROFESIONAL, mVeterinario.getTarjetaProfesional());
+        parametros.put(Veterinario.ESPECIALIDAD, mVeterinario.getEspecialidad());
+        parametros.put(Veterinario.CONSULTAS_REALIZADAS, mVeterinario.getConsultasRelizadas());
+        parametros.put(Veterinario.TELEFONO, mVeterinario.getTelefono());
+        return parametros;
     }
 }

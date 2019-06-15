@@ -49,6 +49,9 @@
     <string name="registro_veterinario_hint_consultas">Consultas Realizadas</string>
     <string name="registro_veterinario_hint_telefono">Teléfono</string>
     <string name="registro_veterinario_btn_registrar">Registrar</string>
+    <string name="registro_veterinario_toast_exito">El veterinario fue registrado exitosamente
+    </string>
+    <string name="registro_veterinario_toast_error">Error:</string>
     <!-- String para activity_registro_mascota.xml Fin -->
 
     <!-- Strings para activity_registro_consulta.xml Inicio -->

@@ -1,21 +1,25 @@
 package engineer.davidauza.veterinariavetcare.models;
 
+/**
+ * {@link Veterinario} es una {@link Persona}. Este cuenta con un número de tarjeta profesional, una
+ * especialidad médica, un total consultas realizadas y un teléfono.
+ */
 public class Veterinario extends Persona {
 
     /**
      * Llave para acceder al número de tarjeta profesional del veterinario en la base de datos.
      */
-    public static final String NUMERO_TARJETA_PROFESIONAL = "numeroDeTarjetaProfesion";
+    public static final String TARJETA_PROFESIONAL = "tarjetaProfesional";
 
     /**
      * Llave para acceder a la especialidad médica del veterinario en la base de datos.
      */
-    public static final String ESPECIALIDAD_MEDICA = "especialidadMedica";
+    public static final String ESPECIALIDAD = "especialidad";
 
     /**
      * Llave para acceder al número de consultas realizadas por el veterinario en la base de datos.
      */
-    public static final String TOTAL_CONSULTAS_REALIZADAS = "consultasRealizadas";
+    public static final String CONSULTAS_REALIZADAS = "consultasRealizadas";
 
     /**
      * Llave para acceder al teléfono del veterinario en la base de datos.
@@ -23,19 +27,26 @@ public class Veterinario extends Persona {
     public static final String TELEFONO = "telefono";
 
     /**
+     * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevos
+     * veterinarios.
+     */
+    public static final String URL =
+            "https://davidauza-engineer.000webhostapp.com/web_service/set_veterinario.php";
+
+    /**
      * El número de tarjeta profesional del veterinario.
      */
-    private String mNumeroDeTarjetaProfesional;
+    private String mTarjetaProfesional;
 
     /**
      * La especialidad médica del veterinario.
      */
-    private String mEspecialidadMedica;
+    private String mEspecialidad;
 
     /**
      * El número de consultas realizadas por el veterinario;
      */
-    private String mTotalConsultasRelizadas;
+    private String mConsultasRelizadas;
 
     /**
      * El número de teléfono del veterinario.
@@ -45,49 +56,49 @@ public class Veterinario extends Persona {
     /**
      * Constructor para crear un nuevo objeto {@link Veterinario}.
      *
-     * @param pId                         es el ID único para el Veterinario.
-     * @param pNombre                     ese el nombre del Veterinario.
-     * @param pNumeroDeIdentidad          es el número de identidad del Veterinario.
-     * @param pDireccion                  es la dirección del Veterinario.
-     * @param pNumeroDeTarjetaProfesional es el número de tarjeta profesional del Veterinario.
-     * @param pEspecialidadMedica         es la especialidad médica del Veterinario.
-     * @param pTotalConsultasRealizadas   es el total de consultas realizadas por el Veterinario.
-     * @param pTelefono                   es el teléfono del Veterinario.
+     * @param pId                  es el ID único para el Veterinario.
+     * @param pNombre              es el nombre del Veterinario.
+     * @param pNumeroDeIdentidad   es el número de identidad del Veterinario.
+     * @param pDireccion           es la dirección del Veterinario.
+     * @param pTarjetaProfesional  es el número de tarjeta profesional del Veterinario.
+     * @param pEspecialidad        es la especialidad médica del Veterinario.
+     * @param pConsultasRealizadas es el total de consultas realizadas por el Veterinario.
+     * @param pTelefono            es el teléfono del Veterinario.
      */
     public Veterinario(String pId,
                        String pNombre,
                        String pNumeroDeIdentidad,
                        String pDireccion,
-                       String pNumeroDeTarjetaProfesional,
-                       String pEspecialidadMedica,
-                       String pTotalConsultasRealizadas,
+                       String pTarjetaProfesional,
+                       String pEspecialidad,
+                       String pConsultasRealizadas,
                        String pTelefono) {
         super(pId, pNombre, pNumeroDeIdentidad, pDireccion);
-        mNumeroDeTarjetaProfesional = pNumeroDeTarjetaProfesional;
-        mEspecialidadMedica = pEspecialidadMedica;
-        mTotalConsultasRelizadas = pTotalConsultasRealizadas;
+        mTarjetaProfesional = pTarjetaProfesional;
+        mEspecialidad = pEspecialidad;
+        mConsultasRelizadas = pConsultasRealizadas;
         mTelefono = pTelefono;
     }
 
     /**
      * Obtener el número de tarjeta profesional del Veterinario.
      */
-    public String getNumeroDeTarjetaProfesional() {
-        return mNumeroDeTarjetaProfesional;
+    public String getTarjetaProfesional() {
+        return mTarjetaProfesional;
     }
 
     /**
      * Obtener la especialidad médica del veterinario.
      */
-    public String getEspecialidadMedica() {
-        return mEspecialidadMedica;
+    public String getEspecialidad() {
+        return mEspecialidad;
     }
 
     /**
      * Obtener el total de consultas realizadas por el veterinario.
      */
-    public String getTotalConsultasRelizadas() {
-        return mTotalConsultasRelizadas;
+    public String getConsultasRelizadas() {
+        return mConsultasRelizadas;
     }
 
     /**
