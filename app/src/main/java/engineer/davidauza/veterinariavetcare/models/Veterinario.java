@@ -28,7 +28,7 @@ public class Veterinario extends Persona {
 
     /**
      * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevos
-     * veterinarios.
+     * {@link Veterinario}s.
      */
     public static final String URL =
             "https://davidauza-engineer.000webhostapp.com/web_service/set_veterinario.php";

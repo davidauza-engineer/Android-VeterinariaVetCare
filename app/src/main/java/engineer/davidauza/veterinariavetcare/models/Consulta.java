@@ -48,6 +48,13 @@ public class Consulta {
     public static final String MASCOTA_ATENDIDA = "mascotaAtendida";
 
     /**
+     * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevas
+     * {@link Consulta}s.
+     */
+    public static final String URL =
+            "https://davidauza-engineer.000webhostapp.com/web_service/set_consulta.php";
+
+    /**
      * El ID de la consulta.
      */
     private String mId;

@@ -126,7 +126,11 @@ public class RegistroFormularioActivity extends AppCompatActivity {
                 break;
             case 2:
                 crearConsulta();
-
+                url = Consulta.URL;
+                toastExito = getString(R.string.registro_consulta_toast_exito);
+                toastError = getString(R.string.registro_consulta_toast_error);
+                parametros = crearParametrosConsulta();
+                break;
         }
         final String toastExitoFinal = toastExito;
         final String toastErrorFinal = toastError;
@@ -318,6 +322,23 @@ public class RegistroFormularioActivity extends AppCompatActivity {
     }
 
     /**
+     * Este método crea un Map que contiene los valores para ser enviados al servidor y
+     * posteriormente a la base de datos, para el caso de las {@link Consulta}s.
+     */
+    private Map<String, String> crearParametrosConsulta() {
+        Map<String, String> parametros = new HashMap<>();
+        parametros.put(Consulta.ID, mConsulta.getId());
+        parametros.put(Consulta.FECHA, mConsulta.getFecha());
+        parametros.put(Consulta.MOTIVO, mConsulta.getMotivo());
+        parametros.put(Consulta.PATOLOGIA_ASOCIADA, mConsulta.getPatologiaAsociada());
+        parametros.put(Consulta.VETERINARIO, mConsulta.getVeterinario());
+        parametros.put(Consulta.EXAMENES, mConsulta.getExamenes());
+        parametros.put(Consulta.TRATAMIENTOS, mConsulta.getTratamientos());
+        parametros.put(Consulta.MASCOTA_ATENDIDA, mConsulta.getMascotaAtendida());
+        return parametros;
+    }
+
+    /**
      * Este método retorna un String con la fecha presente en el DatePicke indicado, en el formato
      * dia/mes/año.
      *
@@ -329,7 +350,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         int dia = datePicker.getDayOfMonth();
         // Se añada 1, puesto que el DatePicker retorna el índice del mes
         int mes = datePicker.getMonth() + 1;
-        int ano = datePicker.getMonth();
+        int ano = datePicker.getYear();
         return dia + "/" + mes + "/" + ano;
     }
 }

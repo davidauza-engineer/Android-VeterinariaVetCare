@@ -64,6 +64,8 @@
     <string name="registro_consulta_hint_tratamientos">Tratamientos</string>
     <string name="registro_consulta_hint_mascota">Mascota Atendida</string>
     <string name="registro_consulta_btn_registrar">Registrar</string>
+    <string name="registro_consulta_toast_exito">La consulta fue registrada exitosamente</string>
+    <string name="registro_consulta_toast_error">Error:</string>
     <!-- Strings para activity_registro_consulta.xml Fin -->
 
 
