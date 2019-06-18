@@ -45,10 +45,10 @@ public class RegistroFormularioActivity extends AppCompatActivity {
     private Consulta mConsulta;
 
     /**
-     * Esta variable almacena la posición seleccionada en el Spinner en activity_registro.xml.
+     * Esta variable almacena la posición seleccionada en el Spinner en activity_seleccionn.xml.
      * 0 indica que se cargue la interfaz gráfica para registrar una {@link Mascota}.
      * 1 indica que se cargue la interfaz gráfica para registrar un {@link Veterinario}.
-     * 2 indica que se cargue la interfaz gráfica para registrar una consulta. // TODO
+     * 2 indica que se cargue la interfaz gráfica para registrar una {@link Consulta}.
      */
     private int mRegistroSeleccionadoSpinner;
 
@@ -63,11 +63,11 @@ public class RegistroFormularioActivity extends AppCompatActivity {
 
     /**
      * Este método selecciona la interfaz gráfica adecuada según la selección del usuario en
-     * activity_registro.xml
+     * activity_seleccionn.xml
      */
     private void seleccionarInterfazGráfica() {
         mRegistroSeleccionadoSpinner =
-                getIntent().getIntExtra(RegistroActivity.EXTRA_POSICION_SPINNER, -1);
+                getIntent().getIntExtra(SeleccionActivity.EXTRA_POSICION_SPINNER, -1);
         switch (mRegistroSeleccionadoSpinner) {
             case 0:
                 setContentView(R.layout.activity_registro_mascota);
@@ -99,7 +99,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
 
     /**
      * Este método hace el registro pertinente en la base de datos, según el valor que contiene
-     * mRegistroSeleccionadoSpinner. Dicho valor es provisto por el usuario en activity_registro.xml
+     * mRegistroSeleccionadoSpinner. Dicho valor es provisto por el usuario en activity_seleccion.xmll
      * Si es 0 se registrará una {@link Mascota}, si es 1 se registrará un {@link Veterinario}, y si
      * es 2 se registrará una {@link Consulta}.
      */
@@ -112,21 +112,21 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         switch (mRegistroSeleccionadoSpinner) {
             case 0:
                 crearMascota();
-                url = Mascota.URL;
+                url = Mascota.URL_SET;
                 toastExito = getString(R.string.registro_mascota_toast_exito);
                 toastError = getString(R.string.registro_mascota_toast_error);
                 parametros = crearParametrosMascota();
                 break;
             case 1:
                 crearVeterinario();
-                url = Veterinario.URL;
+                url = Veterinario.URL_SET;
                 toastExito = getString(R.string.registro_veterinario_toast_exito);
                 toastError = getString(R.string.registro_veterinario_toast_error);
                 parametros = crearParametrosVeterinario();
                 break;
             case 2:
                 crearConsulta();
-                url = Consulta.URL;
+                url = Consulta.URL_SET;
                 toastExito = getString(R.string.registro_consulta_toast_exito);
                 toastError = getString(R.string.registro_consulta_toast_error);
                 parametros = crearParametrosConsulta();

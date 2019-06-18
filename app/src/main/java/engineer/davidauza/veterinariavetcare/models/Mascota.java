@@ -63,10 +63,18 @@ public class Mascota {
 
     /**
      * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevas
-     * mascotas.
+     * {@link Mascota}s.
      */
-    public static final String URL =
+    public static final String URL_SET =
             "https://davidauza-engineer.000webhostapp.com/web_service/set_mascota.php";
+
+    /**
+     * Contiene la URL necesaria para acceder al microservicio que permite consultar las
+     * {@link Mascota}s registradas.
+     */
+    public static final String URL_GET =
+            "https://davidauza-engineer.000webhostapp.com/web_service/get_mascota.php";
+
     /**
      * El ID único para cada mascota.
      */
@@ -163,6 +171,24 @@ public class Mascota {
         mExamenes = pExamenes;
         mTratamientos = pTratamientos;
         mPropietarios = pPropietarios;
+    }
+
+    /**
+     * Constructor para crear un nuevo objeto {@link Mascota}.
+     *
+     * @param pNombre            es el nombre de la mascota.
+     * @param pFechaDeNacimiento es la fecha de nacimiento de la mascota.
+     * @param pSexo              es el sexo de la mascota.
+     * @param pEspecie           es la especie de la mascota.
+     */
+    public Mascota(String pNombre,
+                   String pFechaDeNacimiento,
+                   String pSexo,
+                   String pEspecie) {
+        mNombre = pNombre;
+        mFechaDeNacimiento = pFechaDeNacimiento;
+        mSexo = pSexo;
+        mEspecie = pEspecie;
     }
 
     /**

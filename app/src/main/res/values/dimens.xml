@@ -4,5 +4,6 @@
     <dimen name="activity_main_ancho_botones">144dp</dimen>
     <dimen name="margen_estandar">16dp</dimen>
     <dimen name="margen_doble">32dp</dimen>
+    <dimen name="margen_medio">8dp</dimen>
 
 </resources>

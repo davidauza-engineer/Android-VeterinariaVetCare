@@ -8,10 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import engineer.davidauza.veterinariavetcare.R;
 
-public class RegistroActivity extends AppCompatActivity
+public class SeleccionActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
 
     /**
@@ -26,10 +27,20 @@ public class RegistroActivity extends AppCompatActivity
      */
     private int mItemSeleccionado;
 
+    /**
+     * Esta variable alamacena el valor pasado como extra en un intent antes de abrir esta activity.
+     * Su valor es 0 si el botón seleccionado en la interfaz anterior fue Registrar, ó 1 si el botón
+     * presionado fue consultar.
+     */
+    private int mBotonOrigen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
+        setContentView(R.layout.activity_seleccion);
+        // Obtener el extra que viene en el intent que abre la actividad
+        mBotonOrigen = getIntent().getIntExtra(MainActivity.EXTRA_BOTON, -1);
+        configurarTextoAyuda();
         configurarSpinner();
         configurarBotonContinuar();
     }
@@ -46,8 +57,21 @@ public class RegistroActivity extends AppCompatActivity
     }
 
     /**
+     * Este método configura el texto de ayuda encima del Spinner, basado en el valor recibido al
+     * abrir la Activity.
+     */
+    private void configurarTextoAyuda() {
+        TextView textoAyuda = findViewById(R.id.txt_texto_ayuda);
+        if (mBotonOrigen == 0) {
+            textoAyuda.setText(getString(R.string.registro_registrar_txt_spinner));
+        } else if (mBotonOrigen == 1) {
+            textoAyuda.setText(getString(R.string.registro_consultar_txt_spinner));
+        }
+    }
+
+    /**
      * Este método asocia la lista de opciones para el Spinner en la interfaz gráfica
-     * activity_registro.xml
+     * activity_seleccion.xmll
      */
     private void configurarSpinner() {
         Spinner spinner = findViewById(R.id.spn_spineer);
@@ -60,21 +84,29 @@ public class RegistroActivity extends AppCompatActivity
         // Aplicar el adaptador al Spinner
         spinner.setAdapter(adapter);
         // Aplicar el escucha para la selección del usuario
-        spinner.setOnItemSelectedListener(RegistroActivity.this);
+        spinner.setOnItemSelectedListener(SeleccionActivity.this);
     }
 
     /**
-     * Este método configura el botón para continuar al correspondiente formulario según el registro
-     * que se vaya a realizar.
+     * Este método configura el botón para continuar, ya sea al registro escogido ó al listado de
+     * consultas, según el valor de mBotonOrigen y la opción elegida en el Spinner, la cual se
+     * pasará como extra a la siguiente Activity.
      */
     private void configurarBotonContinuar() {
         Button botonContinuar = findViewById(R.id.btn_continuar);
         botonContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistroActivity.this,
-                        RegistroFormularioActivity.class);
-                // Se envía la posición a RegistroFormularioActivity.class
+                Intent intent = null;
+                if (mBotonOrigen == 0) {
+                    intent = new Intent(SeleccionActivity.this,
+                            RegistroFormularioActivity.class);
+                } else if (mBotonOrigen == 1) {
+                    intent = new Intent(SeleccionActivity.this,
+                            ListadoConsultaActivity.class);
+                }
+                // Se envía la posición a RegistroFormularioActivity ó a
+                // ListadoConsultaActivity según corresponda
                 intent.putExtra(EXTRA_POSICION_SPINNER, mItemSeleccionado);
                 startActivity(intent);
             }

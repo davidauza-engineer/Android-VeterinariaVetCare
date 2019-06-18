@@ -51,8 +51,15 @@ public class Consulta {
      * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevas
      * {@link Consulta}s.
      */
-    public static final String URL =
+    public static final String URL_SET =
             "https://davidauza-engineer.000webhostapp.com/web_service/set_consulta.php";
+
+    /**
+     * Contiene la URL necesaria para acceder al microservicio que permite consultar las
+     * {@link Consulta}s registradas.
+     */
+    public static final String URL_GET =
+            "https://davidauza-engineer.000webhostapp.com/web_service/get_consulta.php";
 
     /**
      * El ID de la consulta.

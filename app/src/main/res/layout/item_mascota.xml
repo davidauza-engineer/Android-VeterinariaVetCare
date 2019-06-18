@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margen_estandar"
+    android:layout_marginTop="@dimen/margen_estandar"
+    android:layout_marginRight="@dimen/margen_estandar"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItemMascota">
+
+        <TextView
+            style="@style/NombreMascotaItemMascota"
+            android:text="@string/item_mascota_txt_nombre" />
+
+        <TextView
+            android:id="@+id/txt_nombre_mascota"
+            style="@style/NombreMascotaItemMascota"
+            android:layout_marginLeft="@dimen/margen_medio"
+            tools:text="Luke Skywalker" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItemMascota">
+
+        <TextView
+            style="@style/TextoAyudaItemMascota"
+            android:text="@string/item_mascota_txt_fecha_de_nacimiento" />
+
+        <TextView
+            android:id="@+id/txt_fecha_de_nacimiento_mascota"
+            style="@style/TextoContenidoItemMascota"
+            tools:text="02/03/2015" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItemMascota">
+
+        <TextView
+            style="@style/TextoAyudaItemMascota"
+            android:text="@string/item_mascota_txt_sexo" />
+
+        <TextView
+            android:id="@+id/txt_sexo_mascota"
+            style="@style/TextoContenidoItemMascota"
+            tools:text="Masculino" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            style="@style/TextoAyudaItemMascota"
+            android:text="@string/item_mascota_txt_especie" />
+
+        <TextView
+            android:id="@+id/txt_especie_mascota"
+            style="@style/TextoContenidoItemMascota"
+            tools:text="Canino" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margen_estandar"
+        android:background="@android:color/darker_gray" />
+
+</LinearLayout>

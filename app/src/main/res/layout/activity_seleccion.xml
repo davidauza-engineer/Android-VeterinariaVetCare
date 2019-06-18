@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.RegistroActivity">
+    tools:context=".activities.SeleccionActivity">
 
     <TextView
+        android:id="@+id/txt_texto_ayuda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/spn_spineer"
@@ -13,8 +14,8 @@
         android:layout_marginRight="@dimen/margen_estandar"
         android:layout_marginBottom="@dimen/margen_estandar"
         android:gravity="center_horizontal"
-        android:text="@string/registro_txt_spinner"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="@string/registro_registrar_txt_spinner" />
 
     <Spinner
         android:id="@+id/spn_spineer"

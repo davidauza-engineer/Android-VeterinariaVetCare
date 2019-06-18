@@ -8,27 +8,56 @@ import android.widget.Button;
 
 import engineer.davidauza.veterinariavetcare.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    /**
+     * Esta constante contiene la llave con la cual se identifica el extra que se añade al intent
+     * antes de iniciar la SeleccionActivity.
+     */
+    public static final String EXTRA_BOTON =
+            "engineer.davidauza.veterinariavetcare.activities.ExtraBoton";
+
+    /**
+     * Contiene la referencia hacia el botón registrar.
+     */
+    private Button mBotonRegistrar;
+
+    /**
+     * Contiene la referencia hacia el botón consultar.
+     */
+    private Button mBotonConsultar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        configurarBotonRegistrar();
+        configurarBotones();
     }
 
     /**
-     * Este método configura el botón registrar de la interfaz gráfica principal, para abrir la
-     * actividad RegistroActivity.
+     * Este método configura el escucha que usarán botones de la interfaz para iniciar la
+     * SeleccionActivity, donde el usuario selecciona qué tipo de registro/consulta desea realizar.
+     * Se pone un extra con valor 0 si el botón presionado fue Registrar, o de 1 si el botón
+     * presionado fue Consultar. Dicho extra es obtenido en la SeleccionActivity.
      */
-    private void configurarBotonRegistrar() {
-        Button botonRegistrar = findViewById(R.id.btn_registrar);
-        botonRegistrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
-                startActivity(intent);
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(MainActivity.this, SeleccionActivity.class);
+        if (v == mBotonRegistrar) {
+            intent.putExtra(EXTRA_BOTON, 0);
+        } else if (v == mBotonConsultar) {
+            intent.putExtra(EXTRA_BOTON, 1);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * Este métoodo configura los botones de la interfaz gráfica.
+     */
+    private void configurarBotones() {
+        mBotonRegistrar = findViewById(R.id.btn_registrar);
+        mBotonRegistrar.setOnClickListener(this);
+        mBotonConsultar = findViewById(R.id.btn_consultar);
+        mBotonConsultar.setOnClickListener(this);
     }
 }

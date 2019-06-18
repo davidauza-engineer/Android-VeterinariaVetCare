@@ -75,4 +75,33 @@
         <item name="android:layout_marginTop">@dimen/margen_estandar</item>
     </style>
 
+    <!-- Estilo para los LinearLayout horizontales en item_mascota.xml -->
+    <style name="LinearLayoutsHorizontalesItemMascota">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- Estilo para los TextView que incluyen el nombre de la mascota en item_mascota.xml -->
+    <style name="NombreMascotaItemMascota">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+    </style>
+
+    <!-- Estilo para los TextView que incluyen texto de ayuda en item_mascota.xml -->
+    <style name="TextoAyudaItemMascota">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <!-- Estilo para los TextView que incluyen texto de cada mascota en item_mascota.xml -->
+    <style name="TextoContenidoItemMascota">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:layout_marginLeft">@dimen/margen_medio</item>
+    </style>
+
 </resources>

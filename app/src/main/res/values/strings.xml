@@ -8,15 +8,18 @@
     <string name="main_btn_reportes">Reportes</string>
     <!-- Strings para activity_main.xml Fin -->
 
-    <!-- Strings para activity_registro.xml Inicio -->
+    <!-- Strings para activity_seleccion.xmll Inicio -->
     <string-array name="registro_spn_opciones">
         <item>Mascota</item>
         <item>Veterinario</item>
         <item>Consulta</item>
     </string-array>
-    <string name="registro_txt_spinner">Selecciona el tipo de registro que deseas realizar</string>
+    <string name="registro_registrar_txt_spinner">Selecciona el tipo de registro que deseas realizar
+    </string>
+    <string name="registro_consultar_txt_spinner">Selecciona el tipo de consulta que deseas realizar
+    </string>
     <string name="registro_btn_continuar">Continuar</string>
-    <!-- Strings para activity_registro.xml Fin -->
+    <!-- Strings para activity_seleccion.xmll Fin -->
 
     <!-- Strings para activity_registro_mascota.xml Inicio -->
     <string name="registro_mascota_txt_titulo">Registro Mascota</string>
@@ -67,6 +70,17 @@
     <string name="registro_consulta_toast_exito">La consulta fue registrada exitosamente</string>
     <string name="registro_consulta_toast_error">Error:</string>
     <!-- Strings para activity_registro_consulta.xml Fin -->
+
+    <!-- Strings para activity_listado_consulta.xml Inicio -->
+    <string name="listado_consulta_toast_error">No se pudo conectar con la base de datos</string>
+    <!-- String para activity_listado_consulta.xml Fin -->
+
+    <!-- Strings para item_mascota.xml Inicio -->
+    <string name="item_mascota_txt_nombre">Nombre:</string>
+    <string name="item_mascota_txt_sexo">Sexo:</string>
+    <string name="item_mascota_txt_fecha_de_nacimiento">Fecha de Nacimiento:</string>
+    <string name="item_mascota_txt_especie">Especie:</string>
+    <!-- Strings para item_mascota.xml Fin -->
 
 
 </resources>
