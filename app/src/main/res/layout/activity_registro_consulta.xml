@@ -13,29 +13,37 @@
             style="@style/TextViewsRegistros"
             android:text="@string/registro_consulta_txt_fecha" />
 
-        <DatePicker style="@style/FechaRegistros" />
+        <DatePicker
+            android:id="@+id/dte_fecha"
+            style="@style/FechaRegistros" />
 
         <EditText
+            android:id="@+id/txt_motivo_consulta"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_consulta_hint_motivo" />
 
         <EditText
+            android:id="@+id/txt_patologia_asociada_consulta"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_consulta_hint_patologia" />
 
         <EditText
+            android:id="@+id/txt_veterinario_consulta"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_consulta_hint_veterinario" />
 
         <EditText
+            android:id="@+id/txt_examenes_consulta"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_consulta_hint_examenes" />
 
         <EditText
+            android:id="@+id/txt_tratamientos_consulta"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_consulta_hint_tratamientos" />
 
         <EditText
+            android:id="@+id/txt_mascota_atendida_consulta"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_consulta_hint_mascota" />
 

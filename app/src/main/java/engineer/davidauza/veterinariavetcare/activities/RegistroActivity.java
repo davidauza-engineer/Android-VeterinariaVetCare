@@ -65,7 +65,7 @@ public class RegistroActivity extends AppCompatActivity
 
     /**
      * Este método configura el botón para continuar al correspondiente formulario según el registro
-     * que se vaya a realizar. //TODO validar esta descripción y método
+     * que se vaya a realizar.
      */
     private void configurarBotonContinuar() {
         Button botonContinuar = findViewById(R.id.btn_continuar);

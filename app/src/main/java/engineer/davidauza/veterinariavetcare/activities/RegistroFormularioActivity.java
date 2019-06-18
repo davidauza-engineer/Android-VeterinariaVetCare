@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import engineer.davidauza.veterinariavetcare.R;
+import engineer.davidauza.veterinariavetcare.models.Consulta;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
 import engineer.davidauza.veterinariavetcare.models.Veterinario;
 
@@ -37,6 +38,11 @@ public class RegistroFormularioActivity extends AppCompatActivity {
      * Esta variable almacena el objeto {@link Veterinario} que será registrado en la base de datos.
      */
     private Veterinario mVeterinario;
+
+    /**
+     * Esta variable almacena el objeto {@link Consulta} que será registrado en la base de datos.
+     */
+    private Consulta mConsulta;
 
     /**
      * Esta variable almacena la posición seleccionada en el Spinner en activity_registro.xml.
@@ -95,7 +101,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
      * Este método hace el registro pertinente en la base de datos, según el valor que contiene
      * mRegistroSeleccionadoSpinner. Dicho valor es provisto por el usuario en activity_registro.xml
      * Si es 0 se registrará una {@link Mascota}, si es 1 se registrará un {@link Veterinario}, y si
-     * es 2 se registrará una consulta. // TODO.
+     * es 2 se registrará una {@link Consulta}.
      */
     private void registrarEnBaseDeDatos() {
         String url = "";
@@ -118,6 +124,9 @@ public class RegistroFormularioActivity extends AppCompatActivity {
                 toastError = getString(R.string.registro_veterinario_toast_error);
                 parametros = crearParametrosVeterinario();
                 break;
+            case 2:
+                crearConsulta();
+
         }
         final String toastExitoFinal = toastExito;
         final String toastErrorFinal = toastError;
@@ -169,12 +178,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
             sexo = getString(R.string.registro_mascota_txt_sexo_femenino);
         }
         // Obtener la fecha de nacimiento de la mascota
-        DatePicker fechaDatePicker = findViewById(R.id.dte_fecha);
-        int dia = fechaDatePicker.getDayOfMonth();
-        // Se añade 1 porque el DatePicker devuelve el índice para el mes
-        int mes = fechaDatePicker.getMonth() + 1;
-        int ano = fechaDatePicker.getYear();
-        String fechaDeNacimiento = dia + "/" + mes + "/" + ano;
+        String fechaDeNacimiento = obtenerFecha(R.id.dte_fecha);
         // Obtener padre
         EditText padreEditText = findViewById(R.id.txt_padre_mascota);
         String padre = padreEditText.getText().toString();
@@ -279,5 +283,53 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         parametros.put(Veterinario.CONSULTAS_REALIZADAS, mVeterinario.getConsultasRelizadas());
         parametros.put(Veterinario.TELEFONO, mVeterinario.getTelefono());
         return parametros;
+    }
+
+    /**
+     * Este método crea un nuevo objeto {@link Consulta} con base en los valores suministrados por
+     * el usuario en la interfaz gráfica.
+     */
+    private void crearConsulta() {
+        // Crear ID para la consulta
+        String id = Double.toString(Math.random() * 1_000_000);
+        // Obtener fecha
+        String fecha = obtenerFecha(R.id.dte_fecha);
+        // Obtener motivo
+        EditText motivoEditText = findViewById(R.id.txt_motivo_consulta);
+        String motivo = motivoEditText.getText().toString();
+        // Obtener patología asociada.
+        EditText patologiaAsociadaEditText = findViewById(R.id.txt_patologia_asociada_consulta);
+        String patologiaAsociada = patologiaAsociadaEditText.getText().toString();
+        // Obtener veterinario
+        EditText veterinarioEditText = findViewById(R.id.txt_veterinario_consulta);
+        String veterinario = veterinarioEditText.getText().toString();
+        // Obtener exámenes
+        EditText examenesEditText = findViewById(R.id.txt_examenes_consulta);
+        String examenes = examenesEditText.getText().toString();
+        // Obtener tratamientos
+        EditText tratamientosEditText = findViewById(R.id.txt_tratamientos_consulta);
+        String tratamientos = tratamientosEditText.getText().toString();
+        // Obtener mascotaAtendida
+        EditText mascotaAtenidaEditText = findViewById(R.id.txt_mascota_atendida_consulta);
+        String mascotaAtendida = mascotaAtenidaEditText.getText().toString();
+        // Crear Consulta
+        mConsulta = new Consulta(id, fecha, motivo, patologiaAsociada, veterinario, examenes,
+                tratamientos, mascotaAtendida);
+    }
+
+    /**
+     * Este método retorna un String con la fecha presente en el DatePicke indicado, en el formato
+     * dia/mes/año.
+     *
+     * @param pDatePicker es el DatePicker de donde se obtiene la fecha.
+     * @return retorna un String en el formato dia/mes/año.
+     */
+    private String obtenerFecha(int pDatePicker) {
+        DatePicker datePicker = findViewById(pDatePicker);
+        int dia = datePicker.getDayOfMonth();
+        // Se añada 1, puesto que el DatePicker retorna el índice del mes
+        int mes = datePicker.getMonth() + 1;
+        int ano = datePicker.getMonth();
+        return dia + "/" + mes + "/" + ano;
     }
 }
