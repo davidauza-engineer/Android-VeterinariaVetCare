@@ -132,6 +132,24 @@ public class Consulta {
     }
 
     /**
+     * Constructor para crear un nuevo objeto {@link Consulta}.
+     *
+     * @param pFecha           es la fecha de la consulta.
+     * @param pMotivo          es el motivo de la consulta.
+     * @param pVeterinario     es el veterinario que atendió la consulta.
+     * @param pMascotaAtendida es la mascota atendida durante la consulta.
+     */
+    public Consulta(String pFecha,
+                    String pMotivo,
+                    String pVeterinario,
+                    String pMascotaAtendida) {
+        mFecha = pFecha;
+        mMotivo = pMotivo;
+        mVeterinario = pVeterinario;
+        mMascotaAtendida = pMascotaAtendida;
+    }
+
+    /**
      * Este método retorna el ID de la consulta.
      */
     public String getId() {

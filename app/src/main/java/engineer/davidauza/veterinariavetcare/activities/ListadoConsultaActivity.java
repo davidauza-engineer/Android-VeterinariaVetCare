@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import engineer.davidauza.veterinariavetcare.R;
+import engineer.davidauza.veterinariavetcare.adapters.ConsultaAdapter;
 import engineer.davidauza.veterinariavetcare.adapters.MascotaAdapter;
 import engineer.davidauza.veterinariavetcare.adapters.VeterinarioAdapter;
 import engineer.davidauza.veterinariavetcare.models.Consulta;
@@ -72,7 +73,7 @@ public class ListadoConsultaActivity extends AppCompatActivity
      * Un ArrayList que contendrá la lista de {@link Consulta}s, si se están consultando las
      * {@link Consulta}s.
      */
-    private ArrayList<Consulta> mConsultaArrayList;
+    private ArrayList<Consulta> mConsultaArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +118,13 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         mVeterinariosArrayList.add(new Veterinario(nombreVeterinario,
                                 tarjetaProfesional, especialidad, consultasRealizadas));
                         break;
+                    case 2:
+                        String fecha = jsonObject.optString("fecha");
+                        String motivo = jsonObject.optString("motivo");
+                        String veterinario = jsonObject.optString("veterinario");
+                        String mascotaAtendida = jsonObject.optString("mascotaAtendida");
+                        mConsultaArrayList.add(new Consulta(fecha, motivo, veterinario,
+                                mascotaAtendida));
                 }
             }
             configurarAdaptador();
@@ -166,6 +174,9 @@ public class ListadoConsultaActivity extends AppCompatActivity
                 break;
             case 1:
                 adaptador = new VeterinarioAdapter(mVeterinariosArrayList);
+                break;
+            case 2:
+                adaptador = new ConsultaAdapter(mConsultaArrayList);
                 break;
         }
         mRecyclerView.setAdapter(adaptador);

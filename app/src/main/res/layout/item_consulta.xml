@@ -7,12 +7,38 @@
 
         <TextView
             style="@style/TituloItems"
-            android:text="@string/item_veterinario_txt_nombre" />
+            android:text="@string/item_consulta_txt_fecha" />
 
         <TextView
-            android:id="@+id/txt_nombre_veterinario"
+            android:id="@+id/txt_fecha_consulta"
             style="@style/TituloItems"
             android:layout_marginLeft="@dimen/margen_medio"
+            tools:text="14/6/2019" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
+            android:text="@string/item_consulta_txt_motivo" />
+
+        <TextView
+            android:id="@+id/txt_motivo_consulta"
+            style="@style/TextoContenidoItems"
+            tools:text="Chequeo general" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
+            android:text="@string/item_consulta_txt_veterinario" />
+
+        <TextView
+            android:id="@+id/txt_veterinario_consulta"
+            style="@style/TextoContenidoItems"
             tools:text="David R. Auza" />
 
     </LinearLayout>
@@ -21,38 +47,12 @@
 
         <TextView
             style="@style/TextoAyudaItems"
-            android:text="@string/item_veterinario_txt_tarjeta_profesional" />
+            android:text="@string/item_consulta_txt_mascota_atendida" />
 
         <TextView
-            android:id="@+id/txt_tarjeta_profesional_veterinario"
+            android:id="@+id/txt_mascota_atendida_consulta"
             style="@style/TextoContenidoItems"
-            tools:text="0-987-654-321" />
-
-    </LinearLayout>
-
-    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
-
-        <TextView
-            style="@style/TextoAyudaItems"
-            android:text="@string/item_veterinario_txt_especialidad" />
-
-        <TextView
-            android:id="@+id/txt_especialidad_veterinario"
-            style="@style/TextoContenidoItems"
-            tools:text="Cirugía Canina" />
-
-    </LinearLayout>
-
-    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
-
-        <TextView
-            style="@style/TextoAyudaItems"
-            android:text="@string/item_veterinario_txt_consultas_realizadas" />
-
-        <TextView
-            android:id="@+id/txt_consultas_realizadas_veterinario"
-            style="@style/TextoContenidoItems"
-            tools:text="2" />
+            tools:text="Luke Skywalker" />
 
     </LinearLayout>
 

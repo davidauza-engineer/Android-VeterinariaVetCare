@@ -94,9 +94,10 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <!-- Estilo para los TextView que incluyen el nombre de la mascota en item_mascota.xml y el
-        nombre del veterinario en item_veterinario.xml -->
-    <style name="NombreItems">
+    <!-- Estilo para los TextView que incluyen el nombre de la mascota en item_mascota.xml, el
+        nombre del veterinario en item_veterinario.xml, o la fecha de la consulta en
+        item_consulta.xml -->
+    <style name="TituloItems">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:textAppearanceLarge</item>

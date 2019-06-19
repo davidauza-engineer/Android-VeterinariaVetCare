@@ -98,4 +98,12 @@
     <!-- Strings para item_veterinario.xml Fin -->
 
 
+    <!-- Strings para item_consulta.xml Inicio -->
+    <string name="item_consulta_txt_fecha">Fecha:</string>
+    <string name="item_consulta_txt_motivo">Motivo:</string>
+    <string name="item_consulta_txt_veterinario">Veterinario:</string>
+    <string name="item_consulta_txt_mascota_atendida">Mascota Atendida:</string>
+    <!-- Strings para item_veterinario.xml Fin -->
+
+
 </resources>
