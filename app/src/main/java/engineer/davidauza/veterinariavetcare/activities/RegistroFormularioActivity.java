@@ -25,6 +25,11 @@ import engineer.davidauza.veterinariavetcare.models.Consulta;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
 import engineer.davidauza.veterinariavetcare.models.Veterinario;
 
+/**
+ * Esta Activity es responsable de mostrar la interfaz gráfica según la elección del usuario en
+ * activity_seleccion.xml y de enviar al servidor los datos que el usuario registre en dicha intefaz
+ * gráfica.
+ */
 public class RegistroFormularioActivity extends AppCompatActivity {
 
     private RequestQueue mRequest;

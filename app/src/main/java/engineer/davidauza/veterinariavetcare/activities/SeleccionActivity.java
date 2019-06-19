@@ -12,6 +12,12 @@ import android.widget.TextView;
 
 import engineer.davidauza.veterinariavetcare.R;
 
+/**
+ * Esta clase es responsable de mostrar una interfaz gráfica al usuario para que este seleccione si
+ * desea registrar/consultar una {@link engineer.davidauza.veterinariavetcare.models.Mascota}, un
+ * {@link engineer.davidauza.veterinariavetcare.models.Veterinario}, o una
+ * {@link engineer.davidauza.veterinariavetcare.models.Consulta}.
+ */
 public class SeleccionActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
 

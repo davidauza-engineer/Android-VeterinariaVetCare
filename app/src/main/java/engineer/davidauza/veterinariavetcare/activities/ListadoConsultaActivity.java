@@ -27,12 +27,14 @@ import engineer.davidauza.veterinariavetcare.models.Consulta;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
 import engineer.davidauza.veterinariavetcare.models.Veterinario;
 
+/**
+ * Esta Activity es responsable por traer y presentar la información de la base de datos con base en
+ * la opción seleccionada por el usuario en el Spinner en activity_seleccion.xml
+ */
 public class ListadoConsultaActivity extends AppCompatActivity
         implements Response.Listener<JSONArray>, Response.ErrorListener {
 
     private RequestQueue mRequest;
-
-    private JsonArrayRequest mJsonArrayRequest;
 
     /**
      * Esta variable almacena la posición seleccionada en el Spinner en activity_seleccion.xml.
@@ -46,16 +48,6 @@ public class ListadoConsultaActivity extends AppCompatActivity
      * El RecyclerView que mostrará la lista de elementos disponibles en la base de datos.
      */
     private RecyclerView mRecyclerView;
-
-    /**
-     * El adaptador que traerá los ítems al RecyclerView.
-     */
-    private RecyclerView.Adapter mAdaptador;
-
-    /**
-     * El LayoutManager que usará el RecyclerView.
-     */
-    private RecyclerView.LayoutManager mLayoutManager;
 
     /**
      * Un ArrayList que contendrá la lista de {@link Mascota}s, si se están consultando las
@@ -83,6 +75,7 @@ public class ListadoConsultaActivity extends AppCompatActivity
         Toast.makeText(ListadoConsultaActivity.this,
                 getString(R.string.listado_consulta_toast_cargando), Toast.LENGTH_SHORT).show();
         configurarRecyclerView();
+        // Configurar la librería Volley que se encarga de interactuar con la base de datos
         mRequest = Volley.newRequestQueue(ListadoConsultaActivity.this);
         cargarWebService();
     }
@@ -94,13 +87,13 @@ public class ListadoConsultaActivity extends AppCompatActivity
                 getString(R.string.listado_consulta_toast_error), Toast.LENGTH_LONG).show();
     }
 
-    // TODO describir
     @Override
     public void onResponse(JSONArray response) {
         try {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject jsonObject = response.getJSONObject(i);
                 switch (mConsultaSeleccionadaSpinner) {
+                    // Si se están consultando las mascotas
                     case 0:
                         String nombreMascota = jsonObject.optString("nombre");
                         String fechaDeNacimiento = jsonObject.optString("fechaDeNacimiento");
@@ -109,6 +102,7 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         mMascotasArrayList.add(new Mascota(nombreMascota, fechaDeNacimiento, sexo,
                                 especie));
                         break;
+                    // Si se están consultando los veterinarios
                     case 1:
                         String nombreVeterinario = jsonObject.optString("nombre");
                         String tarjetaProfesional = jsonObject.optString("tarjetaProfesional");
@@ -118,6 +112,7 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         mVeterinariosArrayList.add(new Veterinario(nombreVeterinario,
                                 tarjetaProfesional, especialidad, consultasRealizadas));
                         break;
+                    // Si están consultando las consultas
                     case 2:
                         String fecha = jsonObject.optString("fecha");
                         String motivo = jsonObject.optString("motivo");
@@ -125,6 +120,7 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         String mascotaAtendida = jsonObject.optString("mascotaAtendida");
                         mConsultaArrayList.add(new Consulta(fecha, motivo, veterinario,
                                 mascotaAtendida));
+                        break;
                 }
             }
             configurarAdaptador();
@@ -140,11 +136,15 @@ public class ListadoConsultaActivity extends AppCompatActivity
     private void configurarRecyclerView() {
         mRecyclerView = findViewById(R.id.ly_recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(ListadoConsultaActivity.this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        RecyclerView.LayoutManager layoutManager =
+                new LinearLayoutManager(ListadoConsultaActivity.this);
+        mRecyclerView.setLayoutManager(layoutManager);
     }
 
-    // TODO describir bien
+    /**
+     * Este método se encarga de contactar al servidor para que este ejecute el microservicio y se
+     * obtenga un objeto JSON con los valores solicitados.
+     */
     private void cargarWebService() {
         mConsultaSeleccionadaSpinner = getIntent().
                 getIntExtra(SeleccionActivity.EXTRA_POSICION_SPINNER, -1);
@@ -160,21 +160,28 @@ public class ListadoConsultaActivity extends AppCompatActivity
                 url = Consulta.URL_GET;
                 break;
         }
-        mJsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                ListadoConsultaActivity.this, ListadoConsultaActivity.this);
-        mRequest.add(mJsonArrayRequest);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, ListadoConsultaActivity.this,
+                ListadoConsultaActivity.this);
+        mRequest.add(jsonArrayRequest);
     }
 
-    // TODO describir bien
+    /**
+     * Este método configura el adaptador correspondiente para que el RecyclerView muestre la lista
+     * adecuadamente en la interfaz gráfica.
+     */
     private void configurarAdaptador() {
         RecyclerView.Adapter adaptador = null;
         switch (mConsultaSeleccionadaSpinner) {
+            // Si se va a consultar la lista de mascotas
             case 0:
                 adaptador = new MascotaAdapter(mMascotasArrayList);
                 break;
+            // Si se va a consultar la lista de veterinarios
             case 1:
                 adaptador = new VeterinarioAdapter(mVeterinariosArrayList);
                 break;
+            // Si se va a consultar la lista de Consultas
             case 2:
                 adaptador = new ConsultaAdapter(mConsultaArrayList);
                 break;

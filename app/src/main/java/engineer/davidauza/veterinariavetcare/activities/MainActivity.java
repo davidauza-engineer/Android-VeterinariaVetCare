@@ -8,6 +8,9 @@ import android.widget.Button;
 
 import engineer.davidauza.veterinariavetcare.R;
 
+/**
+ * Esta Activity es responsable de mostrar la interfaz gráfica principal.
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
