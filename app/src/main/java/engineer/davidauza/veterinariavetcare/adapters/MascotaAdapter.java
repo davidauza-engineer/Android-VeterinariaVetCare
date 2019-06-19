@@ -60,7 +60,7 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MyViewHo
     }
 
     /**
-     * Retorna el tamaño del ArrayList que contiene las mascotas. Es invocado por el LayoutManager.
+     * Retorna el tamaño del ArrayList que contiene las {@link Mascota}s. Es invocado por el LayoutManager.
      */
     @Override
     public int getItemCount() {

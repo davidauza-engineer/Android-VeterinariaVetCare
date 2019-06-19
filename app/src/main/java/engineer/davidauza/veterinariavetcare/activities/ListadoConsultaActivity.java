@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import engineer.davidauza.veterinariavetcare.R;
 import engineer.davidauza.veterinariavetcare.adapters.MascotaAdapter;
+import engineer.davidauza.veterinariavetcare.adapters.VeterinarioAdapter;
 import engineer.davidauza.veterinariavetcare.models.Consulta;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
 import engineer.davidauza.veterinariavetcare.models.Veterinario;
@@ -65,7 +66,7 @@ public class ListadoConsultaActivity extends AppCompatActivity
      * Un ArrayList que contendrá la lista de {@link Veterinario}s, si se están consultando los
      * {@link Veterinario}s.
      */
-    private ArrayList<Veterinario> mVeterinariosArrayList;
+    private ArrayList<Veterinario> mVeterinariosArrayList = new ArrayList<>();
 
     /**
      * Un ArrayList que contendrá la lista de {@link Consulta}s, si se están consultando las
@@ -77,6 +78,9 @@ public class ListadoConsultaActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_consulta);
+        // Mostrar toast que dice: "Cargando..."
+        Toast.makeText(ListadoConsultaActivity.this,
+                getString(R.string.listado_consulta_toast_cargando), Toast.LENGTH_SHORT).show();
         configurarRecyclerView();
         mRequest = Volley.newRequestQueue(ListadoConsultaActivity.this);
         cargarWebService();
@@ -97,18 +101,25 @@ public class ListadoConsultaActivity extends AppCompatActivity
                 JSONObject jsonObject = response.getJSONObject(i);
                 switch (mConsultaSeleccionadaSpinner) {
                     case 0:
-                        String nombre = jsonObject.optString("nombre");
+                        String nombreMascota = jsonObject.optString("nombre");
                         String fechaDeNacimiento = jsonObject.optString("fechaDeNacimiento");
                         String sexo = jsonObject.optString("sexo");
                         String especie = jsonObject.optString("especie");
-                        mMascotasArrayList.add(new Mascota(nombre, fechaDeNacimiento, sexo,
+                        mMascotasArrayList.add(new Mascota(nombreMascota, fechaDeNacimiento, sexo,
                                 especie));
+                        break;
+                    case 1:
+                        String nombreVeterinario = jsonObject.optString("nombre");
+                        String tarjetaProfesional = jsonObject.optString("tarjetaProfesional");
+                        String especialidad = jsonObject.optString("especialidad");
+                        String consultasRealizadas =
+                                jsonObject.optString("consultasRealizadas");
+                        mVeterinariosArrayList.add(new Veterinario(nombreVeterinario,
+                                tarjetaProfesional, especialidad, consultasRealizadas));
                         break;
                 }
             }
-            // TODO verificar
-            MascotaAdapter adaptador = new MascotaAdapter(mMascotasArrayList);
-            mRecyclerView.setAdapter(adaptador);
+            configurarAdaptador();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -144,5 +155,19 @@ public class ListadoConsultaActivity extends AppCompatActivity
         mJsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 ListadoConsultaActivity.this, ListadoConsultaActivity.this);
         mRequest.add(mJsonArrayRequest);
+    }
+
+    // TODO describir bien
+    private void configurarAdaptador() {
+        RecyclerView.Adapter adaptador = null;
+        switch (mConsultaSeleccionadaSpinner) {
+            case 0:
+                adaptador = new MascotaAdapter(mMascotasArrayList);
+                break;
+            case 1:
+                adaptador = new VeterinarioAdapter(mVeterinariosArrayList);
+                break;
+        }
+        mRecyclerView.setAdapter(adaptador);
     }
 }

@@ -75,33 +75,57 @@
         <item name="android:layout_marginTop">@dimen/margen_estandar</item>
     </style>
 
-    <!-- Estilo para los LinearLayout horizontales en item_mascota.xml -->
-    <style name="LinearLayoutsHorizontalesItemMascota">
+    <!-- Estilo para el LinearLayout raíz en item_mascota.xml, item_veterinario.xml y
+        item_consulta.xml -->
+    <style name="LinearLayoutRaizItems">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margen_estandar</item>
+        <item name="android:layout_marginLeft">@dimen/margen_estandar</item>
+        <item name="android:layout_marginRight">@dimen/margen_estandar</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Estilo para los LinearLayout horizontales en item_mascota.xml, item_veterinario.xml y
+        item_consulta.xml -->
+    <style name="LinearLayoutsHorizontalesItems">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <!-- Estilo para los TextView que incluyen el nombre de la mascota en item_mascota.xml -->
-    <style name="NombreMascotaItemMascota">
+    <!-- Estilo para los TextView que incluyen el nombre de la mascota en item_mascota.xml y el
+        nombre del veterinario en item_veterinario.xml -->
+    <style name="NombreItems">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:textAppearanceLarge</item>
     </style>
 
-    <!-- Estilo para los TextView que incluyen texto de ayuda en item_mascota.xml -->
-    <style name="TextoAyudaItemMascota">
+    <!-- Estilo para los TextView que incluyen texto de ayuda en item_mascota.xml, item_
+        veterinario.xml, e item_consulta.xml -->
+    <style name="TextoAyudaItems">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
 
-    <!-- Estilo para los TextView que incluyen texto de cada mascota en item_mascota.xml -->
-    <style name="TextoContenidoItemMascota">
+    <!-- Estilo para los TextView que incluyen texto de cada mascota en item_mascota.xml, o de cada
+        veterinario en item_veterinario.xml, o de cada consulta en item_consulta.xml -->
+    <style name="TextoContenidoItems">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:layout_marginLeft">@dimen/margen_medio</item>
+    </style>
+
+    <!-- Estilo para los Views que actúan como líneas de división en item_mascota.xml,
+        item_veterinario.xml. y item_consulta.xml -->
+    <style name="LineasDivisionItems">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginTop">@dimen/margen_estandar</item>
+        <item name="android:background">@android:color/darker_gray</item>
     </style>
 
 </resources>

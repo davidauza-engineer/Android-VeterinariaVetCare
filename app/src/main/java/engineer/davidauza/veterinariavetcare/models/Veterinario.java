@@ -88,6 +88,24 @@ public class Veterinario extends Persona {
     }
 
     /**
+     * Constructor para crear un nuevo objeto {@link Veterinario}.
+     *
+     * @param pNombre              es el nombre del Veterinario.
+     * @param pTarjetaProfesional  es el número de tarjeta profesional del Veterinario.
+     * @param pEspecialidad        es la especialidad médica del Veterinario.
+     * @param pConsultasRealizadas es el total de consultas realizadas por el Veterinario.
+     */
+    public Veterinario(String pNombre,
+                       String pTarjetaProfesional,
+                       String pEspecialidad,
+                       String pConsultasRealizadas) {
+        super(pNombre);
+        mTarjetaProfesional = pTarjetaProfesional;
+        mEspecialidad = pEspecialidad;
+        mConsultasRelizadas = pConsultasRealizadas;
+    }
+
+    /**
      * Obtener el número de tarjeta profesional del Veterinario.
      */
     public String getTarjetaProfesional() {

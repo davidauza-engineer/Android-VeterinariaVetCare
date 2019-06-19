@@ -7,13 +7,13 @@
 
         <TextView
             style="@style/NombreItems"
-            android:text="@string/item_mascota_txt_nombre" />
+            android:text="@string/item_veterinario_txt_nombre" />
 
         <TextView
-            android:id="@+id/txt_nombre_mascota"
+            android:id="@+id/txt_nombre_veterinario"
             style="@style/NombreItems"
             android:layout_marginLeft="@dimen/margen_medio"
-            tools:text="Luke Skywalker" />
+            tools:text="David R. Auza" />
 
     </LinearLayout>
 
@@ -21,12 +21,12 @@
 
         <TextView
             style="@style/TextoAyudaItems"
-            android:text="@string/item_mascota_txt_fecha_de_nacimiento" />
+            android:text="@string/item_veterinario_txt_tarjeta_profesional" />
 
         <TextView
-            android:id="@+id/txt_fecha_de_nacimiento_mascota"
+            android:id="@+id/txt_tarjeta_profesional_veterinario"
             style="@style/TextoContenidoItems"
-            tools:text="02/03/2015" />
+            tools:text="0-987-654-321" />
 
     </LinearLayout>
 
@@ -34,26 +34,25 @@
 
         <TextView
             style="@style/TextoAyudaItems"
-            android:text="@string/item_mascota_txt_sexo" />
+            android:text="@string/item_veterinario_txt_especialidad" />
 
         <TextView
-            android:id="@+id/txt_sexo_mascota"
+            android:id="@+id/txt_especialidad_veterinario"
             style="@style/TextoContenidoItems"
-            tools:text="Masculino" />
+            tools:text="Cirugía Canina" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
 
         <TextView
             style="@style/TextoAyudaItems"
-            android:text="@string/item_mascota_txt_especie" />
+            android:text="@string/item_veterinario_txt_consultas_realizadas" />
 
         <TextView
-            android:id="@+id/txt_especie_mascota"
+            android:id="@+id/txt_consultas_realizadas_veterinario"
             style="@style/TextoContenidoItems"
-            tools:text="Canino" />
+            tools:text="2" />
 
     </LinearLayout>
 

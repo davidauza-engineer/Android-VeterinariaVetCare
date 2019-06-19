@@ -65,6 +65,15 @@ public class Persona {
     }
 
     /**
+     * Constructor para crear un nuebo objeto {@link Persona}.
+     *
+     * @param pNombre es el nombre de la persona.
+     */
+    public Persona(String pNombre) {
+        mNombre = pNombre;
+    }
+
+    /**
      * Obtener el ID de la persona.
      */
     public String getId() {
