@@ -179,12 +179,9 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         String nombre = editTextNombre.getText().toString();
         // Obtener el sexo de la mascota
         RadioButton botonMasculino = findViewById(R.id.btn_sexo_masculino);
-        RadioButton botonFemenino = findViewById(R.id.btn_sexo_femenino);
-        String sexo = "";
+        boolean sexo = false;
         if (botonMasculino.isChecked()) {
-            sexo = getString(R.string.registro_mascota_txt_sexo_masculino);
-        } else if (botonFemenino.isChecked()) {
-            sexo = getString(R.string.registro_mascota_txt_sexo_femenino);
+            sexo = true;
         }
         // Obtener la fecha de nacimiento de la mascota
         String fechaDeNacimiento = obtenerFecha(R.id.dte_fecha);
@@ -228,7 +225,12 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         Map<String, String> parametros = new HashMap<>();
         parametros.put(Mascota.ID, Integer.toString(mMascota.getId()));
         parametros.put(Mascota.NOMBRE, mMascota.getNombre());
-        parametros.put(Mascota.SEXO, mMascota.getSexo());
+        // Traducir sexo de la mascota de boolean a String
+        String sexo = getString(R.string.registro_mascota_txt_sexo_femenino);
+        if (mMascota.getSexo()) {
+            sexo = getString(R.string.registro_mascota_txt_sexo_masculino);
+        }
+        parametros.put(Mascota.SEXO, sexo);
         parametros.put(Mascota.FECHA_DE_NACIMIENTO, mMascota.getFechaDeNacimiento());
         parametros.put(Mascota.PADRE, mMascota.getPadre());
         parametros.put(Mascota.MADRE, mMascota.getMadre());

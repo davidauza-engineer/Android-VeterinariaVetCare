@@ -1,5 +1,6 @@
 package engineer.davidauza.veterinariavetcare.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,12 +25,18 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MyViewHo
     private ArrayList<Mascota> mMascotas;
 
     /**
+     * Es el Context de ListadoConsultaActivity.
+     */
+    private Context mContexto;
+
+    /**
      * Constructor para crear un nuevo objeto {@link MascotaAdapter}.
      *
      * @param pMascotas es el ArrayList que contiene la lista de mascotas para mostrar.
      */
-    public MascotaAdapter(ArrayList<Mascota> pMascotas) {
+    public MascotaAdapter(ArrayList<Mascota> pMascotas, Context pContext) {
         mMascotas = pMascotas;
+        mContexto = pContext;
     }
 
     /**
@@ -55,7 +62,11 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MyViewHo
         // Reemplazar el contenido del View con dicho elemento
         myViewHolder.mNombreMascota.setText(mascotaActual.getNombre());
         myViewHolder.mFechaDeNacimientoMascota.setText(mascotaActual.getFechaDeNacimiento());
-        myViewHolder.mSexoMascota.setText(mascotaActual.getSexo());
+        String sexo = mContexto.getString(R.string.registro_mascota_txt_sexo_femenino);
+        if (mascotaActual.getSexo()) {
+            sexo = mContexto.getString(R.string.registro_mascota_txt_sexo_masculino);
+        }
+        myViewHolder.mSexoMascota.setText(sexo);
         myViewHolder.mEspecieMascota.setText(mascotaActual.getEspecie());
     }
 

@@ -86,7 +86,7 @@ public class Mascota {
     /**
      * El sexo de la mascota.
      */
-    private String mSexo;
+    private boolean mSexo;
     /**
      * La fecha de nacimiento de la mascota.
      */
@@ -149,7 +149,7 @@ public class Mascota {
      */
     public Mascota(int pId,
                    String pNombre,
-                   String pSexo,
+                   boolean pSexo,
                    String pFechaDeNacimiento,
                    String pPadre,
                    String pMadre,
@@ -185,7 +185,7 @@ public class Mascota {
      */
     public Mascota(String pNombre,
                    String pFechaDeNacimiento,
-                   String pSexo,
+                   boolean pSexo,
                    String pEspecie) {
         mNombre = pNombre;
         mFechaDeNacimiento = pFechaDeNacimiento;
@@ -210,7 +210,7 @@ public class Mascota {
     /**
      * Obtener el sexo de la mascota.
      */
-    public String getSexo() {
+    public boolean getSexo() {
         return mSexo;
     }
 

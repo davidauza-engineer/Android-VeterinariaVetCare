@@ -97,10 +97,15 @@ public class ListadoConsultaActivity extends AppCompatActivity
                     case 0:
                         String nombreMascota = jsonObject.optString("nombre");
                         String fechaDeNacimiento = jsonObject.optString("fechaDeNacimiento");
-                        String sexo = jsonObject.optString("sexo");
+                        String sexoString = jsonObject.optString("sexo");
+                        boolean sexo = false;
+                        if (sexoString.
+                                equals(getString(R.string.registro_mascota_txt_sexo_masculino))) {
+                            sexo = true;
+                        }
                         String especie = jsonObject.optString("especie");
-                        mMascotasArrayList.add(new Mascota(nombreMascota, fechaDeNacimiento, sexo,
-                                especie));
+                        mMascotasArrayList.add(new Mascota(nombreMascota, fechaDeNacimiento,
+                                sexo, especie));
                         break;
                     // Si se están consultando los veterinarios
                     case 1:
@@ -175,7 +180,8 @@ public class ListadoConsultaActivity extends AppCompatActivity
         switch (mConsultaSeleccionadaSpinner) {
             // Si se va a consultar la lista de mascotas
             case 0:
-                adaptador = new MascotaAdapter(mMascotasArrayList);
+                adaptador = new MascotaAdapter(mMascotasArrayList,
+                        ListadoConsultaActivity.this);
                 break;
             // Si se va a consultar la lista de veterinarios
             case 1:
