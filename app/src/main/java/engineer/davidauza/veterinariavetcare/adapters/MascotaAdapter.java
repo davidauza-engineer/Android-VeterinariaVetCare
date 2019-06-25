@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import engineer.davidauza.veterinariavetcare.R;
@@ -28,6 +29,11 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MyViewHo
      * Es el Context de ListadoConsultaActivity.
      */
     private Context mContexto;
+
+    /**
+     * Esta constante contiene el formato que se usará para mostrar la fecha al ser consultada.
+     */
+    private static final SimpleDateFormat FORMATO = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Constructor para crear un nuevo objeto {@link MascotaAdapter}.
@@ -61,7 +67,9 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MyViewHo
 
         // Reemplazar el contenido del View con dicho elemento
         myViewHolder.mNombreMascota.setText(mascotaActual.getNombre());
-        myViewHolder.mFechaDeNacimientoMascota.setText(mascotaActual.getFechaDeNacimiento());
+        // Dar formato a la fecha
+        String fechaDeNacimiento = FORMATO.format(mascotaActual.getFechaDeNacimiento());
+        myViewHolder.mFechaDeNacimientoMascota.setText(fechaDeNacimiento);
         String sexo = mContexto.getString(R.string.registro_mascota_txt_sexo_femenino);
         if (mascotaActual.getSexo()) {
             sexo = mContexto.getString(R.string.registro_mascota_txt_sexo_masculino);

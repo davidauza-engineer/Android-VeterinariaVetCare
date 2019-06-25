@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -18,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import engineer.davidauza.veterinariavetcare.R;
 import engineer.davidauza.veterinariavetcare.adapters.ConsultaAdapter;
@@ -96,7 +99,38 @@ public class ListadoConsultaActivity extends AppCompatActivity
                     // Si se están consultando las mascotas
                     case 0:
                         String nombreMascota = jsonObject.optString("nombre");
-                        String fechaDeNacimiento = jsonObject.optString("fechaDeNacimiento");
+                        String fechaDeNacimientoString =
+                                jsonObject.optString("fechaDeNacimiento");
+                        Log.e("ERROR", fechaDeNacimientoString);
+                        char[] charArray = fechaDeNacimientoString.toCharArray();
+                        int contador = 0;
+                        String diaString = "";
+                        String mesString = "";
+                        String anoString = "";
+                        for (int j = 0; j < charArray.length; j++) {
+                            if (charArray[j] == '/') {
+                                contador++;
+                            } else {
+                                if (contador == 0) {
+                                    diaString += charArray[j];
+                                } else if (contador == 1) {
+                                    mesString += charArray[j];
+                                } else {
+                                    anoString += charArray[j];
+                                }
+                            }
+                        }
+                        int dia = Integer.parseInt(diaString);
+                        Log.e("ERROR", "" + dia);
+                        int mes = Integer.parseInt(mesString);
+                        Log.e("ERROR", "" + mes);
+                        int ano = Integer.parseInt(anoString);
+                        Log.e("ERROR", "" + ano);
+                        Calendar calendario = Calendar.getInstance();
+                        // Se resta a uno al mes puesto que el método set tiene en cuenta los meses
+                        // del 0 al 11
+                        calendario.set(ano, mes - 1, dia);
+                        Date fechaDeNacimiento = calendario.getTime();
                         String sexoString = jsonObject.optString("sexo");
                         boolean sexo = false;
                         if (sexoString.

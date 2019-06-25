@@ -17,6 +17,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -184,7 +187,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
             sexo = true;
         }
         // Obtener la fecha de nacimiento de la mascota
-        String fechaDeNacimiento = obtenerFecha(R.id.dte_fecha);
+        Date fechaDeNacimiento = obtenerFecha(R.id.dte_fecha);
         // Obtener padre
         EditText padreEditText = findViewById(R.id.txt_padre_mascota);
         String padre = padreEditText.getText().toString();
@@ -231,7 +234,10 @@ public class RegistroFormularioActivity extends AppCompatActivity {
             sexo = getString(R.string.registro_mascota_txt_sexo_masculino);
         }
         parametros.put(Mascota.SEXO, sexo);
-        parametros.put(Mascota.FECHA_DE_NACIMIENTO, mMascota.getFechaDeNacimiento());
+        // Dar formato a la fecha
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaDeNacimiento = formato.format(mMascota.getFechaDeNacimiento());
+        parametros.put(Mascota.FECHA_DE_NACIMIENTO, fechaDeNacimiento);
         parametros.put(Mascota.PADRE, mMascota.getPadre());
         parametros.put(Mascota.MADRE, mMascota.getMadre());
         parametros.put(Mascota.RAZA, mMascota.getRaza());
@@ -304,7 +310,9 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         // Crear ID para la consulta
         String id = Double.toString(Math.random() * 1_000_000);
         // Obtener fecha
-        String fecha = obtenerFecha(R.id.dte_fecha);
+        //String fecha = obtenerFecha(R.id.dte_fecha);
+        //TODO reemplazar los siguiente:
+        String fecha = "";
         // Obtener motivo
         EditText motivoEditText = findViewById(R.id.txt_motivo_consulta);
         String motivo = motivoEditText.getText().toString();
@@ -346,18 +354,19 @@ public class RegistroFormularioActivity extends AppCompatActivity {
     }
 
     /**
-     * Este método retorna un String con la fecha presente en el DatePicke indicado, en el formato
-     * dia/mes/año.
+     * Este método retorna un objeto Date con la fecha presente en el DatePicker indicado, en el
+     * formato día/mes/año.
      *
      * @param pDatePicker es el DatePicker de donde se obtiene la fecha.
-     * @return retorna un String en el formato dia/mes/año.
+     * @return retorna un objeto Date en el formato día/mes/año.
      */
-    private String obtenerFecha(int pDatePicker) {
+    private Date obtenerFecha(int pDatePicker) {
         DatePicker datePicker = findViewById(pDatePicker);
         int dia = datePicker.getDayOfMonth();
-        // Se añada 1, puesto que el DatePicker retorna el índice del mes
-        int mes = datePicker.getMonth() + 1;
+        int mes = datePicker.getMonth();
         int ano = datePicker.getYear();
-        return dia + "/" + mes + "/" + ano;
+        Calendar calendario = Calendar.getInstance();
+        calendario.set(ano, mes, dia);
+        return calendario.getTime();
     }
 }

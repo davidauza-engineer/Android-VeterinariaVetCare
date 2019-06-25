@@ -1,5 +1,7 @@
 package engineer.davidauza.veterinariavetcare.models;
 
+import java.util.Date;
+
 /**
  * Esta clase representa una {@link Mascota}. Una mascota tiene un id, un nombre, un sexo, una fecha
  * de nacimiento, un padre, una madre, una raza, una especie, enfermedades que puede padecer,
@@ -90,7 +92,7 @@ public class Mascota {
     /**
      * La fecha de nacimiento de la mascota.
      */
-    private String mFechaDeNacimiento;
+    private Date mFechaDeNacimiento;
     /**
      * El padre de la mascota.
      */
@@ -150,7 +152,7 @@ public class Mascota {
     public Mascota(int pId,
                    String pNombre,
                    boolean pSexo,
-                   String pFechaDeNacimiento,
+                   Date pFechaDeNacimiento,
                    String pPadre,
                    String pMadre,
                    String pRaza,
@@ -184,7 +186,7 @@ public class Mascota {
      * @param pEspecie           es la especie de la mascota.
      */
     public Mascota(String pNombre,
-                   String pFechaDeNacimiento,
+                   Date pFechaDeNacimiento,
                    boolean pSexo,
                    String pEspecie) {
         mNombre = pNombre;
@@ -217,7 +219,7 @@ public class Mascota {
     /**
      * Obtener la fecha de nacimiento de la mascota.
      */
-    public String getFechaDeNacimiento() {
+    public Date getFechaDeNacimiento() {
         return mFechaDeNacimiento;
     }
 
