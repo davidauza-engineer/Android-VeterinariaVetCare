@@ -173,7 +173,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
      */
     private void crearMascota() {
         // Crear ID para la mascota.
-        String id = Double.toString(Math.random() * 100_000);
+        int id = (int) (Math.random() * 100_000);
         // Obtener el nombre de la mascota
         EditText editTextNombre = findViewById(R.id.txt_nombre_mascota);
         String nombre = editTextNombre.getText().toString();
@@ -226,7 +226,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
      */
     private Map<String, String> crearParametrosMascota() {
         Map<String, String> parametros = new HashMap<>();
-        parametros.put(Mascota.ID, mMascota.getId());
+        parametros.put(Mascota.ID, Integer.toString(mMascota.getId()));
         parametros.put(Mascota.NOMBRE, mMascota.getNombre());
         parametros.put(Mascota.SEXO, mMascota.getSexo());
         parametros.put(Mascota.FECHA_DE_NACIMIENTO, mMascota.getFechaDeNacimiento());

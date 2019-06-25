@@ -34,17 +34,17 @@ public class Persona {
     /**
      * El nombre de la persona.
      */
-    private String mNombre;
+    private String mNombre; // TODO dividir en nombre y apellido.
 
     /**
      * El número de identidad de la persona.
      */
-    private String mNumeroDeIdentidad;
+    private String mNumeroDeIdentidad; // TODO cambiar tipo a int
 
     /**
      * La dirección de la persona.
      */
-    private String mDireccion;
+    private String mDireccion; // TODO añadir teléfonos, eliminar de Veterinario.
 
     /**
      * Constructor para crear un nuevo objeto {@link Persona}.

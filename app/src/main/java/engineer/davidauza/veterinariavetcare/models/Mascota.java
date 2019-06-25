@@ -78,7 +78,7 @@ public class Mascota {
     /**
      * El ID único para cada mascota.
      */
-    private String mId;
+    private int mId;
     /**
      * El nombre de la mascota.
      */
@@ -94,11 +94,11 @@ public class Mascota {
     /**
      * El padre de la mascota.
      */
-    private String mPadre;
+    private String mPadre; // TODO cambiar tipo a Mascota, puede ser null
     /**
      * La madre de la mascota.
      */
-    private String mMadre;
+    private String mMadre; // TODO cambiar tipo a Mascota, puede ser null
     /**
      * La raza de la mascota.
      */
@@ -110,7 +110,7 @@ public class Mascota {
     /**
      * Las enfermedades que puede haber sufrido la mascota.
      */
-    private String mEnfermedades;
+    private String mEnfermedades; // TODO añadir boolean enfermedad crónica ¿Cómo manejo la enfermedad crónica?
     /**
      * Las consultas a las que ha asistido la mascota.
      */
@@ -126,13 +126,15 @@ public class Mascota {
     /**
      * Los propietarios de la mascota.
      */
-    private String mPropietarios;
+    private String mPropietarios; // TODO cambiar tipo a Propietario[]
+    // TODO añadir miembro propietarioActual "incluso pudierar tener un dueño más de una vez"
+    // TODO "Cada vez que una persona se hace cargo de la mascota se registra la fecha de paso."
 
     /**
      * Constructor para crear un nuevo objeto {@link Mascota}.
      *
      * @param pId                es el ID de la mascota.
-     * @param pNomnre            es el nombre de la mascota.
+     * @param pNombre            es el nombre de la mascota.
      * @param pSexo              es el sexo de la mascota.
      * @param pFechaDeNacimiento es la fecha de nacimiento de la mascota.
      * @param pPadre             es el padre de la mascota.
@@ -145,8 +147,8 @@ public class Mascota {
      * @param pTratamientos      son los tratamientos a los que pudo ser sometida la mascota.
      * @param pPropietarios      son los propietarios que ha tenido la mascota.
      */
-    public Mascota(String pId,
-                   String pNomnre,
+    public Mascota(int pId,
+                   String pNombre,
                    String pSexo,
                    String pFechaDeNacimiento,
                    String pPadre,
@@ -159,7 +161,7 @@ public class Mascota {
                    String pTratamientos,
                    String pPropietarios) {
         mId = pId;
-        mNombre = pNomnre;
+        mNombre = pNombre;
         mSexo = pSexo;
         mFechaDeNacimiento = pFechaDeNacimiento;
         mPadre = pPadre;
@@ -194,7 +196,7 @@ public class Mascota {
     /**
      * Obtener el ID de la mascota.
      */
-    public String getId() {
+    public int getId() {
         return mId;
     }
 

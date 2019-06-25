@@ -64,12 +64,12 @@ public class Consulta {
     /**
      * El ID de la consulta.
      */
-    private String mId;
+    private String mId; // TODO cambiar tipo a int
 
     /**
      * La fecha de la consulta.
      */
-    private String mFecha;
+    private String mFecha; // TODO cambiar tipo a Date
 
     /**
      * El motivo de la consulta.
@@ -77,24 +77,24 @@ public class Consulta {
     private String mMotivo;
 
     /**
-     * La patología asociada a la consulta realizada.
+     * La patología asociada a la consulta realizada. // TODO cambiar tipo a Patologia ó agrupar en estructura de datos con código y nombre. cambiar a mPatologia, tener en cuenta "En la consulta médica se le diagnostica a la mascota cierta patología."
      */
-    private String mPatologiaAsociada;
+    private String mPatologiaAsociada; // TODO se debe registrar también la enfermedad crónica.
 
     /**
-     * El veterinario que atendió la consulta.
+     * El veterinario que atendió la consulta. // TODO cambiar tipo a Veterinario
      */
     private String mVeterinario;
 
     /**
      * Los exámenes ordenados en la consulta.
      */
-    private String mExamenes;
+    private String mExamenes; // TODO convertir en array con los distintos tipos de examenes físicos
 
     /**
      * Los tratamientos ordenados en la consulta.
      */
-    private String mTratamientos;
+    private String mTratamientos; // TODO debería ser tipo Tratamiento que será una clase con varios atributos
 
     /**
      * La mascota atendida en la consulta.

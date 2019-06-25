@@ -43,12 +43,12 @@ public class Veterinario extends Persona {
     /**
      * El número de tarjeta profesional del veterinario.
      */
-    private String mTarjetaProfesional;
+    private String mTarjetaProfesional; // TODO cambiar tipo a String y cambiar nombre por numeroDeRegistroProfesional
 
     /**
      * La especialidad médica del veterinario.
      */
-    private String mEspecialidad;
+    private String mEspecialidad; // TODO ¿mEspecialidadMedica debería ser un array? Sí
 
     /**
      * El número de consultas realizadas por el veterinario;
