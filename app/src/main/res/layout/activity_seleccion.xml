@@ -9,7 +9,7 @@
         android:id="@+id/txt_texto_ayuda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/spn_spineer"
+        android:layout_above="@id/spn_spinner"
         android:layout_marginLeft="@dimen/margen_estandar"
         android:layout_marginRight="@dimen/margen_estandar"
         android:layout_marginBottom="@dimen/margen_estandar"
@@ -18,7 +18,7 @@
         tools:text="@string/registro_registrar_txt_spinner" />
 
     <Spinner
-        android:id="@+id/spn_spineer"
+        android:id="@+id/spn_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
@@ -27,7 +27,7 @@
         android:id="@+id/btn_continuar"
         android:layout_width="@dimen/activity_main_ancho_botones"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spn_spineer"
+        android:layout_below="@id/spn_spinner"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margen_estandar"
         android:text="@string/registro_btn_continuar" />

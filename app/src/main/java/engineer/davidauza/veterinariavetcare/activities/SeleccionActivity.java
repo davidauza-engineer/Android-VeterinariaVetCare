@@ -80,7 +80,7 @@ public class SeleccionActivity extends AppCompatActivity
      * activity_seleccion.xmll
      */
     private void configurarSpinner() {
-        Spinner spinner = findViewById(R.id.spn_spineer);
+        Spinner spinner = findViewById(R.id.spn_spinner);
         // Creación de ArrayAdapter usando el array de Strings y un diseño por defecto para el
         // Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

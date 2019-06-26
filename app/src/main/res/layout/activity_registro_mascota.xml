@@ -46,10 +46,15 @@
             android:id="@+id/dte_fecha"
             style="@style/FechaRegistros" />
 
-        <EditText
-            android:id="@+id/txt_padre_mascota"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_mascota_hint_padre" />
+        <TextView
+            style="@style/TextViewsRegistros"
+            android:text="@string/registro_mascota_txt_padre" />
+
+        <Spinner
+            android:id="@+id/spn_padre_mascota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margen_estandar" />
 
         <EditText
             android:id="@+id/txt_madre_mascota"

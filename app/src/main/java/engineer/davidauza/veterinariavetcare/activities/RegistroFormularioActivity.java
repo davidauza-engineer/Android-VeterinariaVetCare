@@ -3,10 +3,12 @@ package engineer.davidauza.veterinariavetcare.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -14,10 +16,16 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,9 +41,18 @@ import engineer.davidauza.veterinariavetcare.models.Veterinario;
  * activity_seleccion.xml y de enviar al servidor los datos que el usuario registre en dicha intefaz
  * gráfica.
  */
-public class RegistroFormularioActivity extends AppCompatActivity {
+public class RegistroFormularioActivity extends AppCompatActivity
+        implements Response.Listener<JSONArray>, Response.ErrorListener {
 
-    private RequestQueue mRequest;
+    private RequestQueue mRequestRegistrar;
+
+    private RequestQueue mRequestCargar;
+
+    /**
+     * El ArrayList que almacena el nombre de las {@link Mascota}s Macho (potencialmente padres)
+     * almacenadas en la base de datos.
+     */
+    private ArrayList<String> mMascotasPadre = new ArrayList<>();
 
     /**
      * Esta variable almacena el objeto {@link Mascota} que será registrado en la base de datos.
@@ -66,12 +83,38 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         seleccionarInterfazGráfica();
         configurarBotonRegistrar();
         // Configurar la librería Volley que se encarga de interactuar con la base de datos
-        mRequest = Volley.newRequestQueue(RegistroFormularioActivity.this);
+        mRequestRegistrar = Volley.newRequestQueue(RegistroFormularioActivity.this);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        // En caso de error al cargar las mascotas padre de la base de datos, informar al usuario a
+        // través de un Toast.
+        Toast.makeText(RegistroFormularioActivity.this,
+                getString(R.string.registro_mascota_toast_error_carga_padre), Toast.LENGTH_LONG)
+                .show();
+    }
+
+    @Override
+    public void onResponse(JSONArray response) {
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject jsonObject = response.getJSONObject(i);
+                String sexoMascota = jsonObject.optString("sexo");
+                // Si las mascotas obtenidas de la base de datos son machos, añadirlos a la lista de
+                // padres.
+                if (sexoMascota.equals(getString(R.string.registro_mascota_txt_sexo_masculino))) {
+                    mMascotasPadre.add(jsonObject.optString("nombre"));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Este método selecciona la interfaz gráfica adecuada según la selección del usuario en
-     * activity_seleccionn.xml
+     * activity_seleccion.xml
      */
     private void seleccionarInterfazGráfica() {
         mRegistroSeleccionadoSpinner =
@@ -79,6 +122,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         switch (mRegistroSeleccionadoSpinner) {
             case 0:
                 setContentView(R.layout.activity_registro_mascota);
+                configurarSpinner(R.id.spn_padre_mascota);
                 break;
             case 1:
                 setContentView(R.layout.activity_registro_veterinario);
@@ -107,9 +151,9 @@ public class RegistroFormularioActivity extends AppCompatActivity {
 
     /**
      * Este método hace el registro pertinente en la base de datos, según el valor que contiene
-     * mRegistroSeleccionadoSpinner. Dicho valor es provisto por el usuario en activity_seleccion.xmll
-     * Si es 0 se registrará una {@link Mascota}, si es 1 se registrará un {@link Veterinario}, y si
-     * es 2 se registrará una {@link Consulta}.
+     * mRegistroSeleccionadoSpinner. Dicho valor es provisto por el usuario en
+     * activity_seleccion.xml. Si es 0 se registrará una {@link Mascota}, si es 1 se registrará un
+     * {@link Veterinario}, y si es 2 se registrará una {@link Consulta}.
      */
     private void registrarEnBaseDeDatos() {
         String url = "";
@@ -166,7 +210,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
                 return parametrosFinal;
             }
         };
-        mRequest.add(stringRequest);
+        mRequestRegistrar.add(stringRequest);
     }
 
 
@@ -189,8 +233,12 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         // Obtener la fecha de nacimiento de la mascota
         Date fechaDeNacimiento = obtenerFecha(R.id.dte_fecha);
         // Obtener padre
-        EditText padreEditText = findViewById(R.id.txt_padre_mascota);
-        String padre = padreEditText.getText().toString();
+        Spinner padreSpinner = findViewById(R.id.spn_padre_mascota);
+        int posicionSpinner = padreSpinner.getSelectedItemPosition();
+        if (posicionSpinner == 0) {
+            posicionSpinner = 1;
+        }
+        Mascota padre = new Mascota(mMascotasPadre.get(posicionSpinner));
         // Obtener madre
         EditText madreEditText = findViewById(R.id.txt_madre_mascota);
         String madre = madreEditText.getText().toString();
@@ -238,7 +286,7 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         String fechaDeNacimiento = formato.format(mMascota.getFechaDeNacimiento());
         parametros.put(Mascota.FECHA_DE_NACIMIENTO, fechaDeNacimiento);
-        parametros.put(Mascota.PADRE, mMascota.getPadre());
+        parametros.put(Mascota.PADRE, mMascota.getPadre().getNombre());
         parametros.put(Mascota.MADRE, mMascota.getMadre());
         parametros.put(Mascota.RAZA, mMascota.getRaza());
         parametros.put(Mascota.ESPECIE, mMascota.getEspecie());
@@ -368,5 +416,42 @@ public class RegistroFormularioActivity extends AppCompatActivity {
         Calendar calendario = Calendar.getInstance();
         calendario.set(ano, mes, dia);
         return calendario.getTime();
+    }
+
+    /**
+     * Este método configura el Spinner que se pase como argumento.
+     *
+     * @param pSpinner es el Spinner que se pasa como argumento.
+     */
+    private void configurarSpinner(int pSpinner) {
+        if (pSpinner == R.id.spn_padre_mascota) {
+            Spinner spinner = findViewById(pSpinner);
+            mMascotasPadre.add(getString(R.string.registro_mascota_txt_ayuda_padre));
+            mMascotasPadre.add(getString(R.string.registro_mascota_txt_padre_defecto));
+            cargarMascotas();
+            // Creación de ArrayAdapter usando el array de Strings y un diseño por defecto para el
+            // Spinner
+            ArrayAdapter<String> adaptador =
+                    new ArrayAdapter<>(RegistroFormularioActivity.this,
+                            android.R.layout.simple_spinner_item, mMascotasPadre);
+            // Especificar el diseño que se usará cuando aparece la lista de opciones
+            adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Aplicar el adaptador al Spinner
+            spinner.setAdapter(adaptador);
+        }
+    }
+
+    /**
+     * Este método configura la petición que se hace al servidor para obtener las {@link Mascota}s
+     * registradas en la base de datos.
+     */
+    private void cargarMascotas() {
+        // Configurar la librería Volley que se encarga de interactuar con la base de datos
+        mRequestCargar = Volley.newRequestQueue(RegistroFormularioActivity.this);
+        // Cargar web service
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                Mascota.URL_GET, null, RegistroFormularioActivity.this,
+                RegistroFormularioActivity.this);
+        mRequestCargar.add(jsonArrayRequest);
     }
 }
