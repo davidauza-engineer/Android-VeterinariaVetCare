@@ -52,14 +52,15 @@
 
         <Spinner
             android:id="@+id/spn_padre_mascota"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margen_estandar" />
+            style="@style/SpinnersRegistros" />
 
-        <EditText
-            android:id="@+id/txt_madre_mascota"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_mascota_hint_madre" />
+        <TextView
+            style="@style/TextViewsRegistros"
+            android:text="@string/registro_mascota_txt_madre" />
+
+        <Spinner
+            android:id="@+id/spn_madre_mascota"
+            style="@style/SpinnersRegistros" />
 
         <EditText
             android:id="@+id/txt_raza_mascota"

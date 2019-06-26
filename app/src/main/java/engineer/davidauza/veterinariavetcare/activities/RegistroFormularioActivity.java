@@ -49,10 +49,16 @@ public class RegistroFormularioActivity extends AppCompatActivity
     private RequestQueue mRequestCargar;
 
     /**
-     * El ArrayList que almacena el nombre de las {@link Mascota}s Macho (potencialmente padres)
+     * El ArrayList que almacena el nombre de las {@link Mascota}s macho (potencialmente padres)
      * almacenadas en la base de datos.
      */
     private ArrayList<String> mMascotasPadre = new ArrayList<>();
+
+    /**
+     * El ArrayList que almacena el nombre de las {@link Mascota}s hembra (potencialmente madres)
+     * almacenadas en la base de datos.
+     */
+    private ArrayList<String> mMascotasMadre = new ArrayList<>();
 
     /**
      * Esta variable almacena el objeto {@link Mascota} que será registrado en la base de datos.
@@ -80,7 +86,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        seleccionarInterfazGráfica();
+        configurarInterfazGrafica();
         configurarBotonRegistrar();
         // Configurar la librería Volley que se encarga de interactuar con la base de datos
         mRequestRegistrar = Volley.newRequestQueue(RegistroFormularioActivity.this);
@@ -88,11 +94,10 @@ public class RegistroFormularioActivity extends AppCompatActivity
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        // En caso de error al cargar las mascotas padre de la base de datos, informar al usuario a
-        // través de un Toast.
+        // En caso de error al cargar las mascotas padre o madre de la base de datos, informar al
+        // usuario a través de un Toast.
         Toast.makeText(RegistroFormularioActivity.this,
-                getString(R.string.registro_mascota_toast_error_carga_padre), Toast.LENGTH_LONG)
-                .show();
+                getString(R.string.registro_mascota_toast_error_carga), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -102,9 +107,12 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 JSONObject jsonObject = response.getJSONObject(i);
                 String sexoMascota = jsonObject.optString("sexo");
                 // Si las mascotas obtenidas de la base de datos son machos, añadirlos a la lista de
-                // padres.
+                // padres. Si son hembras, a la lista de madres.
                 if (sexoMascota.equals(getString(R.string.registro_mascota_txt_sexo_masculino))) {
                     mMascotasPadre.add(jsonObject.optString("nombre"));
+                } else if (sexoMascota.
+                        equals(getString(R.string.registro_mascota_txt_sexo_femenino))) {
+                    mMascotasMadre.add(jsonObject.optString("nombre"));
                 }
             }
         } catch (JSONException e) {
@@ -113,16 +121,18 @@ public class RegistroFormularioActivity extends AppCompatActivity
     }
 
     /**
-     * Este método selecciona la interfaz gráfica adecuada según la selección del usuario en
+     * Este método configura la interfaz gráfica adecuada según la selección del usuario en
      * activity_seleccion.xml
      */
-    private void seleccionarInterfazGráfica() {
+    private void configurarInterfazGrafica() {
         mRegistroSeleccionadoSpinner =
                 getIntent().getIntExtra(SeleccionActivity.EXTRA_POSICION_SPINNER, -1);
         switch (mRegistroSeleccionadoSpinner) {
             case 0:
                 setContentView(R.layout.activity_registro_mascota);
                 configurarSpinner(R.id.spn_padre_mascota);
+                configurarSpinner(R.id.spn_madre_mascota);
+                cargarMascotas();
                 break;
             case 1:
                 setContentView(R.layout.activity_registro_veterinario);
@@ -233,15 +243,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener la fecha de nacimiento de la mascota
         Date fechaDeNacimiento = obtenerFecha(R.id.dte_fecha);
         // Obtener padre
-        Spinner padreSpinner = findViewById(R.id.spn_padre_mascota);
-        int posicionSpinner = padreSpinner.getSelectedItemPosition();
-        if (posicionSpinner == 0) {
-            posicionSpinner = 1;
-        }
-        Mascota padre = new Mascota(mMascotasPadre.get(posicionSpinner));
+        Mascota padre = obtenerMascotaPadre(R.id.spn_padre_mascota, mMascotasPadre);
         // Obtener madre
-        EditText madreEditText = findViewById(R.id.txt_madre_mascota);
-        String madre = madreEditText.getText().toString();
+        Mascota madre = obtenerMascotaPadre(R.id.spn_madre_mascota, mMascotasMadre);
         // Obtener raza
         EditText razaEditText = findViewById(R.id.txt_raza_mascota);
         String raza = razaEditText.getText().toString();
@@ -287,7 +291,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         String fechaDeNacimiento = formato.format(mMascota.getFechaDeNacimiento());
         parametros.put(Mascota.FECHA_DE_NACIMIENTO, fechaDeNacimiento);
         parametros.put(Mascota.PADRE, mMascota.getPadre().getNombre());
-        parametros.put(Mascota.MADRE, mMascota.getMadre());
+        parametros.put(Mascota.MADRE, mMascota.getMadre().getNombre());
         parametros.put(Mascota.RAZA, mMascota.getRaza());
         parametros.put(Mascota.ESPECIE, mMascota.getEspecie());
         parametros.put(Mascota.ENFERMEDADES, mMascota.getEnfermedades());
@@ -424,21 +428,27 @@ public class RegistroFormularioActivity extends AppCompatActivity
      * @param pSpinner es el Spinner que se pasa como argumento.
      */
     private void configurarSpinner(int pSpinner) {
+        Spinner spinner = findViewById(pSpinner);
+        ArrayAdapter<String> adaptador = null;
         if (pSpinner == R.id.spn_padre_mascota) {
-            Spinner spinner = findViewById(pSpinner);
-            mMascotasPadre.add(getString(R.string.registro_mascota_txt_ayuda_padre));
+            mMascotasPadre.add(getString(R.string.registro_mascota_txt_ayuda_padres));
             mMascotasPadre.add(getString(R.string.registro_mascota_txt_padre_defecto));
-            cargarMascotas();
-            // Creación de ArrayAdapter usando el array de Strings y un diseño por defecto para el
-            // Spinner
-            ArrayAdapter<String> adaptador =
-                    new ArrayAdapter<>(RegistroFormularioActivity.this,
-                            android.R.layout.simple_spinner_item, mMascotasPadre);
-            // Especificar el diseño que se usará cuando aparece la lista de opciones
-            adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // Aplicar el adaptador al Spinner
-            spinner.setAdapter(adaptador);
+            // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
+            // el Spinner
+            adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                    android.R.layout.simple_spinner_item, mMascotasPadre);
+        } else if (pSpinner == R.id.spn_madre_mascota) {
+            mMascotasMadre.add(getString(R.string.registro_mascota_txt_ayuda_padres));
+            mMascotasMadre.add(getString(R.string.registro_mascota_txt_madre_defecto));
+            // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
+            // el Spinner
+            adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                    android.R.layout.simple_spinner_item, mMascotasMadre);
         }
+        // Especificar el diseño que se usará cuando aparece la lista de opciones
+        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Aplicar el adaptador al Spinner
+        spinner.setAdapter(adaptador);
     }
 
     /**
@@ -453,5 +463,22 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 Mascota.URL_GET, null, RegistroFormularioActivity.this,
                 RegistroFormularioActivity.this);
         mRequestCargar.add(jsonArrayRequest);
+    }
+
+    /**
+     * Este método retorna una {@link Mascota} padre o madre.
+     *
+     * @param pSpinner             es el Spinner del cual se va a tomar la selección.
+     * @param pArregloMascotaPadre es el ArrayList donde se encuentran los nombres de las posibles
+     *                             mascotas padre o madre.
+     * @return el objeto {@link Mascota} que corresponde según la selección en el Spinner.
+     */
+    private Mascota obtenerMascotaPadre(int pSpinner, ArrayList<String> pArregloMascotaPadre) {
+        Spinner spinner = findViewById(pSpinner);
+        int posicionSpinner = spinner.getSelectedItemPosition();
+        if (posicionSpinner == 0) {
+            posicionSpinner = 1;
+        }
+        return new Mascota(pArregloMascotaPadre.get(posicionSpinner));
     }
 }

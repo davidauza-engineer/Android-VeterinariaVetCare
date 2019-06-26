@@ -129,4 +129,12 @@
         <item name="android:background">@android:color/darker_gray</item>
     </style>
 
+    <!-- Estilo para los Spinners en activity_registro_mascota.xml,
+        activity_registro_veterinario.xml y activity_registro_consulta.xml -->
+    <style name="SpinnersRegistros">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margen_estandar</item>
+    </style>
+
 </resources>

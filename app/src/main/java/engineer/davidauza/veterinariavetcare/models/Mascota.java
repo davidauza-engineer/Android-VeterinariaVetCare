@@ -117,7 +117,7 @@ public class Mascota {
     /**
      * La madre de la mascota.
      */
-    private String mMadre; // TODO cambiar tipo a Mascota, puede ser null
+    private Mascota mMadre;
 
     /**
      * La raza de la mascota.
@@ -181,7 +181,7 @@ public class Mascota {
                    boolean pSexo,
                    Date pFechaDeNacimiento,
                    Mascota pPadre,
-                   String pMadre,
+                   Mascota pMadre,
                    String pRaza,
                    String pEspecie,
                    String pEnfermedades,
@@ -269,7 +269,7 @@ public class Mascota {
     /**
      * Obtener la madre de la mascota.
      */
-    public String getMadre() {
+    public Mascota getMadre() {
         return mMadre;
     }
 
