@@ -41,14 +41,14 @@ public class Mascota {
     public static final String MADRE = "madre";
 
     /**
-     * Llave para acceder a la raza de la mascota en la base de datos.
-     */
-    public static final String RAZA = "raza";
-
-    /**
      * Llave para acceder a la especie de la mascota en la base de datos.
      */
     public static final String ESPECIE = "especie";
+
+    /**
+     * Llave para acceder a la raza de la mascota en la base de datos.
+     */
+    public static final String RAZA = "raza";
 
     /**
      * Llave para acceder a las enfermedades de la mascota en la base de datos.
@@ -120,12 +120,12 @@ public class Mascota {
     private Mascota mMadre;
 
     /**
-     * La especie de la mascota.
+     * La {@link Especie} de la {@link Mascota}.
      */
     private Especie mEspecie;
 
     /**
-     * La raza de la mascota.
+     * La raza de la {@link Mascota}.
      */
     private String mRaza;
 
@@ -195,8 +195,8 @@ public class Mascota {
         mFechaDeNacimiento = pFechaDeNacimiento;
         mPadre = pPadre;
         mMadre = pMadre;
-        mRaza = pRaza;
         mEspecie = pEspecie;
+        mRaza = pRaza;
         mEnfermedades = pEnfermedades;
         mConsultas = pConsultas;
         mExamenes = pExamenes;
@@ -232,91 +232,91 @@ public class Mascota {
     }
 
     /**
-     * Obtener el ID de la mascota.
+     * Obtener el ID de la {@link Mascota}.
      */
     public int getId() {
         return mId;
     }
 
     /**
-     * Obtener el nombre de la mascota.
+     * Obtener el nombre de la {@link Mascota}.
      */
     public String getNombre() {
         return mNombre;
     }
 
     /**
-     * Obtener el sexo de la mascota.
+     * Obtener el sexo de la {@link Mascota}.
      */
     public boolean getSexo() {
         return mSexo;
     }
 
     /**
-     * Obtener la fecha de nacimiento de la mascota.
+     * Obtener la fecha de nacimiento de la {@link Mascota}.
      */
     public Date getFechaDeNacimiento() {
         return mFechaDeNacimiento;
     }
 
     /**
-     * Obtener el padre de la mascota.
+     * Obtener el padre de la {@link Mascota}.
      */
     public Mascota getPadre() {
         return mPadre;
     }
 
     /**
-     * Obtener la madre de la mascota.
+     * Obtener la madre de la {@link Mascota}.
      */
     public Mascota getMadre() {
         return mMadre;
     }
 
     /**
-     * Obtener la raza de la mascota.
+     * Obtener la raza de la {@link Mascota}.
      */
     public String getRaza() {
         return mRaza;
     }
 
     /**
-     * Obtener la especie de la mascota.
+     * Obtener la {@link Especie} de la {@link Mascota}.
      */
     public Especie getEspecie() {
         return mEspecie;
     }
 
     /**
-     * Obtener las enfermedades de la mascota.
+     * Obtener las enfermedades de la {@link Mascota}.
      */
     public String getEnfermedades() {
         return mEnfermedades;
     }
 
     /**
-     * Obtener las consultas de la mascota.
+     * Obtener las consultas de la {@link Mascota}.
      */
     public String getConsultas() {
         return mConsultas;
     }
 
     /**
-     * Obtener los exámenes de la mascota.
+     * Obtener los exámenes de la {@link Mascota}.
      */
     public String getExamenes() {
         return mExamenes;
     }
 
     /**
-     * Obtener los tratamientos de la mascota.
+     * Obtener los tratamientos de la {@link Mascota}.
      */
     public String getTratamientos() {
         return mTratamientos;
     }
 
     /**
-     * Obtener los propietarios de la mascota.
+     * Obtener los propietarios de la {@link Mascota}.
      */
     public String getPropietarios() {
         return mPropietarios;

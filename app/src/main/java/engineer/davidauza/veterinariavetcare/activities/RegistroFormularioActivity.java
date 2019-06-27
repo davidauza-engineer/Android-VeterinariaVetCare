@@ -308,10 +308,6 @@ public class RegistroFormularioActivity extends AppCompatActivity
         Mascota padre = obtenerMascotaPadre(R.id.spn_padre_mascota, mMascotasPadre);
         // Obtener madre
         Mascota madre = obtenerMascotaPadre(R.id.spn_madre_mascota, mMascotasMadre);
-        // Obtener raza
-        //EditText razaEditText = findViewById(R.id.txt_raza_mascota);
-        //String raza = razaEditText.getText().toString();
-        String raza = "";
         // Obtener especie
         Spinner spinnerEspecie = findViewById(R.id.spn_especie_mascota);
         Especie especie = null;
@@ -330,6 +326,46 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 break;
             default:
                 especie = new Especie();
+                break;
+        }
+        // Obtener raza
+        String raza = "";
+        int posicion = mSpinnerRaza.getSelectedItemPosition();
+        switch (especie.getNombre()) {
+            case Ave.NOMBRE:
+                // Si el usuario no ha seleccionado una raza ir a la posición 5 del arreglo donde se
+                // encuentra la palabra Desconocida
+                if (posicion == 0) {
+                    posicion = 5;
+                }
+                raza = mRazas.get(posicion);
+                break;
+            case Canino.NOMBRE:
+                // Si el usuario no ha seleccionado una raza ir a la posición 7 del arreglo donde se
+                // encuentra la palabra Desconocida
+                if (posicion == 0) {
+                    posicion = 7;
+                }
+                raza = mRazas.get(posicion);
+                break;
+            case Felino.NOMBRE:
+                // Si el usuario no ha seleccionado una raza ir a la posición 3 del arreglo donde se
+                // encuentra la palabra Desconocida
+                if (posicion == 0) {
+                    posicion = 3;
+                }
+                raza = mRazas.get(posicion);
+                break;
+            case Roedor.NOMBRE:
+                // Si el usuario no ha seleccionado una raza ir a la posición 2 del arreglo donde se
+                // encuentra la palabra Desconocida
+                if (posicion == 0) {
+                    posicion = 2;
+                }
+                raza = mRazas.get(posicion);
+                break;
+            default:
+                raza = Especie.RAZAS[0];
                 break;
         }
         // Obtener enfermedades
@@ -372,6 +408,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Mascota.FECHA_DE_NACIMIENTO, fechaDeNacimiento);
         parametros.put(Mascota.PADRE, mMascota.getPadre().getNombre());
         parametros.put(Mascota.MADRE, mMascota.getMadre().getNombre());
+        // TODO cambiar orden especie vs raza en backend y aquí
         parametros.put(Mascota.RAZA, mMascota.getRaza());
         parametros.put(Mascota.ESPECIE, mMascota.getEspecie().getNombre());
         parametros.put(Mascota.ENFERMEDADES, mMascota.getEnfermedades());
