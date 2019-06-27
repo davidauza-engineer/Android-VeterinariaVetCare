@@ -15,8 +15,8 @@ public class Canino extends Especie {
      * Las razas de la {@link Especie}: {@link Canino}
      */
     public static final String[] RAZAS = {"Beagle", "Bóxer", "Bulldog", "Cocker Spaniel", "Criolla",
-            "Dálmata", "Desconocida", "Golden Retriever", "Gran Danés", "Labrador", "Otra",
-            "Pastor Alemán", "Pitbull", "Springer Spaniel"};
+            "Dálmata", "Desconocida", "French Poodle", "Golden Retriever", "Gran Danés", "Labrador",
+            "Otra", "Pastor Alemán", "Pitbull", "Shih Tzu", "Springer Spaniel"};
 
     /**
      * Constructor para crear un nuevo objeto {@link Canino}.
