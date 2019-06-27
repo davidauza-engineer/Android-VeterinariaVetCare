@@ -62,15 +62,21 @@
             android:id="@+id/spn_madre_mascota"
             style="@style/SpinnersRegistros" />
 
-        <EditText
-            android:id="@+id/txt_raza_mascota"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_mascota_hint_raza" />
+        <TextView
+            style="@style/TextViewsRegistros"
+            android:text="@string/registro_mascota_txt_especie" />
 
-        <EditText
-            android:id="@+id/txt_especie_mascota"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_mascota_hint_especie" />
+        <Spinner
+            android:id="@+id/spn_especie_mascota"
+            style="@style/SpinnersRegistros" />
+
+        <TextView
+            style="@style/TextViewsRegistros"
+            android:text="@string/registro_mascota_txt_raza" />
+
+        <Spinner
+            android:id="@+id/spn_raza_mascota"
+            style="@style/SpinnersRegistros" />
 
         <EditText
             android:id="@+id/txt_enfermedades_mascota"

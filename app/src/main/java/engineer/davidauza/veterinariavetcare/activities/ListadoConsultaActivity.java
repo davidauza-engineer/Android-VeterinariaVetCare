@@ -26,8 +26,13 @@ import engineer.davidauza.veterinariavetcare.R;
 import engineer.davidauza.veterinariavetcare.adapters.ConsultaAdapter;
 import engineer.davidauza.veterinariavetcare.adapters.MascotaAdapter;
 import engineer.davidauza.veterinariavetcare.adapters.VeterinarioAdapter;
+import engineer.davidauza.veterinariavetcare.models.Ave;
+import engineer.davidauza.veterinariavetcare.models.Canino;
 import engineer.davidauza.veterinariavetcare.models.Consulta;
+import engineer.davidauza.veterinariavetcare.models.Especie;
+import engineer.davidauza.veterinariavetcare.models.Felino;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
+import engineer.davidauza.veterinariavetcare.models.Roedor;
 import engineer.davidauza.veterinariavetcare.models.Veterinario;
 
 /**
@@ -137,7 +142,25 @@ public class ListadoConsultaActivity extends AppCompatActivity
                                 equals(getString(R.string.registro_mascota_txt_sexo_masculino))) {
                             sexo = true;
                         }
-                        String especie = jsonObject.optString("especie");
+                        String especieString = jsonObject.optString("especie");
+                        Especie especie = null;
+                        switch (especieString) {
+                            case Ave.NOMBRE:
+                                especie = new Ave();
+                                break;
+                            case Canino.NOMBRE:
+                                especie = new Canino();
+                                break;
+                            case Felino.NOMBRE:
+                                especie = new Felino();
+                                break;
+                            case Roedor.NOMBRE:
+                                especie = new Roedor();
+                                break;
+                            default:
+                                especie = new Especie();
+                                break;
+                        }
                         mMascotasArrayList.add(new Mascota(nombreMascota, fechaDeNacimiento,
                                 sexo, especie));
                         break;

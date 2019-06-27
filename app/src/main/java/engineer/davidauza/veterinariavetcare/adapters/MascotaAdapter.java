@@ -75,7 +75,7 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MyViewHo
             sexo = mContexto.getString(R.string.registro_mascota_txt_sexo_masculino);
         }
         myViewHolder.mSexoMascota.setText(sexo);
-        myViewHolder.mEspecieMascota.setText(mascotaActual.getEspecie());
+        myViewHolder.mEspecieMascota.setText(mascotaActual.getEspecie().getNombre());
     }
 
     /**

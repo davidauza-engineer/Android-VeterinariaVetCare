@@ -3,6 +3,7 @@ package engineer.davidauza.veterinariavetcare.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,13 +28,19 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import engineer.davidauza.veterinariavetcare.R;
+import engineer.davidauza.veterinariavetcare.models.Ave;
+import engineer.davidauza.veterinariavetcare.models.Canino;
 import engineer.davidauza.veterinariavetcare.models.Consulta;
+import engineer.davidauza.veterinariavetcare.models.Especie;
+import engineer.davidauza.veterinariavetcare.models.Felino;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
+import engineer.davidauza.veterinariavetcare.models.Roedor;
 import engineer.davidauza.veterinariavetcare.models.Veterinario;
 
 /**
@@ -42,7 +49,8 @@ import engineer.davidauza.veterinariavetcare.models.Veterinario;
  * gráfica.
  */
 public class RegistroFormularioActivity extends AppCompatActivity
-        implements Response.Listener<JSONArray>, Response.ErrorListener {
+        implements Response.Listener<JSONArray>, Response.ErrorListener,
+        AdapterView.OnItemSelectedListener {
 
     private RequestQueue mRequestRegistrar;
 
@@ -59,6 +67,16 @@ public class RegistroFormularioActivity extends AppCompatActivity
      * almacenadas en la base de datos.
      */
     private ArrayList<String> mMascotasMadre = new ArrayList<>();
+
+    /**
+     * El ArrayList que almacenará las razas según la especie seleccionada por el usuario.
+     */
+    private ArrayList<String> mRazas = new ArrayList<>();
+
+    /**
+     * Contiene el Spinner que despliega la lista de razas según la {@link Especie} seleccionada.
+     */
+    private Spinner mSpinnerRaza;
 
     /**
      * Esta variable almacena el objeto {@link Mascota} que será registrado en la base de datos.
@@ -121,6 +139,48 @@ public class RegistroFormularioActivity extends AppCompatActivity
     }
 
     /**
+     * Escucha para el Spinner de Selección de {@link Especie}.
+     */
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 1:
+                // Si se selecciona especie Ave
+                refrescarSpinnerRaza(Ave.RAZAS, position);
+                break;
+            case 2:
+                // Si se selecciona especie Canino
+                refrescarSpinnerRaza(Canino.RAZAS, position);
+                break;
+            case 3:
+                // Si se selecciona especie Desconocida - Otra
+                refrescarSpinnerRaza(Especie.RAZAS, position);
+                break;
+            case 4:
+                // Si se selecciona especie Felino
+                refrescarSpinnerRaza(Felino.RAZAS, position);
+                break;
+            case 5:
+                // Si se selecciona especie Roedor
+                refrescarSpinnerRaza(Roedor.RAZAS, position);
+                break;
+            default:
+                // Si se selecciona Selecciona la opción correcta
+                String[] noSeleccion = {getString(R.string.registro_mascota_txt_ayuda_razas)};
+                refrescarSpinnerRaza(noSeleccion, position);
+                break;
+        }
+    }
+
+    /**
+     * Método necesario para implementar la interfaz AdapterView.OnItemSelectedListener.
+     */
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Método necesario para implementar la interfaz AdapterView.OnItemSelectedListener
+    }
+
+    /**
      * Este método configura la interfaz gráfica adecuada según la selección del usuario en
      * activity_seleccion.xml
      */
@@ -133,6 +193,8 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 configurarSpinner(R.id.spn_padre_mascota);
                 configurarSpinner(R.id.spn_madre_mascota);
                 cargarMascotas();
+                configurarSpinner(R.id.spn_especie_mascota);
+                configurarSpinner(R.id.spn_raza_mascota);
                 break;
             case 1:
                 setContentView(R.layout.activity_registro_veterinario);
@@ -247,11 +309,29 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener madre
         Mascota madre = obtenerMascotaPadre(R.id.spn_madre_mascota, mMascotasMadre);
         // Obtener raza
-        EditText razaEditText = findViewById(R.id.txt_raza_mascota);
-        String raza = razaEditText.getText().toString();
+        //EditText razaEditText = findViewById(R.id.txt_raza_mascota);
+        //String raza = razaEditText.getText().toString();
+        String raza = "";
         // Obtener especie
-        EditText especieEditText = findViewById(R.id.txt_especie_mascota);
-        String especie = especieEditText.getText().toString();
+        Spinner spinnerEspecie = findViewById(R.id.spn_especie_mascota);
+        Especie especie = null;
+        switch (spinnerEspecie.getSelectedItemPosition()) {
+            case 1:
+                especie = new Ave();
+                break;
+            case 2:
+                especie = new Canino();
+                break;
+            case 4:
+                especie = new Felino();
+                break;
+            case 5:
+                especie = new Roedor();
+                break;
+            default:
+                especie = new Especie();
+                break;
+        }
         // Obtener enfermedades
         EditText enfermedadesEditText = findViewById(R.id.txt_enfermedades_mascota);
         String enfermedades = enfermedadesEditText.getText().toString();
@@ -268,7 +348,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         EditText propietariosEditText = findViewById(R.id.txt_propietarios_mascota);
         String propietarios = propietariosEditText.getText().toString();
         // Crear mascota
-        mMascota = new Mascota(id, nombre, sexo, fechaDeNacimiento, padre, madre, raza, especie,
+        mMascota = new Mascota(id, nombre, sexo, fechaDeNacimiento, padre, madre, especie, raza,
                 enfermedades, consultas, examenes, tratamientos, propietarios);
     }
 
@@ -293,7 +373,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Mascota.PADRE, mMascota.getPadre().getNombre());
         parametros.put(Mascota.MADRE, mMascota.getMadre().getNombre());
         parametros.put(Mascota.RAZA, mMascota.getRaza());
-        parametros.put(Mascota.ESPECIE, mMascota.getEspecie());
+        parametros.put(Mascota.ESPECIE, mMascota.getEspecie().getNombre());
         parametros.put(Mascota.ENFERMEDADES, mMascota.getEnfermedades());
         parametros.put(Mascota.CONSULTAS, mMascota.getConsultas());
         parametros.put(Mascota.EXAMENES, mMascota.getExamenes());
@@ -431,19 +511,36 @@ public class RegistroFormularioActivity extends AppCompatActivity
         Spinner spinner = findViewById(pSpinner);
         ArrayAdapter<String> adaptador = null;
         if (pSpinner == R.id.spn_padre_mascota) {
-            mMascotasPadre.add(getString(R.string.registro_mascota_txt_ayuda_padres));
+            mMascotasPadre.add(getString(R.string.registro_mascota_txt_ayuda));
             mMascotasPadre.add(getString(R.string.registro_mascota_txt_padre_defecto));
             // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
             // el Spinner
             adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
                     android.R.layout.simple_spinner_item, mMascotasPadre);
         } else if (pSpinner == R.id.spn_madre_mascota) {
-            mMascotasMadre.add(getString(R.string.registro_mascota_txt_ayuda_padres));
+            mMascotasMadre.add(getString(R.string.registro_mascota_txt_ayuda));
             mMascotasMadre.add(getString(R.string.registro_mascota_txt_madre_defecto));
             // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
             // el Spinner
             adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
                     android.R.layout.simple_spinner_item, mMascotasMadre);
+        } else if (pSpinner == R.id.spn_especie_mascota) {
+            String[] especies = {getString(R.string.registro_mascota_txt_ayuda), Ave.NOMBRE,
+                    Canino.NOMBRE, Especie.NOMBRE, Felino.NOMBRE, Roedor.NOMBRE};
+            // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
+            // el Spinner
+            adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                    android.R.layout.simple_spinner_item, especies);
+            // Aplicar el escucha para que la lista de razas se despliegue una vez se seleccione la
+            // especie.
+            spinner.setOnItemSelectedListener(RegistroFormularioActivity.this);
+        } else if (pSpinner == R.id.spn_raza_mascota) {
+            mSpinnerRaza = spinner;
+            mRazas.add(getString(R.string.registro_mascota_txt_ayuda_razas));
+            // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
+            // el Spinner
+            adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                    android.R.layout.simple_spinner_item, mRazas);
         }
         // Especificar el diseño que se usará cuando aparece la lista de opciones
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -480,5 +577,32 @@ public class RegistroFormularioActivity extends AppCompatActivity
             posicionSpinner = 1;
         }
         return new Mascota(pArregloMascotaPadre.get(posicionSpinner));
+    }
+
+    /**
+     * Este método refresca el Spinner con la lista de razas cuando el usuario selecciona una
+     * {@link Especie} en el Spinner de {@link Especie}s.
+     *
+     * @param pRazas   es un arreglo de Strings que contiene las razas disponibles.
+     * @param posicion es la posición en la lista de {@link Especie}s que el usuario seleccionó.
+     */
+    private void refrescarSpinnerRaza(String[] pRazas, int posicion) {
+        mRazas.clear();
+        if (posicion != 3 && posicion != 0) {
+            mRazas.add(getString(R.string.registro_mascota_txt_ayuda));
+        }
+        Collections.addAll(mRazas, pRazas);
+        // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
+        // el Spinner
+        ArrayAdapter<String> adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                android.R.layout.simple_spinner_item, mRazas);
+        // Especificar el diseño que se usará cuando aparece la lista de opciones
+        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerRaza.setAdapter(adaptador);
+        if (posicion != 0 && !mSpinnerRaza.isEnabled()) {
+            mSpinnerRaza.setEnabled(true);
+        } else if (posicion == 0) {
+            mSpinnerRaza.setEnabled(false);
+        }
     }
 }

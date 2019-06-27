@@ -120,14 +120,14 @@ public class Mascota {
     private Mascota mMadre;
 
     /**
+     * La especie de la mascota.
+     */
+    private Especie mEspecie;
+
+    /**
      * La raza de la mascota.
      */
     private String mRaza;
-
-    /**
-     * La especie de la mascota.
-     */
-    private String mEspecie;
 
     /**
      * Las enfermedades que puede haber sufrido la mascota.
@@ -165,8 +165,8 @@ public class Mascota {
      * @param pFechaDeNacimiento es la fecha de nacimiento de la {@link Mascota}.
      * @param pPadre             es el padre de la {@link Mascota}.
      * @param pMadre             es la madre de la {@link Mascota}.
+     * @param pEspecie           es la {@link Especie} de la {@link Mascota}.
      * @param pRaza              es la raza de la {@link Mascota}.
-     * @param pEspecie           es la especie de la {@link Mascota}.
      * @param pEnfermedades      son las enfermedades que puede sufrir la {@link Mascota}.
      * @param pConsultas         son las consultas a las que puede haber asistido la
      *                           {@link Mascota}.
@@ -182,8 +182,8 @@ public class Mascota {
                    Date pFechaDeNacimiento,
                    Mascota pPadre,
                    Mascota pMadre,
+                   Especie pEspecie,
                    String pRaza,
-                   String pEspecie,
                    String pEnfermedades,
                    String pConsultas,
                    String pExamenes,
@@ -210,12 +210,12 @@ public class Mascota {
      * @param pNombre            es el nombre de la {@link Mascota}.
      * @param pFechaDeNacimiento es la fecha de nacimiento de la {@link Mascota}.
      * @param pSexo              es el sexo de la {@link Mascota}.
-     * @param pEspecie           es la especie de la {@link Mascota}.
+     * @param pEspecie           es la {@link Especie} de la {@link Mascota}.
      */
     public Mascota(String pNombre,
                    Date pFechaDeNacimiento,
                    boolean pSexo,
-                   String pEspecie) {
+                   Especie pEspecie) {
         mNombre = pNombre;
         mFechaDeNacimiento = pFechaDeNacimiento;
         mSexo = pSexo;
@@ -283,7 +283,7 @@ public class Mascota {
     /**
      * Obtener la especie de la mascota.
      */
-    public String getEspecie() {
+    public Especie getEspecie() {
         return mEspecie;
     }
 

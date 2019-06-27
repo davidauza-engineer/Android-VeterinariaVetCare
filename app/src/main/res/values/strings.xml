@@ -32,8 +32,8 @@
     <string name="registro_mascota_txt_fecha_nacimiento">Fecha de Nacimiento</string>
     <string name="registro_mascota_txt_padre">Padre</string>
     <string name="registro_mascota_txt_madre">Madre</string>
-    <string name="registro_mascota_hint_raza">Raza</string>
-    <string name="registro_mascota_hint_especie">Especie</string>
+    <string name="registro_mascota_txt_especie">Especie</string>
+    <string name="registro_mascota_txt_raza">Raza</string>
     <string name="registro_mascota_hint_enfermedades">Enfermedades</string>
     <string name="registro_mascota_hint_consultas">Consultas</string>
     <string name="registro_mascota_hint_examenes">Exámenes</string>
@@ -47,7 +47,8 @@
     </string>
     <string name="registro_mascota_txt_padre_defecto">Desconocido</string>
     <string name="registro_mascota_txt_madre_defecto">Desconocida</string>
-    <string name="registro_mascota_txt_ayuda_padres">Selecciona la opción correcta</string>
+    <string name="registro_mascota_txt_ayuda">Selecciona la opción correcta</string>
+    <string name="registro_mascota_txt_ayuda_razas">Selecciona una especie primero</string>
     <!-- Strings para activity_registro_mascota.xml Fin -->
 
 
