@@ -7,97 +7,137 @@ package engineer.davidauza.veterinariavetcare.models;
 public class Persona {
 
     /**
-     * Llave para acceder al ID de la persona en la base de datos.
+     * Llave para acceder al ID de la {@link Persona} en la base de datos.
      */
     public static final String ID = "id";
 
     /**
-     * Llave para acceder al nombre de la persona en la base de datos.
+     * Llave para acceder al nombre de la {@link Persona} en la base de datos.
      */
     public static final String NOMBRE = "nombre";
 
     /**
-     * Llave para acceder al numero de identidad de la persona en la base de datos.
+     * Llave para acceder al apellido de la {@link Persona} en la base de datos.
      */
-    public static final String NUMERO_DE_IDENTIDAD = "numeroDeIdentidad";
+    public static final String APELLIDO = "apellido";
 
     /**
-     * Llave para acceder a la dirección de la persona en la base de datos.
+     * Llave para acceder al número de documento de la {@link Persona} en la base de datos.
+     */
+    public static final String NUMERO_DE_DOCUMENTO = "numeroDeDocumento"; //TODO actualizar en el backend
+
+    /**
+     * Llave para acceder a la dirección de la {@link Persona} en la base de datos.
      */
     public static final String DIRECCION = "direccion";
 
     /**
-     * El ID único de la persona.
+     * Llave para acceder al teléfono de la {@link Persona} en la base de datos.
      */
-    private String mId;
+    public static final String TELEFONO = "telefono";
 
     /**
-     * El nombre de la persona.
+     * El ID único de la {@link Persona}.
      */
-    private String mNombre; // TODO dividir en nombre y apellido.
+    private int mId;
 
     /**
-     * El número de identidad de la persona.
+     * El nombre de la {@link Persona}.
      */
-    private String mNumeroDeIdentidad; // TODO cambiar tipo a int
+    private String mNombre;
 
     /**
-     * La dirección de la persona.
+     * El apellido de la {@link Persona}.
      */
-    private String mDireccion; // TODO añadir teléfonos, eliminar de Veterinario.
+    private String mApellido;
+
+    /**
+     * El número de documento de la {@link Persona}.
+     */
+    private int mNumeroDeDocumento;
+
+    /**
+     * La dirección de la {@link Persona}.
+     */
+    private String mDireccion;
+
+    /**
+     * El teléfono de la {@link Persona}.
+     */
+    private int mTelefono;
 
     /**
      * Constructor para crear un nuevo objeto {@link Persona}.
      *
-     * @param pId                es el ID de la persona.
-     * @param pNombre            es el nombre de la persona.
-     * @param pNumeroDeIdentidad es el número de identidad de la persona.
-     * @param pDireccion         es la dirección de la persona.
+     * @param pId                es el ID de la {@link Persona}.
+     * @param pNombre            es el nombre de la {@link Persona}.
+     * @param pApellido          es el apellido de la {@link Persona}.
+     * @param pNumeroDeDocumento es el número de documento de la {@link Persona}.
+     * @param pDireccion         es la dirección de la {@link Persona}.
+     * @param pTelefono          es el teléfono de la {@link Persona}.
      */
-    public Persona(String pId,
+    public Persona(int pId,
                    String pNombre,
-                   String pNumeroDeIdentidad,
-                   String pDireccion) {
+                   String pApellido,
+                   int pNumeroDeDocumento,
+                   String pDireccion,
+                   int pTelefono) {
         mId = pId;
         mNombre = pNombre;
-        mNumeroDeIdentidad = pNumeroDeIdentidad;
+        mApellido = pApellido;
+        mNumeroDeDocumento = pNumeroDeDocumento;
         mDireccion = pDireccion;
+        mTelefono = pTelefono;
     }
 
     /**
-     * Constructor para crear un nuebo objeto {@link Persona}.
+     * Constructor para crear un nuevo objeto {@link Persona}.
      *
-     * @param pNombre es el nombre de la persona.
+     * @param pNombre es el nombre de la {@link Persona}.
      */
     public Persona(String pNombre) {
         mNombre = pNombre;
     }
 
     /**
-     * Obtener el ID de la persona.
+     * Obtener el ID de la {@link Persona}.
      */
-    public String getId() {
+    public int getId() {
         return mId;
     }
 
     /**
-     * Obtener el nombre de la persona.
+     * Obtener el nombre de la {@link Persona}.
      */
     public String getNombre() {
         return mNombre;
     }
 
     /**
-     * Obtener el número de identidad de la persona.
+     * Obtener el apellido de la {@link Persona}.
      */
-    public String getNumeroDeIdentidad() {
-        return mNumeroDeIdentidad;
+    public String getApellido() {
+        return mApellido;
     }
 
     /**
-     * Obtener la dirección de la persona.
+     * Obtener el número de documento de la {@link Persona}.
+     */
+    public int getNumeroDeDocumento() {
+        return mNumeroDeDocumento;
+    }
+
+    /**
+     * Obtener la dirección de la {@link Persona}.
      */
     public String getDireccion() {
         return mDireccion;
+    }
+
+    /**
+     * Obtener el teléfono de la {@link Persona}.
+     */
+    public int getTelefono() {
+        return mTelefono;
     }
 }

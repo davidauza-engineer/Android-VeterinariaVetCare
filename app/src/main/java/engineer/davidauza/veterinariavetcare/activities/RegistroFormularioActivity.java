@@ -2,6 +2,7 @@ package engineer.davidauza.veterinariavetcare.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,6 +38,7 @@ import engineer.davidauza.veterinariavetcare.R;
 import engineer.davidauza.veterinariavetcare.models.Ave;
 import engineer.davidauza.veterinariavetcare.models.Canino;
 import engineer.davidauza.veterinariavetcare.models.Consulta;
+import engineer.davidauza.veterinariavetcare.models.Dueno;
 import engineer.davidauza.veterinariavetcare.models.Especie;
 import engineer.davidauza.veterinariavetcare.models.Felino;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
@@ -92,6 +94,11 @@ public class RegistroFormularioActivity extends AppCompatActivity
      * Esta variable almacena el objeto {@link Consulta} que será registrado en la base de datos.
      */
     private Consulta mConsulta;
+
+    /**
+     * Esta variable almacena el objeto {@link Dueno} que será registrado en la base de datos.
+     */
+    private Dueno mDueno;
 
     /**
      * Esta variable almacena la posición seleccionada en el Spinner en activity_seleccionn.xml.
@@ -386,6 +393,11 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Crear mascota
         mMascota = new Mascota(id, nombre, sexo, fechaDeNacimiento, padre, madre, especie, raza,
                 enfermedades, consultas, examenes, tratamientos, propietarios);
+        // Crea Dueño y asignárselo a la Mascota.
+        mDueno = crearDueno();
+        ArrayList<Dueno> duenos = new ArrayList<>();
+        duenos.add(mDueno);
+        mMascota.setDuenos(duenos);
     }
 
     /**
@@ -408,9 +420,14 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Mascota.FECHA_DE_NACIMIENTO, fechaDeNacimiento);
         parametros.put(Mascota.PADRE, mMascota.getPadre().getNombre());
         parametros.put(Mascota.MADRE, mMascota.getMadre().getNombre());
-        // TODO cambiar orden especie vs raza en backend y aquí
-        parametros.put(Mascota.RAZA, mMascota.getRaza());
         parametros.put(Mascota.ESPECIE, mMascota.getEspecie().getNombre());
+        parametros.put(Mascota.RAZA, mMascota.getRaza());
+        // TODO provisional
+        parametros.put(Mascota.DUENOS, mMascota.getDuenos().toString());
+        Log.e("Dueños", mMascota.getDuenos().toString());
+        //TODO verificar
+        parametros.put(Mascota.DUENO_ACTUAL, "" + mMascota.getDuenoActual().getId());
+        Log.e("Dueño Actual", mMascota.getDuenoActual().toString());
         parametros.put(Mascota.ENFERMEDADES, mMascota.getEnfermedades());
         parametros.put(Mascota.CONSULTAS, mMascota.getConsultas());
         parametros.put(Mascota.EXAMENES, mMascota.getExamenes());
@@ -420,21 +437,57 @@ public class RegistroFormularioActivity extends AppCompatActivity
     }
 
     /**
+     * Este método crea un {@link Dueno} con base en los datos suministrados en la interfaz gráfica.
+     *
+     * @return un objeto {@link Dueno}.
+     */
+    private Dueno crearDueno() {
+        // Crear ID
+        int id = (int) (Math.random() * 100_000);
+        // Obtener nombre
+        EditText nombreDuenoEditText = findViewById(R.id.txt_nombre_dueno_mascota);
+        String nombre = nombreDuenoEditText.getText().toString();
+        // Obtener apellido
+        EditText apellidoDuenoEditText = findViewById(R.id.txt_apellido_dueno_mascota);
+        String apellido = apellidoDuenoEditText.getText().toString();
+        // Obtener número de documento
+        EditText documentoDuenoEditText = findViewById(R.id.txt_documento_dueno_mascota);
+        int numeroDeDocumento = Integer.parseInt(documentoDuenoEditText.getText().toString());
+        // Obtener dirección
+        EditText direccionEditText = findViewById(R.id.txt_direccion_dueno_mascota);
+        String direccion = direccionEditText.getText().toString();
+        // Obtener teléfono
+        EditText telefonoEditText = findViewById(R.id.txt_telefono_dueno_mascota);
+        int telefono = Integer.parseInt(telefonoEditText.getText().toString());
+        // Obtener mascota
+        Mascota mascota = mMascota;
+        // Obtener fecha de registro mascota
+        Date fecha = Calendar.getInstance().getTime();
+        return new Dueno(id, nombre, apellido, numeroDeDocumento, direccion, telefono, mascota,
+                fecha);
+    }
+
+    /**
      * Este método crea un nuevo objeto {@link Veterinario} con base en los valores suministrados
      * por el usuario en la interfaz gráfica.
      */
     private void crearVeterinario() {
         // Crear ID para el Veterinario
-        String id = Double.toString(Math.random() * 1_000);
+        int id = (int) (Math.random() * 1_000);
         // Obtener nombre del Veterinario
         EditText nombreEditText = findViewById(R.id.txt_nombre_veterinario);
         String nombre = nombreEditText.getText().toString();
+        // Obtener apellido del Veterinari
+        String apellido = "";
         // Obtener el número de identidad del Veterinario
         EditText numeroDeIdentidadEditText = findViewById(R.id.txt_numero_identidad_veterinario);
-        String numeroDeIdentidad = numeroDeIdentidadEditText.getText().toString();
+        int numeroDeIdentidad = Integer.parseInt(numeroDeIdentidadEditText.getText().toString());
         // Obtener dirección del Veterinario
         EditText direccionEditText = findViewById(R.id.txt_direccion_veterinario);
         String direccion = direccionEditText.getText().toString();
+        // Obtener teléfono Veterinario
+        EditText telefonoEditText = findViewById(R.id.txt_telefono_veterinario);
+        int telefono = Integer.parseInt(telefonoEditText.getText().toString());
         // Obtener el número de tarjeta profesional del Veterinario
         EditText tarjetaProfesionalEditText =
                 findViewById(R.id.txt_tarjeta_profesional_veterinario);
@@ -446,12 +499,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
         EditText consultasRealizadasEditText =
                 findViewById(R.id.txt_consultas_realizadas_veterinario);
         String consultasRealizadas = consultasRealizadasEditText.getText().toString();
-        // Obtener teléfono Veterinario
-        EditText telefonoEditText = findViewById(R.id.txt_telefono_veterinario);
-        String telefono = telefonoEditText.getText().toString();
         // Crear Veterinario
-        mVeterinario = new Veterinario(id, nombre, numeroDeIdentidad, direccion, tarjetaProfesional,
-                especialidad, consultasRealizadas, telefono);
+        mVeterinario = new Veterinario(id, nombre, apellido, numeroDeIdentidad, direccion,
+                telefono, tarjetaProfesional, especialidad, consultasRealizadas);
     }
 
     /**
@@ -460,14 +510,15 @@ public class RegistroFormularioActivity extends AppCompatActivity
      */
     private Map<String, String> crearParametrosVeterinario() {
         Map<String, String> parametros = new HashMap<>();
-        parametros.put(Veterinario.ID, mVeterinario.getId());
+        parametros.put(Veterinario.ID, Integer.toString(mVeterinario.getId()));
         parametros.put(Veterinario.NOMBRE, mVeterinario.getNombre());
-        parametros.put(Veterinario.NUMERO_DE_IDENTIDAD, mVeterinario.getNumeroDeIdentidad());
+        parametros.put(Veterinario.NUMERO_DE_DOCUMENTO,
+                Integer.toString(mVeterinario.getNumeroDeDocumento()));
         parametros.put(Veterinario.DIRECCION, mVeterinario.getDireccion());
         parametros.put(Veterinario.TARJETA_PROFESIONAL, mVeterinario.getTarjetaProfesional());
         parametros.put(Veterinario.ESPECIALIDAD, mVeterinario.getEspecialidad());
         parametros.put(Veterinario.CONSULTAS_REALIZADAS, mVeterinario.getConsultasRelizadas());
-        parametros.put(Veterinario.TELEFONO, mVeterinario.getTelefono());
+        parametros.put(Veterinario.TELEFONO, Integer.toString(mVeterinario.getTelefono()));
         return parametros;
     }
 

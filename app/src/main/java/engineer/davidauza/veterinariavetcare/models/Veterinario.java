@@ -21,10 +21,6 @@ public class Veterinario extends Persona {
      */
     public static final String CONSULTAS_REALIZADAS = "consultasRealizadas";
 
-    /**
-     * Llave para acceder al teléfono del veterinario en la base de datos.
-     */
-    public static final String TELEFONO = "telefono";
 
     /**
      * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevos
@@ -56,35 +52,31 @@ public class Veterinario extends Persona {
     private String mConsultasRelizadas;
 
     /**
-     * El número de teléfono del veterinario.
-     */
-    private String mTelefono;
-
-    /**
      * Constructor para crear un nuevo objeto {@link Veterinario}.
      *
      * @param pId                  es el ID único para el Veterinario.
      * @param pNombre              es el nombre del Veterinario.
+     * @param pApellido
      * @param pNumeroDeIdentidad   es el número de identidad del Veterinario.
      * @param pDireccion           es la dirección del Veterinario.
+     * @param pTelefono            es el teléfono del Veterinario.
      * @param pTarjetaProfesional  es el número de tarjeta profesional del Veterinario.
      * @param pEspecialidad        es la especialidad médica del Veterinario.
      * @param pConsultasRealizadas es el total de consultas realizadas por el Veterinario.
-     * @param pTelefono            es el teléfono del Veterinario.
      */
-    public Veterinario(String pId,
+    public Veterinario(int pId,
                        String pNombre,
-                       String pNumeroDeIdentidad,
+                       String pApellido,
+                       int pNumeroDeIdentidad,
                        String pDireccion,
+                       int pTelefono,
                        String pTarjetaProfesional,
                        String pEspecialidad,
-                       String pConsultasRealizadas,
-                       String pTelefono) {
-        super(pId, pNombre, pNumeroDeIdentidad, pDireccion);
+                       String pConsultasRealizadas) {
+        super(pId, pNombre, pApellido, pNumeroDeIdentidad, pDireccion, pTelefono);
         mTarjetaProfesional = pTarjetaProfesional;
         mEspecialidad = pEspecialidad;
         mConsultasRelizadas = pConsultasRealizadas;
-        mTelefono = pTelefono;
     }
 
     /**
@@ -124,12 +116,5 @@ public class Veterinario extends Persona {
      */
     public String getConsultasRelizadas() {
         return mConsultasRelizadas;
-    }
-
-    /**
-     * Obtener el teléfono del veterinario.
-     */
-    public String getTelefono() {
-        return mTelefono;
     }
 }

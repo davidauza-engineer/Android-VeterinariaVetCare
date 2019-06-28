@@ -1,5 +1,6 @@
 package engineer.davidauza.veterinariavetcare.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -11,67 +12,77 @@ import java.util.Date;
 public class Mascota {
 
     /**
-     * Llave para acceder al ID de la mascota en la base de datos.
+     * Llave para acceder al ID de la {@link Mascota} en la base de datos.
      */
     public static final String ID = "id";
 
     /**
-     * Llave para acceder al nombre de la mascota en la base de datos.
+     * Llave para acceder al nombre de la {@link Mascota} en la base de datos.
      */
     public static final String NOMBRE = "nombre";
 
     /**
-     * Llave para acceder al sexo de la mascota en la base de datos.
+     * Llave para acceder al sexo de la {@link Mascota} en la base de datos.
      */
     public static final String SEXO = "sexo";
 
     /**
-     * Llave para acceder a la fecha de nacimiento de la mascota en la base de datos.
+     * Llave para acceder a la fecha de nacimiento de la {@link Mascota} en la base de datos.
      */
     public static final String FECHA_DE_NACIMIENTO = "fechaDeNacimiento";
 
     /**
-     * Llave para acceder al padre de la mascota en la base de datos.
+     * Llave para acceder al padre de la {@link Mascota} en la base de datos.
      */
     public static final String PADRE = "padre";
 
     /**
-     * Llave para acceder a la madre de la mascota en la base de datos.
+     * Llave para acceder a la madre de la {@link Mascota} en la base de datos.
      */
     public static final String MADRE = "madre";
 
     /**
-     * Llave para acceder a la especie de la mascota en la base de datos.
+     * Llave para acceder a la especie de la {@link Mascota} en la base de datos.
      */
     public static final String ESPECIE = "especie";
 
     /**
-     * Llave para acceder a la raza de la mascota en la base de datos.
+     * Llave para acceder a la raza de la {@link Mascota} en la base de datos.
      */
     public static final String RAZA = "raza";
 
     /**
-     * Llave para acceder a las enfermedades de la mascota en la base de datos.
+     * Llave para acceder a la lista de dueños de la {@link Mascota} en la base de datos.
+     */
+    public static final String DUENOS = "duenos";
+
+    /**
+     * LLave para acceder al dueño actual de la {@link Mascota} en la base de datos.
+     */
+    public static final String DUENO_ACTUAL = "duenoActual";
+
+    /**
+     * Llave para acceder a las enfermedades de la {@link Mascota} en la base de datos.
      */
     public static final String ENFERMEDADES = "enfermedades";
 
     /**
-     * Llave para acceder a las consultas de la mascota en la base de datos.
+     * Llave para acceder a las consultas de la {@link Mascota} en la base de datos.
      */
     public static final String CONSULTAS = "consultas";
 
     /**
-     * Llave para acceder a los exámenes de la mascota en la base de datos.
+     * Llave para acceder a los exámenes de la {@link Mascota} en la base de datos.
      */
     public static final String EXAMENES = "examenes";
 
     /**
-     * Llave para acceder a los tratamientos de la mascota en la base de datos.
+     * Llave para acceder a los tratamientos de la {@link Mascota} en la base de datos.
      */
     public static final String TRATAMIENTOS = "tratamientos";
 
     /**
-     * Llave para acceder a los propietarios de la mascota en la base de datos.
+     * Llave para acceder a los propietarios de la {@link Mascota} en la base de datos.
      */
     public static final String PROPIETARIOS = "propietarios";
 
@@ -90,32 +101,32 @@ public class Mascota {
             "https://davidauza-engineer.000webhostapp.com/web_service/get_mascota.php";
 
     /**
-     * El ID único para cada mascota.
+     * El ID único para cada {@link Mascota}.
      */
     private int mId;
 
     /**
-     * El nombre de la mascota.
+     * El nombre de la {@link Mascota}.
      */
     private String mNombre;
 
     /**
-     * El sexo de la mascota.
+     * El sexo de la {@link Mascota}.
      */
     private boolean mSexo;
 
     /**
-     * La fecha de nacimiento de la mascota.
+     * La fecha de nacimiento de la {@link Mascota}.
      */
     private Date mFechaDeNacimiento;
 
     /**
-     * El padre de la mascota.
+     * El padre de la {@link Mascota}.
      */
     private Mascota mPadre;
 
     /**
-     * La madre de la mascota.
+     * La madre de la {@link Mascota}.
      */
     private Mascota mMadre;
 
@@ -130,27 +141,37 @@ public class Mascota {
     private String mRaza;
 
     /**
-     * Las enfermedades que puede haber sufrido la mascota.
+     * Un ArrayList que contiene la lista de dueños de la {@link Mascota}.
+     */
+    private ArrayList<Dueno> mDuenos;
+
+    /**
+     * El Dueño actual de la {@link Mascota}.
+     */
+    private Dueno mDuenoActual;
+
+    /**
+     * Las enfermedades que puede haber sufrido la {@link Mascota}.
      */
     private String mEnfermedades; // TODO añadir boolean enfermedad crónica ¿Cómo manejo la enfermedad crónica?
 
     /**
-     * Las consultas a las que ha asistido la mascota.
+     * Las consultas a las que ha asistido la {@link Mascota}.
      */
     private String mConsultas;
 
     /**
-     * Los exámenes que se le han practicado a la mascota.
+     * Los exámenes que se le han practicado a la {@link Mascota}.
      */
     private String mExamenes;
 
     /**
-     * Los tratamientos que se la han practicado a la mascota.
+     * Los tratamientos que se la han practicado a la {@link Mascota}.
      */
     private String mTratamientos;
 
     /**
-     * Los propietarios de la mascota.
+     * Los propietarios de la {@link Mascota}.
      */
     private String mPropietarios; // TODO cambiar tipo a Propietario[]
     // TODO añadir miembro propietarioActual "incluso pudierar tener un dueño más de una vez"
@@ -281,6 +302,23 @@ public class Mascota {
     }
 
     /**
+     * Obtener la lista de dueños de la {@link Mascota}.
+     */
+    public ArrayList<Dueno> getDuenos() {
+        return mDuenos;
+    }
+
+    /**
+     * Este método configura los dueños de la  {@link Mascota}.
+     *
+     * @param pDuenos es la lista de dueños de la {@link Mascota}.
+     */
+    public void setDuenos(ArrayList<Dueno> pDuenos) {
+        mDuenos = pDuenos;
+        mDuenoActual = mDuenos.get(mDuenos.size() - 1);
+    }
+
+    /**
      * Obtener la {@link Especie} de la {@link Mascota}.
      */
     public Especie getEspecie() {
@@ -320,5 +358,12 @@ public class Mascota {
      */
     public String getPropietarios() {
         return mPropietarios;
+    }
+
+    /**
+     * Obtener el dueño actual de la {@link Mascota}.
+     */
+    public Dueno getDuenoActual() {
+        return mDuenoActual;
     }
 }
