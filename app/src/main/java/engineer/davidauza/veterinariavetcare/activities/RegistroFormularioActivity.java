@@ -2,7 +2,6 @@ package engineer.davidauza.veterinariavetcare.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -422,12 +421,8 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Mascota.MADRE, mMascota.getMadre().getNombre());
         parametros.put(Mascota.ESPECIE, mMascota.getEspecie().getNombre());
         parametros.put(Mascota.RAZA, mMascota.getRaza());
-        // TODO provisional
         parametros.put(Mascota.DUENOS, mMascota.getDuenos().toString());
-        Log.e("Dueños", mMascota.getDuenos().toString());
-        //TODO verificar
-        parametros.put(Mascota.DUENO_ACTUAL, "" + mMascota.getDuenoActual().getId());
-        Log.e("Dueño Actual", mMascota.getDuenoActual().toString());
+        parametros.put(Mascota.DUENO_ACTUAL, mMascota.getDuenoActual().toString());
         parametros.put(Mascota.ENFERMEDADES, mMascota.getEnfermedades());
         parametros.put(Mascota.CONSULTAS, mMascota.getConsultas());
         parametros.put(Mascota.EXAMENES, mMascota.getExamenes());
@@ -452,13 +447,21 @@ public class RegistroFormularioActivity extends AppCompatActivity
         String apellido = apellidoDuenoEditText.getText().toString();
         // Obtener número de documento
         EditText documentoDuenoEditText = findViewById(R.id.txt_documento_dueno_mascota);
-        int numeroDeDocumento = Integer.parseInt(documentoDuenoEditText.getText().toString());
+        String documento = documentoDuenoEditText.getText().toString();
+        int numeroDeDocumento = -1;
+        if (!documento.equals("")) {
+            numeroDeDocumento = Integer.parseInt(documento);
+        }
         // Obtener dirección
         EditText direccionEditText = findViewById(R.id.txt_direccion_dueno_mascota);
         String direccion = direccionEditText.getText().toString();
         // Obtener teléfono
         EditText telefonoEditText = findViewById(R.id.txt_telefono_dueno_mascota);
-        int telefono = Integer.parseInt(telefonoEditText.getText().toString());
+        String numeroDeTelefono = telefonoEditText.getText().toString();
+        int telefono = -1;
+        if (!numeroDeTelefono.equals("")) {
+            telefono = Integer.parseInt(numeroDeTelefono);
+        }
         // Obtener mascota
         Mascota mascota = mMascota;
         // Obtener fecha de registro mascota
@@ -477,7 +480,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener nombre del Veterinario
         EditText nombreEditText = findViewById(R.id.txt_nombre_veterinario);
         String nombre = nombreEditText.getText().toString();
-        // Obtener apellido del Veterinari
+        // Obtener apellido del Veterinario
         String apellido = "";
         // Obtener el número de identidad del Veterinario
         EditText numeroDeIdentidadEditText = findViewById(R.id.txt_numero_identidad_veterinario);
