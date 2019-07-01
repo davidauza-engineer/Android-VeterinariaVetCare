@@ -105,32 +105,7 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         String nombreMascota = jsonObject.optString("nombre");
                         String fechaDeNacimientoString =
                                 jsonObject.optString("fechaDeNacimiento");
-                        char[] charArray = fechaDeNacimientoString.toCharArray();
-                        int contador = 0;
-                        String diaString = "";
-                        String mesString = "";
-                        String anoString = "";
-                        for (int j = 0; j < charArray.length; j++) {
-                            if (charArray[j] == '/') {
-                                contador++;
-                            } else {
-                                if (contador == 0) {
-                                    diaString += charArray[j];
-                                } else if (contador == 1) {
-                                    mesString += charArray[j];
-                                } else {
-                                    anoString += charArray[j];
-                                }
-                            }
-                        }
-                        int dia = Integer.parseInt(diaString);
-                        int mes = Integer.parseInt(mesString);
-                        int ano = Integer.parseInt(anoString);
-                        Calendar calendario = Calendar.getInstance();
-                        // Se resta a uno al mes puesto que el método set tiene en cuenta los meses
-                        // del 0 al 11
-                        calendario.set(ano, mes - 1, dia);
-                        Date fechaDeNacimiento = calendario.getTime();
+                        Date fechaDeNacimiento = construirFecha(fechaDeNacimientoString);
                         String sexoString = jsonObject.optString("sexo");
                         boolean sexo = false;
                         if (sexoString.
@@ -202,7 +177,8 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         break;
                     // Si están consultando las consultas
                     case 2:
-                        String fecha = jsonObject.optString("fecha");
+                        String fechaString = jsonObject.optString("fecha");
+                        Date fecha = construirFecha(fechaString);
                         String motivo = jsonObject.optString("motivo");
                         String veterinario = jsonObject.optString("veterinario");
                         String mascotaAtendida = jsonObject.optString("mascotaAtendida");
@@ -276,5 +252,41 @@ public class ListadoConsultaActivity extends AppCompatActivity
                 break;
         }
         mRecyclerView.setAdapter(adaptador);
+    }
+
+    /**
+     * Este método convierte un String que contiene una fecha en formato dd/mm/aaaa a un objeto
+     * {@link Date}
+     *
+     * @param pFechaString es el String en formato dd/mm/aaaa.
+     * @return un objeto {@link Date} con la fecha correspondiente.
+     */
+    private Date construirFecha(String pFechaString) {
+        char[] charArray = pFechaString.toCharArray();
+        int contador = 0;
+        String diaString = "";
+        String mesString = "";
+        String anoString = "";
+        for (int j = 0; j < charArray.length; j++) {
+            if (charArray[j] == '/') {
+                contador++;
+            } else {
+                if (contador == 0) {
+                    diaString += charArray[j];
+                } else if (contador == 1) {
+                    mesString += charArray[j];
+                } else {
+                    anoString += charArray[j];
+                }
+            }
+        }
+        int dia = Integer.parseInt(diaString);
+        int mes = Integer.parseInt(mesString);
+        int ano = Integer.parseInt(anoString);
+        Calendar calendario = Calendar.getInstance();
+        // Se resta a uno al mes puesto que el método set tiene en cuenta los meses
+        // del 0 al 11
+        calendario.set(ano, mes - 1, dia);
+        return calendario.getTime();
     }
 }

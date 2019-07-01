@@ -1,5 +1,7 @@
 package engineer.davidauza.veterinariavetcare.models;
 
+import java.util.Date;
+
 /**
  * Esta clase representa una {@link Consulta}. Una {@link Consulta} tiene un código, una fecha,
  * un motivo, una patología asociada, un veterinario que la realiza, unos exámenes asociados, unos
@@ -70,7 +72,7 @@ public class Consulta {
     /**
      * La fecha de la {@link Consulta}.
      */
-    private String mFecha; // TODO cambiar tipo a Date
+    private Date mFecha;
 
     /**
      * El motivo de la {@link Consulta}.
@@ -115,7 +117,7 @@ public class Consulta {
      * @param pMascotaAtendida   es la {@link Mascota} atendida durante la {@link Consulta}.
      */
     public Consulta(int pCodigo,
-                    String pFecha,
+                    Date pFecha,
                     String pMotivo,
                     String pPatologiaAsociada,
                     String pVeterinario,
@@ -140,7 +142,7 @@ public class Consulta {
      * @param pVeterinario     es el {@link Veterinario} que atendió la {@link Consulta}.
      * @param pMascotaAtendida es la {@link Mascota} atendida durante la {@link Consulta}.
      */
-    public Consulta(String pFecha,
+    public Consulta(Date pFecha,
                     String pMotivo,
                     String pVeterinario,
                     String pMascotaAtendida) {
@@ -160,7 +162,7 @@ public class Consulta {
     /**
      * Este método retorna la fecha de la {@link Consulta}.
      */
-    public String getFecha() {
+    public Date getFecha() {
         return mFecha;
     }
 

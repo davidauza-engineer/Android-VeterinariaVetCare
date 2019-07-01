@@ -108,6 +108,11 @@ public class RegistroFormularioActivity extends AppCompatActivity
      */
     private int mRegistroSeleccionadoSpinner;
 
+    /**
+     * El formato de fecha utilizado.
+     */
+    private static final SimpleDateFormat FORMATO = new SimpleDateFormat("dd/MM/yyyy");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -416,8 +421,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         }
         parametros.put(Mascota.SEXO, sexo);
         // Dar formato a la fecha
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaDeNacimiento = formato.format(mMascota.getFechaDeNacimiento());
+        String fechaDeNacimiento = FORMATO.format(mMascota.getFechaDeNacimiento());
         parametros.put(Mascota.FECHA_DE_NACIMIENTO, fechaDeNacimiento);
         parametros.put(Mascota.PADRE, mMascota.getPadre().getNombre());
         parametros.put(Mascota.MADRE, mMascota.getMadre().getNombre());
@@ -621,9 +625,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Crear ID para la consulta
         int codigo = (int) (Math.random() * 1_000_000);
         // Obtener fecha
-        //String fecha = obtenerFecha(R.id.dte_fecha);
-        //TODO reemplazar los siguiente:
-        String fecha = "";
+        Date fecha = obtenerFecha(R.id.dte_fecha);
         // Obtener motivo
         EditText motivoEditText = findViewById(R.id.txt_motivo_consulta);
         String motivo = motivoEditText.getText().toString();
@@ -654,7 +656,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
     private Map<String, String> crearParametrosConsulta() {
         Map<String, String> parametros = new HashMap<>();
         parametros.put(Consulta.CODIGO, Integer.toString(mConsulta.getCodigo()));
-        parametros.put(Consulta.FECHA, mConsulta.getFecha());
+        // Dar formato a la fecha
+        String fecha = FORMATO.format(mConsulta.getFecha());
+        parametros.put(Consulta.FECHA, fecha);
         parametros.put(Consulta.MOTIVO, mConsulta.getMotivo());
         parametros.put(Consulta.PATOLOGIA_ASOCIADA, mConsulta.getPatologiaAsociada());
         parametros.put(Consulta.VETERINARIO, mConsulta.getVeterinario());

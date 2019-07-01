@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import engineer.davidauza.veterinariavetcare.R;
@@ -35,6 +36,11 @@ public class ConsultaAdapter extends RecyclerView.Adapter<ConsultaAdapter.MyView
     }
 
     /**
+     * Esta constante contiene el formato que se usará para mostrar la fecha al ser consultada.
+     */
+    private static final SimpleDateFormat FORMATO = new SimpleDateFormat("dd/MM/yyyy");
+
+    /**
      * Crear nuevos Views, invocado por el LayoutManager.
      */
     @NonNull
@@ -55,7 +61,9 @@ public class ConsultaAdapter extends RecyclerView.Adapter<ConsultaAdapter.MyView
         Consulta consultaActual = mConsultas.get(i);
 
         // Reemplazar el contenido del View con dicho elemento
-        myViewHolder.mFechaConsulta.setText(consultaActual.getFecha());
+        // Dar formato a la fecha
+        String fecha = FORMATO.format(consultaActual.getFecha());
+        myViewHolder.mFechaConsulta.setText(fecha);
         myViewHolder.mMotivoConsulta.setText(consultaActual.getMotivo());
         myViewHolder.mVeterinarioConsulta.setText(consultaActual.getVeterinario());
         myViewHolder.mMascotaAtendida.setText(consultaActual.getMascotaAtendida());
