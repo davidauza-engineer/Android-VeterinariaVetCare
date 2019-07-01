@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -106,7 +105,6 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         String nombreMascota = jsonObject.optString("nombre");
                         String fechaDeNacimientoString =
                                 jsonObject.optString("fechaDeNacimiento");
-                        Log.e("ERROR", fechaDeNacimientoString);
                         char[] charArray = fechaDeNacimientoString.toCharArray();
                         int contador = 0;
                         String diaString = "";
@@ -126,11 +124,8 @@ public class ListadoConsultaActivity extends AppCompatActivity
                             }
                         }
                         int dia = Integer.parseInt(diaString);
-                        Log.e("ERROR", "" + dia);
                         int mes = Integer.parseInt(mesString);
-                        Log.e("ERROR", "" + mes);
                         int ano = Integer.parseInt(anoString);
-                        Log.e("ERROR", "" + ano);
                         Calendar calendario = Calendar.getInstance();
                         // Se resta a uno al mes puesto que el método set tiene en cuenta los meses
                         // del 0 al 11

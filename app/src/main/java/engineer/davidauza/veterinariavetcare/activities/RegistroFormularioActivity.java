@@ -619,7 +619,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
      */
     private void crearConsulta() {
         // Crear ID para la consulta
-        String id = Double.toString(Math.random() * 1_000_000);
+        int codigo = (int) (Math.random() * 1_000_000);
         // Obtener fecha
         //String fecha = obtenerFecha(R.id.dte_fecha);
         //TODO reemplazar los siguiente:
@@ -643,7 +643,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         EditText mascotaAtenidaEditText = findViewById(R.id.txt_mascota_atendida_consulta);
         String mascotaAtendida = mascotaAtenidaEditText.getText().toString();
         // Crear Consulta
-        mConsulta = new Consulta(id, fecha, motivo, patologiaAsociada, veterinario, examenes,
+        mConsulta = new Consulta(codigo, fecha, motivo, patologiaAsociada, veterinario, examenes,
                 tratamientos, mascotaAtendida);
     }
 
@@ -653,7 +653,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
      */
     private Map<String, String> crearParametrosConsulta() {
         Map<String, String> parametros = new HashMap<>();
-        parametros.put(Consulta.ID, mConsulta.getId());
+        parametros.put(Consulta.CODIGO, Integer.toString(mConsulta.getCodigo()));
         parametros.put(Consulta.FECHA, mConsulta.getFecha());
         parametros.put(Consulta.MOTIVO, mConsulta.getMotivo());
         parametros.put(Consulta.PATOLOGIA_ASOCIADA, mConsulta.getPatologiaAsociada());
