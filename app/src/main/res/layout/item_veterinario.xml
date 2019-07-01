@@ -24,7 +24,7 @@
             android:text="@string/item_veterinario_txt_tarjeta_profesional" />
 
         <TextView
-            android:id="@+id/txt_tarjeta_profesional_veterinario"
+            android:id="@+id/txt_registro_profesional_veterinario"
             style="@style/TextoContenidoItems"
             tools:text="0-987-654-321" />
 

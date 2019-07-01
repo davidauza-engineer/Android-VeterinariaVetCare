@@ -35,9 +35,9 @@ public class Dueno extends Persona {
     public Dueno(int pId,
                  String pNombre,
                  String pApellido,
-                 int pNumeroDeDocumento,
+                 long pNumeroDeDocumento,
                  String pDireccion,
-                 int pTelefono,
+                 long pTelefono,
                  Mascota pMascota,
                  Date pFechaActual) {
         super(pId, pNombre, pApellido, pNumeroDeDocumento, pDireccion, pTelefono);

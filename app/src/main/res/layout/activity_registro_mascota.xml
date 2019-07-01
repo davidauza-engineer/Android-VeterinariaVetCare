@@ -92,7 +92,8 @@
             android:id="@+id/txt_documento_dueno_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_documento_dueno"
-            android:inputType="number" />
+            android:inputType="number"
+            android:maxLength="10" />
 
         <EditText
             android:id="@+id/txt_direccion_dueno_mascota"
@@ -103,7 +104,8 @@
             android:id="@+id/txt_telefono_dueno_mascota"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_mascota_hint_telefono_dueno"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:maxLength="10" />
 
         <EditText
             android:id="@+id/txt_enfermedades_mascota"

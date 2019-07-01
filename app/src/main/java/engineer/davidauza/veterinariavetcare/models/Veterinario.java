@@ -1,26 +1,29 @@
 package engineer.davidauza.veterinariavetcare.models;
 
+import java.util.ArrayList;
+
 /**
- * {@link Veterinario} es una {@link Persona}. Este cuenta con un número de tarjeta profesional, una
- * especialidad médica, un total consultas realizadas y un teléfono.
+ * {@link Veterinario} es una {@link Persona}. Este cuenta con un número de registro profesional y
+ * una o más especialidades médicas.
  */
 public class Veterinario extends Persona {
 
     /**
-     * Llave para acceder al número de tarjeta profesional del veterinario en la base de datos.
+     * Llave para acceder al número de registro profesional del {@link Veterinario} en la base de
+     * datos.
      */
-    public static final String TARJETA_PROFESIONAL = "tarjetaProfesional";
+    public static final String NUMERO_DE_REGISTRO_PROFESIONAL = "numeroDeRegistroProfesional"; //TODO cambio backend
 
     /**
-     * Llave para acceder a la especialidad médica del veterinario en la base de datos.
+     * Llave para acceder a las especialidades médicas del {@link Veterinario} en la base de datos.
      */
-    public static final String ESPECIALIDAD = "especialidad";
+    public static final String ESPECIALIDADES_MEDICAS = "especialidadesMedicas"; //TODO cambio backend
 
     /**
-     * Llave para acceder al número de consultas realizadas por el veterinario en la base de datos.
+     * Llave para acceder al número de consultas realizadas por el {@link Veterinario} en la base de
+     * datos.
      */
     public static final String CONSULTAS_REALIZADAS = "consultasRealizadas";
-
 
     /**
      * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevos
@@ -37,82 +40,96 @@ public class Veterinario extends Persona {
             "https://davidauza-engineer.000webhostapp.com/web_service/get_veterinario.php";
 
     /**
-     * El número de tarjeta profesional del veterinario.
+     * Arreglo de Strings que contiene las posibles especialidades médicas que un
+     * {@link Veterinario} puede tener.
      */
-    private String mTarjetaProfesional; // TODO cambiar tipo a String y cambiar nombre por numeroDeRegistroProfesional
+    public static final String[] ARREGLO_ESPECIALIDADES_MEDICAS = {"Anestesiología", "Cardiología",
+            "Cirugía", "Dermatología", "Fisioterapia", "Neurología", "Ninguna", "Oftalmología",
+            "Oncología", "Ortopedia", "Otra"};
 
     /**
-     * La especialidad médica del veterinario.
+     * El número de registro profesional del {@link Veterinario}.
      */
-    private String mEspecialidad; // TODO ¿mEspecialidadMedica debería ser un array? Sí
+    private long mNumeroDeRegistroProfesional;
 
     /**
-     * El número de consultas realizadas por el veterinario;
+     * La lista de especialidades médicas con las que cuenta el {@link Veterinario}.
+     */
+    private ArrayList<String> mEspecialidadesMedicas;
+
+    /**
+     * El número de consultas realizadas por el {@link Veterinario};
      */
     private String mConsultasRelizadas;
 
     /**
      * Constructor para crear un nuevo objeto {@link Veterinario}.
      *
-     * @param pId                  es el ID único para el Veterinario.
-     * @param pNombre              es el nombre del Veterinario.
-     * @param pApellido
-     * @param pNumeroDeIdentidad   es el número de identidad del Veterinario.
-     * @param pDireccion           es la dirección del Veterinario.
-     * @param pTelefono            es el teléfono del Veterinario.
-     * @param pTarjetaProfesional  es el número de tarjeta profesional del Veterinario.
-     * @param pEspecialidad        es la especialidad médica del Veterinario.
-     * @param pConsultasRealizadas es el total de consultas realizadas por el Veterinario.
+     * @param pId                          es el ID único para el {@link Veterinario}.
+     * @param pNombre                      es el nombre del {@link Veterinario}.
+     * @param pApellido                    es el apellido del {@link Veterinario}.
+     * @param pNumeroDeIdentidad           es el número de identidad del {@link Veterinario}.
+     * @param pDireccion                   es la dirección del {@link Veterinario}.
+     * @param pTelefono                    es el teléfono del {@link Veterinario}.
+     * @param pNumeroDeRegistroProfesional es el número de registro profesional del
+     *                                     {@link Veterinario}.
+     * @param pEspecialidadesMedicas       es la lista de especialidades médicas que puede poseer el
+     *                                     {@link Veterinario}.
+     * @param pConsultasRealizadas         es el total de consultas realizadas por el
+     *                                     {@link Veterinario}.
      */
     public Veterinario(int pId,
                        String pNombre,
                        String pApellido,
-                       int pNumeroDeIdentidad,
+                       long pNumeroDeIdentidad,
                        String pDireccion,
-                       int pTelefono,
-                       String pTarjetaProfesional,
-                       String pEspecialidad,
+                       long pTelefono,
+                       long pNumeroDeRegistroProfesional,
+                       ArrayList<String> pEspecialidadesMedicas,
                        String pConsultasRealizadas) {
         super(pId, pNombre, pApellido, pNumeroDeIdentidad, pDireccion, pTelefono);
-        mTarjetaProfesional = pTarjetaProfesional;
-        mEspecialidad = pEspecialidad;
+        mNumeroDeRegistroProfesional = pNumeroDeRegistroProfesional;
+        mEspecialidadesMedicas = pEspecialidadesMedicas;
         mConsultasRelizadas = pConsultasRealizadas;
     }
 
     /**
      * Constructor para crear un nuevo objeto {@link Veterinario}.
      *
-     * @param pNombre              es el nombre del Veterinario.
-     * @param pTarjetaProfesional  es el número de tarjeta profesional del Veterinario.
-     * @param pEspecialidad        es la especialidad médica del Veterinario.
-     * @param pConsultasRealizadas es el total de consultas realizadas por el Veterinario.
+     * @param pNombre                      es el nombre del {@link Veterinario}.
+     * @param pNumeroDeRegistroProfesional es el número de registro profesional del
+     *                                     {@link Veterinario}.
+     * @param pEspecialidadesMedicas       es la lista de especialidades médicas que puede poseer el
+     *                                     {@link Veterinario}.
+     * @param pConsultasRealizadas         es el total de consultas realizadas por el
+     *                                     {@link Veterinario}.
      */
     public Veterinario(String pNombre,
-                       String pTarjetaProfesional,
-                       String pEspecialidad,
+                       long pNumeroDeRegistroProfesional,
+                       ArrayList<String> pEspecialidadesMedicas,
                        String pConsultasRealizadas) {
         super(pNombre);
-        mTarjetaProfesional = pTarjetaProfesional;
-        mEspecialidad = pEspecialidad;
+        mNumeroDeRegistroProfesional = pNumeroDeRegistroProfesional;
+        mEspecialidadesMedicas = pEspecialidadesMedicas;
         mConsultasRelizadas = pConsultasRealizadas;
     }
 
     /**
-     * Obtener el número de tarjeta profesional del Veterinario.
+     * Obtener el número de registro profesional del {@link Veterinario}.
      */
-    public String getTarjetaProfesional() {
-        return mTarjetaProfesional;
+    public long getNumeroDeRegistroProfesional() {
+        return mNumeroDeRegistroProfesional;
     }
 
     /**
-     * Obtener la especialidad médica del veterinario.
+     * Obtener la lista de especialidades médicas que puede poseer el {@link Veterinario}.
      */
-    public String getEspecialidad() {
-        return mEspecialidad;
+    public ArrayList<String> getEspecialidadesMedicas() {
+        return mEspecialidadesMedicas;
     }
 
     /**
-     * Obtener el total de consultas realizadas por el veterinario.
+     * Obtener el total de consultas realizadas por el {@link Veterinario}.
      */
     public String getConsultasRelizadas() {
         return mConsultasRelizadas;

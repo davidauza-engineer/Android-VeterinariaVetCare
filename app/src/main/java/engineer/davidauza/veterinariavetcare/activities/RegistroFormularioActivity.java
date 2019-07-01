@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.thomashaertel.widget.MultiSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -204,6 +205,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 break;
             case 1:
                 setContentView(R.layout.activity_registro_veterinario);
+                configurarMultiSpinner();
                 break;
             case 2:
                 setContentView(R.layout.activity_registro_consulta);
@@ -380,7 +382,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener consultas
         EditText consultasEditText = findViewById(R.id.txt_consultas_mascota);
         String consultas = consultasEditText.getText().toString();
-        // Obtener examentes
+        // Obtener examenes
         EditText examentesEditText = findViewById(R.id.txt_examenes_mascota);
         String examenes = examentesEditText.getText().toString();
         // Obtener tratamientos
@@ -448,9 +450,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener número de documento
         EditText documentoDuenoEditText = findViewById(R.id.txt_documento_dueno_mascota);
         String documento = documentoDuenoEditText.getText().toString();
-        int numeroDeDocumento = -1;
+        long numeroDeDocumento = -1;
         if (!documento.equals("")) {
-            numeroDeDocumento = Integer.parseInt(documento);
+            numeroDeDocumento = Long.parseLong(documento);
         }
         // Obtener dirección
         EditText direccionEditText = findViewById(R.id.txt_direccion_dueno_mascota);
@@ -458,9 +460,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener teléfono
         EditText telefonoEditText = findViewById(R.id.txt_telefono_dueno_mascota);
         String numeroDeTelefono = telefonoEditText.getText().toString();
-        int telefono = -1;
+        long telefono = -1;
         if (!numeroDeTelefono.equals("")) {
-            telefono = Integer.parseInt(numeroDeTelefono);
+            telefono = Long.parseLong(numeroDeTelefono);
         }
         // Obtener mascota
         Mascota mascota = mMascota;
@@ -481,30 +483,62 @@ public class RegistroFormularioActivity extends AppCompatActivity
         EditText nombreEditText = findViewById(R.id.txt_nombre_veterinario);
         String nombre = nombreEditText.getText().toString();
         // Obtener apellido del Veterinario
-        String apellido = "";
-        // Obtener el número de identidad del Veterinario
-        EditText numeroDeIdentidadEditText = findViewById(R.id.txt_numero_identidad_veterinario);
-        int numeroDeIdentidad = Integer.parseInt(numeroDeIdentidadEditText.getText().toString());
+        EditText apellidoEditText = findViewById(R.id.txt_apellido_veterinario);
+        String apellido = apellidoEditText.getText().toString();
+        // Obtener el número de documento del Veterinario
+        EditText numeroDeDocumentoEditText = findViewById(R.id.txt_numero_documento_veterinario);
+        String numeroIdentidad = numeroDeDocumentoEditText.getText().toString();
+        long numeroDeDocumento = -1;
+        if (!numeroIdentidad.equals("")) {
+            numeroDeDocumento = Long.parseLong(numeroIdentidad);
+        }
         // Obtener dirección del Veterinario
         EditText direccionEditText = findViewById(R.id.txt_direccion_veterinario);
         String direccion = direccionEditText.getText().toString();
         // Obtener teléfono Veterinario
         EditText telefonoEditText = findViewById(R.id.txt_telefono_veterinario);
-        int telefono = Integer.parseInt(telefonoEditText.getText().toString());
-        // Obtener el número de tarjeta profesional del Veterinario
-        EditText tarjetaProfesionalEditText =
-                findViewById(R.id.txt_tarjeta_profesional_veterinario);
-        String tarjetaProfesional = tarjetaProfesionalEditText.getText().toString();
-        // Obtener especialidad del Veterinario
-        EditText especialidadEditText = findViewById(R.id.txt_especialidad_veterinario);
-        String especialidad = especialidadEditText.getText().toString();
+        String numeroTelefono = telefonoEditText.getText().toString();
+        long telefono = -1;
+        if (!numeroTelefono.equals("")) {
+            telefono = Long.parseLong(numeroTelefono);
+        }
+        // Obtener el número de registro profesional del Veterinario
+        EditText registroProfesionalEditText =
+                findViewById(R.id.txt_registro_profesional_veterinario);
+        String registroProfesional = registroProfesionalEditText.getText().toString();
+        long numeroDeRegistroProfesional = -1;
+        if (!registroProfesional.equals("")) {
+            numeroDeRegistroProfesional = Long.parseLong(registroProfesional);
+        }
+        // Obtener especialidades del Veterinario
+        ArrayList<String> especialidades = new ArrayList<>();
+        MultiSpinner multiSpinnerEspecialidades = findViewById(R.id.spn_especialidad_veterinario);
+        boolean[] seleccionesUsuario = multiSpinnerEspecialidades.getSelected();
+        for (int i = 0; i < seleccionesUsuario.length; i++) {
+            // Si el usuario no ha seleccionado nada en el MultiSpinner asignar la especialidad
+            // Ninguna
+            if (i == 0) {
+                if (seleccionesUsuario[i]) {
+                    especialidades.add(Veterinario.ARREGLO_ESPECIALIDADES_MEDICAS[6]);
+                    break;
+                }
+            } else {
+                // Si el usuario hizo una selección, asignársela a la lista de especialidades.
+                if (seleccionesUsuario[i]) {
+                    // Se resta uno al índice ya que el arreglo boolean posee un índice adicional
+                    // comparado con el arreglo de Strings que contiene las especialidades de los
+                    // veterinarios.
+                    especialidades.add(Veterinario.ARREGLO_ESPECIALIDADES_MEDICAS[i - 1]);
+                }
+            }
+        }
         // Obtener cosultas realizadas por el Veterinario
         EditText consultasRealizadasEditText =
                 findViewById(R.id.txt_consultas_realizadas_veterinario);
         String consultasRealizadas = consultasRealizadasEditText.getText().toString();
         // Crear Veterinario
-        mVeterinario = new Veterinario(id, nombre, apellido, numeroDeIdentidad, direccion,
-                telefono, tarjetaProfesional, especialidad, consultasRealizadas);
+        mVeterinario = new Veterinario(id, nombre, apellido, numeroDeDocumento, direccion,
+                telefono, numeroDeRegistroProfesional, especialidades, consultasRealizadas);
     }
 
     /**
@@ -516,13 +550,67 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Veterinario.ID, Integer.toString(mVeterinario.getId()));
         parametros.put(Veterinario.NOMBRE, mVeterinario.getNombre());
         parametros.put(Veterinario.NUMERO_DE_DOCUMENTO,
-                Integer.toString(mVeterinario.getNumeroDeDocumento()));
+                Long.toString(mVeterinario.getNumeroDeDocumento()));
         parametros.put(Veterinario.DIRECCION, mVeterinario.getDireccion());
-        parametros.put(Veterinario.TARJETA_PROFESIONAL, mVeterinario.getTarjetaProfesional());
-        parametros.put(Veterinario.ESPECIALIDAD, mVeterinario.getEspecialidad());
+        parametros.put(Veterinario.TELEFONO, Long.toString(mVeterinario.getTelefono()));
+        parametros.put(Veterinario.NUMERO_DE_REGISTRO_PROFESIONAL,
+                Long.toString(mVeterinario.getNumeroDeRegistroProfesional()));
+        parametros.put(Veterinario.ESPECIALIDADES_MEDICAS,
+                mVeterinario.getEspecialidadesMedicas().toString());
         parametros.put(Veterinario.CONSULTAS_REALIZADAS, mVeterinario.getConsultasRelizadas());
-        parametros.put(Veterinario.TELEFONO, Integer.toString(mVeterinario.getTelefono()));
         return parametros;
+    }
+
+    /**
+     * Este método configura el MultiSpinner usado para elegir las especialidades médicas de los
+     * {@link Veterinario}s.
+     */
+    private void configurarMultiSpinner() {
+        int tamanoArreglo = Veterinario.ARREGLO_ESPECIALIDADES_MEDICAS.length + 1;
+        String[] opciones = new String[tamanoArreglo];
+        opciones[0] = getString(R.string.registro_veterinario_txt_especialidades_defecto);
+        for (int i = 1; i < tamanoArreglo; i++) {
+            opciones[i] = Veterinario.ARREGLO_ESPECIALIDADES_MEDICAS[i - 1];
+        }
+        ArrayAdapter<String> adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                android.R.layout.simple_spinner_item, opciones);
+        final MultiSpinner multiSpinner = findViewById(R.id.spn_especialidad_veterinario);
+        multiSpinner.setAdapter(adaptador, false,
+                new MultiSpinner.MultiSpinnerListener() {
+                    @Override
+                    public void onItemsSelected(boolean[] selected) {
+                        // Escucha al seleccionar una opción
+                        boolean otraSeleccion = false;
+                        // Si hay un ítem seleccionado diferente de 0 quitar selección a 0
+                        for (int i = 1; i < selected.length; i++) {
+                            if (selected[i]) {
+                                otraSeleccion = true;
+                                break;
+                            }
+                        }
+                        if (otraSeleccion) {
+                            selected[0] = false;
+                        } else {
+                            if (!selected[0]) {
+                                selected[0] = true;
+                            }
+                        }
+                        // Si la opción Ninguna, número 7 dentro del arreglo, está seleccionada,
+                        // quitar la selección del resto de opciones.
+                        if (selected[7]) {
+                            for (int i = 0; i < selected.length; i++) {
+                                if (i != 7) {
+                                    selected[i] = false;
+                                }
+                            }
+                        }
+                        multiSpinner.setSelected(selected);
+                    }
+                });
+        // Configurar la selección por defecto.
+        boolean[] itemsSeleccionados = new boolean[adaptador.getCount()];
+        itemsSeleccionados[0] = true;
+        multiSpinner.setSelected(itemsSeleccionados);
     }
 
     /**
@@ -618,8 +706,8 @@ public class RegistroFormularioActivity extends AppCompatActivity
         } else if (pSpinner == R.id.spn_especie_mascota) {
             String[] especies = {getString(R.string.registro_mascota_txt_ayuda), Ave.NOMBRE,
                     Canino.NOMBRE, Especie.NOMBRE, Felino.NOMBRE, Roedor.NOMBRE};
-            // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
-            // el Spinner
+            // Creación de ArrayAdapter usando el array de Strings y un diseño por defecto para el
+            // Spinner
             adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
                     android.R.layout.simple_spinner_item, especies);
             // Aplicar el escucha para que la lista de razas se despliegue una vez se seleccione la

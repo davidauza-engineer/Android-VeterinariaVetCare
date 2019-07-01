@@ -167,12 +167,43 @@ public class ListadoConsultaActivity extends AppCompatActivity
                     // Si se están consultando los veterinarios
                     case 1:
                         String nombreVeterinario = jsonObject.optString("nombre");
-                        String tarjetaProfesional = jsonObject.optString("tarjetaProfesional");
-                        String especialidad = jsonObject.optString("especialidad");
+                        String registroProfesional = jsonObject.optString("tarjetaProfesional");
+                        long numeroDeRegistroProfesional = Long.parseLong(registroProfesional);
+                        // Obtener especialidades
+                        // TODO Actualizar backend
+                        String especialidadesString = jsonObject.optString("especialidad");
+                        especialidadesString += "$";
+                        char[] especialidadesArreglo = especialidadesString.toCharArray();
+                        boolean unaEspecialidad = true;
+                        for (int j = 0; j < especialidadesArreglo.length; j++) {
+                            if (especialidadesArreglo[j] == ',') {
+                                unaEspecialidad = false;
+                                break;
+                            }
+                        }
+                        ArrayList<String> especialidades = new ArrayList<>();
+                        if (unaEspecialidad) {
+                            especialidadesString = especialidadesString.
+                                    substring(0, especialidadesString.length() - 1);
+                            especialidades.add(especialidadesString);
+                        } else {
+                            int ultimoInicioDePalabra = 0;
+                            for (int j = 0; j < especialidadesArreglo.length; j++) {
+                                if (especialidadesArreglo[j] == ',' ||
+                                        especialidadesArreglo[j] == '$') {
+                                    String especialidadPorAgregar = "";
+                                    for (int k = ultimoInicioDePalabra; k < j; k++) {
+                                        especialidadPorAgregar += especialidadesArreglo[k];
+                                    }
+                                    especialidades.add(especialidadPorAgregar);
+                                    ultimoInicioDePalabra = j + 1;
+                                }
+                            }
+                        }
                         String consultasRealizadas =
                                 jsonObject.optString("consultasRealizadas");
                         mVeterinariosArrayList.add(new Veterinario(nombreVeterinario,
-                                tarjetaProfesional, especialidad, consultasRealizadas));
+                                numeroDeRegistroProfesional, especialidades, consultasRealizadas));
                         break;
                     // Si están consultando las consultas
                     case 2:

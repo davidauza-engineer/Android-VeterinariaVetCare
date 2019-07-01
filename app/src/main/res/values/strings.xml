@@ -60,12 +60,17 @@
     <!-- Strings para activity_registro_veterinario.xml Inicio -->
     <string name="registro_veterinario_txt_titulo">Registro Veterinario</string>
     <string name="registro_veterinario_hint_nombre">Nombre</string>
-    <string name="registro_veterinario_hint_numero_identidad">Número de Identidad</string>
+    <string name="registro_veterinario_hint_apellido">Apellido</string>
+    <string name="registro_veterinario_hint_numero_de_documento">Número de Documento</string>
     <string name="registro_veterinario_hint_direccion">Dirección</string>
-    <string name="registro_veterinario_hint_tarjeta_profesional">Tarjeta Profesional</string>
-    <string name="registro_veterinario_hint_especialidad">Especialidad</string>
-    <string name="registro_veterinario_hint_consultas">Consultas Realizadas</string>
     <string name="registro_veterinario_hint_telefono">Teléfono</string>
+    <string name="registro_veterinario_hint_registro_profesional">Número de Registro Profesional
+    </string>
+    <string name="registro_veterinario_txt_especialidades">Especialidades Médicas</string>
+    <string name="registro_veterinario_txt_especialidades_defecto">Selecciona las opciones que
+        correspondan
+    </string>
+    <string name="registro_veterinario_hint_consultas">Consultas Realizadas</string>
     <string name="registro_veterinario_btn_registrar">Registrar</string>
     <string name="registro_veterinario_toast_exito">El veterinario fue registrado exitosamente
     </string>
@@ -105,7 +110,7 @@
     <!-- Strings para item_veterinario.xml Inicio -->
     <string name="item_veterinario_txt_nombre">Nombre:</string>
     <string name="item_veterinario_txt_tarjeta_profesional">Tarjeta Profesional:</string>
-    <string name="item_veterinario_txt_especialidad">Especialidad:</string>
+    <string name="item_veterinario_txt_especialidad">Especialidades:</string>
     <string name="item_veterinario_txt_consultas_realizadas">Consultas Realizadas:</string>
     <!-- Strings para item_veterinario.xml Fin -->
 

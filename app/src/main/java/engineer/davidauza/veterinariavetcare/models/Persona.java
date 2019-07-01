@@ -2,7 +2,7 @@ package engineer.davidauza.veterinariavetcare.models;
 
 /**
  * {@link Persona} representa a una persona. Un persona tiene un ID único que la identifica, un
- * nombre, un número de identidad y una dirección.
+ * nombre, un apellido, un número de documento, una dirección y un teléfono.
  */
 public class Persona {
 
@@ -24,7 +24,7 @@ public class Persona {
     /**
      * Llave para acceder al número de documento de la {@link Persona} en la base de datos.
      */
-    public static final String NUMERO_DE_DOCUMENTO = "numeroDeDocumento"; //TODO actualizar en el backend
+    public static final String NUMERO_DE_DOCUMENTO = "numeroDeDocumento"; // TODO cambio Backend
 
     /**
      * Llave para acceder a la dirección de la {@link Persona} en la base de datos.
@@ -54,7 +54,7 @@ public class Persona {
     /**
      * El número de documento de la {@link Persona}.
      */
-    private int mNumeroDeDocumento;
+    private long mNumeroDeDocumento;
 
     /**
      * La dirección de la {@link Persona}.
@@ -64,7 +64,7 @@ public class Persona {
     /**
      * El teléfono de la {@link Persona}.
      */
-    private int mTelefono;
+    private long mTelefono;
 
     /**
      * Constructor para crear un nuevo objeto {@link Persona}.
@@ -79,9 +79,9 @@ public class Persona {
     public Persona(int pId,
                    String pNombre,
                    String pApellido,
-                   int pNumeroDeDocumento,
+                   long pNumeroDeDocumento,
                    String pDireccion,
-                   int pTelefono) {
+                   long pTelefono) {
         mId = pId;
         mNombre = pNombre;
         mApellido = pApellido;
@@ -123,7 +123,7 @@ public class Persona {
     /**
      * Obtener el número de documento de la {@link Persona}.
      */
-    public int getNumeroDeDocumento() {
+    public long getNumeroDeDocumento() {
         return mNumeroDeDocumento;
     }
 
@@ -137,7 +137,7 @@ public class Persona {
     /**
      * Obtener el teléfono de la {@link Persona}.
      */
-    public int getTelefono() {
+    public long getTelefono() {
         return mTelefono;
     }
 }

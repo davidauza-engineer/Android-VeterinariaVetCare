@@ -15,9 +15,16 @@
             android:hint="@string/registro_veterinario_hint_nombre" />
 
         <EditText
-            android:id="@+id/txt_numero_identidad_veterinario"
+            android:id="@+id/txt_apellido_veterinario"
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_numero_identidad" />
+            android:hint="@string/registro_veterinario_hint_apellido" />
+
+        <EditText
+            android:id="@+id/txt_numero_documento_veterinario"
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_veterinario_hint_numero_de_documento"
+            android:inputType="number"
+            android:maxLength="10" />
 
         <EditText
             android:id="@+id/txt_direccion_veterinario"
@@ -25,24 +32,36 @@
             android:hint="@string/registro_veterinario_hint_direccion" />
 
         <EditText
-            android:id="@+id/txt_tarjeta_profesional_veterinario"
+            android:id="@+id/txt_telefono_veterinario"
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_tarjeta_profesional" />
+            android:hint="@string/registro_veterinario_hint_telefono"
+            android:inputType="phone"
+            android:maxLength="10" />
+
+        <EditText
+            android:id="@+id/txt_registro_profesional_veterinario"
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_veterinario_hint_registro_profesional"
+            android:inputType="number"
+            android:maxLength="10" />
+
+        <TextView
+            style="@style/TextViewsRegistros"
+            android:text="@string/registro_veterinario_txt_especialidades" />
+
+        <com.thomashaertel.widget.MultiSpinner
+            android:id="@+id/spn_especialidad_veterinario"
+            style="@style/SpinnersRegistros" />
 
         <EditText
             android:id="@+id/txt_especialidad_veterinario"
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_especialidad" />
+            android:hint="@string/registro_veterinario_txt_especialidades" />
 
         <EditText
             android:id="@+id/txt_consultas_realizadas_veterinario"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_veterinario_hint_consultas" />
-
-        <EditText
-            android:id="@+id/txt_telefono_veterinario"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_telefono" />
 
         <Button
             android:id="@+id/btn_registrar"

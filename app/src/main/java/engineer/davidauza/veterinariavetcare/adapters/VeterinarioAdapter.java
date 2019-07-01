@@ -56,8 +56,9 @@ public class VeterinarioAdapter extends RecyclerView.Adapter<VeterinarioAdapter.
         // Reemplazar el contenido del View con dicho elemento
         myViewHolder.mNombreVeterinario.setText(veterinarioActual.getNombre());
         myViewHolder.mTarjetaProfesionalVeterinario.
-                setText(veterinarioActual.getTarjetaProfesional());
-        myViewHolder.mEspecialidadVeterinario.setText(veterinarioActual.getEspecialidad());
+                setText(Long.toString(veterinarioActual.getNumeroDeRegistroProfesional()));
+        myViewHolder.mEspecialidadVeterinario.
+                setText(veterinarioActual.getEspecialidadesMedicas().toString());
         myViewHolder.mConsultasRealizadasVeterinario.
                 setText(veterinarioActual.getConsultasRelizadas());
     }
@@ -106,7 +107,7 @@ public class VeterinarioAdapter extends RecyclerView.Adapter<VeterinarioAdapter.
             mView = itemView;
             mNombreVeterinario = itemView.findViewById(R.id.txt_nombre_veterinario);
             mTarjetaProfesionalVeterinario =
-                    itemView.findViewById(R.id.txt_tarjeta_profesional_veterinario);
+                    itemView.findViewById(R.id.txt_registro_profesional_veterinario);
             mEspecialidadVeterinario = itemView.findViewById(R.id.txt_especialidad_veterinario);
             mConsultasRealizadasVeterinario =
                     itemView.findViewById(R.id.txt_consultas_realizadas_veterinario);
