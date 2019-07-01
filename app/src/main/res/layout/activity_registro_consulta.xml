@@ -23,6 +23,24 @@
             android:hint="@string/registro_consulta_hint_motivo" />
 
         <EditText
+            android:id="@+id/txt_examenes_fisicos_consulta"
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_consulta_hint_examenes_fisicos" />
+
+        <EditText
+            android:id="@+id/txt_tratamiento_consulta"
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_consulta_hint_tratamiento" />
+
+        <TextView
+            style="@style/TextViewsRegistros"
+            android:text="@string/registro_consulta_txt_veterinario" />
+
+        <Spinner
+            android:id="@+id/spn_veterinario_consulta"
+            style="@style/SpinnersRegistros" />
+
+        <EditText
             android:id="@+id/txt_patologia_asociada_consulta"
             style="@style/EditTextRegistros"
             android:hint="@string/registro_consulta_hint_patologia" />
@@ -30,17 +48,7 @@
         <EditText
             android:id="@+id/txt_veterinario_consulta"
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_consulta_hint_veterinario" />
-
-        <EditText
-            android:id="@+id/txt_examenes_consulta"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_consulta_hint_examenes" />
-
-        <EditText
-            android:id="@+id/txt_tratamientos_consulta"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_consulta_hint_tratamientos" />
+            android:hint="@string/registro_consulta_txt_veterinario" />
 
         <EditText
             android:id="@+id/txt_mascota_atendida_consulta"

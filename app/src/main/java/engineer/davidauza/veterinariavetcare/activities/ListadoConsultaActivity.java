@@ -181,8 +181,9 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         Date fecha = construirFecha(fechaString);
                         String motivo = jsonObject.optString("motivo");
                         String veterinario = jsonObject.optString("veterinario");
+                        Veterinario veterinarioConsulta = new Veterinario(veterinario);
                         String mascotaAtendida = jsonObject.optString("mascotaAtendida");
-                        mConsultaArrayList.add(new Consulta(fecha, motivo, veterinario,
+                        mConsultaArrayList.add(new Consulta(fecha, motivo, veterinarioConsulta,
                                 mascotaAtendida));
                         break;
                 }

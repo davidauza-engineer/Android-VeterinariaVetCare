@@ -65,7 +65,7 @@ public class ConsultaAdapter extends RecyclerView.Adapter<ConsultaAdapter.MyView
         String fecha = FORMATO.format(consultaActual.getFecha());
         myViewHolder.mFechaConsulta.setText(fecha);
         myViewHolder.mMotivoConsulta.setText(consultaActual.getMotivo());
-        myViewHolder.mVeterinarioConsulta.setText(consultaActual.getVeterinario());
+        myViewHolder.mVeterinarioConsulta.setText(consultaActual.getVeterinario().getNombre());
         myViewHolder.mMascotaAtendida.setText(consultaActual.getMascotaAtendida());
     }
 

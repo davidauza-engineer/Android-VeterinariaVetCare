@@ -76,6 +76,12 @@ public class RegistroFormularioActivity extends AppCompatActivity
     private ArrayList<String> mRazas = new ArrayList<>();
 
     /**
+     * El ArrayList que almacenará los nombre de los {@link Veterinario}s en la interfaz de registro
+     * de {@link Consulta}.
+     */
+    private ArrayList<String> mVeterinariosConsulta = new ArrayList<>();
+
+    /**
      * Contiene el Spinner que despliega la lista de razas según la {@link Especie} seleccionada.
      */
     private Spinner mSpinnerRaza;
@@ -135,14 +141,21 @@ public class RegistroFormularioActivity extends AppCompatActivity
         try {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject jsonObject = response.getJSONObject(i);
-                String sexoMascota = jsonObject.optString("sexo");
-                // Si las mascotas obtenidas de la base de datos son machos, añadirlos a la lista de
-                // padres. Si son hembras, a la lista de madres.
-                if (sexoMascota.equals(getString(R.string.registro_mascota_txt_sexo_masculino))) {
-                    mMascotasPadre.add(jsonObject.optString("nombre"));
-                } else if (sexoMascota.
-                        equals(getString(R.string.registro_mascota_txt_sexo_femenino))) {
-                    mMascotasMadre.add(jsonObject.optString("nombre"));
+                // Si se está en la interfaz de registro de mascotas
+                if (mRegistroSeleccionadoSpinner == 0) {
+                    String sexoMascota = jsonObject.optString(Mascota.SEXO);
+                    // Si las mascotas obtenidas de la base de datos son machos, añadirlos a la lista de
+                    // padres. Si son hembras, a la lista de madres.
+                    if (sexoMascota.equals(getString(R.string.registro_mascota_txt_sexo_masculino))) {
+                        mMascotasPadre.add(jsonObject.optString(Mascota.NOMBRE));
+                    } else if (sexoMascota.
+                            equals(getString(R.string.registro_mascota_txt_sexo_femenino))) {
+                        mMascotasMadre.add(jsonObject.optString(Mascota.NOMBRE));
+                    }
+                    // Si se está en la interfaz de registro de consultas
+                } else if (mRegistroSeleccionadoSpinner == 2) {
+                    String veterinario = jsonObject.optString(Veterinario.NOMBRE);
+                    mVeterinariosConsulta.add(veterinario);
                 }
             }
         } catch (JSONException e) {
@@ -204,16 +217,18 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 setContentView(R.layout.activity_registro_mascota);
                 configurarSpinner(R.id.spn_padre_mascota);
                 configurarSpinner(R.id.spn_madre_mascota);
-                cargarMascotas();
+                cargarWebService(Mascota.URL_GET);
                 configurarSpinner(R.id.spn_especie_mascota);
                 configurarSpinner(R.id.spn_raza_mascota);
                 break;
             case 1:
                 setContentView(R.layout.activity_registro_veterinario);
-                configurarMultiSpinner();
+                configurarMultiSpinnerEspecialidadesVeterinario();
                 break;
             case 2:
                 setContentView(R.layout.activity_registro_consulta);
+                cargarWebService(Veterinario.URL_GET);
+                configurarSpinner(R.id.spn_veterinario_consulta);
                 break;
             default:
                 finish();
@@ -569,7 +584,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
      * Este método configura el MultiSpinner usado para elegir las especialidades médicas de los
      * {@link Veterinario}s.
      */
-    private void configurarMultiSpinner() {
+    private void configurarMultiSpinnerEspecialidadesVeterinario() {
         int tamanoArreglo = Veterinario.ARREGLO_ESPECIALIDADES_MEDICAS.length + 1;
         String[] opciones = new String[tamanoArreglo];
         opciones[0] = getString(R.string.registro_veterinario_txt_especialidades_defecto);
@@ -629,24 +644,27 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener motivo
         EditText motivoEditText = findViewById(R.id.txt_motivo_consulta);
         String motivo = motivoEditText.getText().toString();
+        // Obtener exámenes físicos
+        EditText examenesFisicosEditText = findViewById(R.id.txt_examenes_fisicos_consulta);
+        String examenesFisicos = examenesFisicosEditText.getText().toString();
+        // Obtener tratamiento
+        EditText tratamientoEditText = findViewById(R.id.txt_tratamiento_consulta);
+        String tratamiento = tratamientoEditText.getText().toString();
+        // Obtener veterinario que atendió la consulta
+        Spinner spinnerVeterinario = findViewById(R.id.spn_veterinario_consulta);
+        Veterinario veterinarioConsulta = new Veterinario(mVeterinariosConsulta.
+                get(spinnerVeterinario.getSelectedItemPosition()));
+        EditText veterinarioEditText = findViewById(R.id.txt_veterinario_consulta);
+        String veterinario = veterinarioEditText.getText().toString();
         // Obtener patología asociada.
         EditText patologiaAsociadaEditText = findViewById(R.id.txt_patologia_asociada_consulta);
         String patologiaAsociada = patologiaAsociadaEditText.getText().toString();
-        // Obtener veterinario
-        EditText veterinarioEditText = findViewById(R.id.txt_veterinario_consulta);
-        String veterinario = veterinarioEditText.getText().toString();
-        // Obtener exámenes
-        EditText examenesEditText = findViewById(R.id.txt_examenes_consulta);
-        String examenes = examenesEditText.getText().toString();
-        // Obtener tratamientos
-        EditText tratamientosEditText = findViewById(R.id.txt_tratamientos_consulta);
-        String tratamientos = tratamientosEditText.getText().toString();
         // Obtener mascotaAtendida
         EditText mascotaAtenidaEditText = findViewById(R.id.txt_mascota_atendida_consulta);
         String mascotaAtendida = mascotaAtenidaEditText.getText().toString();
         // Crear Consulta
-        mConsulta = new Consulta(codigo, fecha, motivo, patologiaAsociada, veterinario, examenes,
-                tratamientos, mascotaAtendida);
+        mConsulta = new Consulta(codigo, fecha, motivo, examenesFisicos, tratamiento,
+                veterinarioConsulta, patologiaAsociada, mascotaAtendida);
     }
 
     /**
@@ -661,9 +679,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Consulta.FECHA, fecha);
         parametros.put(Consulta.MOTIVO, mConsulta.getMotivo());
         parametros.put(Consulta.PATOLOGIA_ASOCIADA, mConsulta.getPatologiaAsociada());
-        parametros.put(Consulta.VETERINARIO, mConsulta.getVeterinario());
-        parametros.put(Consulta.EXAMENES, mConsulta.getExamenes());
-        parametros.put(Consulta.TRATAMIENTOS, mConsulta.getTratamientos());
+        parametros.put(Consulta.VETERINARIO, mConsulta.getVeterinario().getNombre());
+        parametros.put(Consulta.EXAMENES_FISICOS, mConsulta.getExamenesFisicos());
+        parametros.put(Consulta.TRATAMIENTO, mConsulta.getTratamiento());
         parametros.put(Consulta.MASCOTA_ATENDIDA, mConsulta.getMascotaAtendida());
         return parametros;
     }
@@ -724,6 +742,14 @@ public class RegistroFormularioActivity extends AppCompatActivity
             // el Spinner
             adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
                     android.R.layout.simple_spinner_item, mRazas);
+        } else if (pSpinner == R.id.spn_veterinario_consulta) {
+            mVeterinariosConsulta.add(getString(R.string.registro_consulta_txt_ayuda));
+            mVeterinariosConsulta.
+                    add(getString(R.string.registro_consulta_txt_veterinario_defecto));
+            // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
+            // el Spinner
+            adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                    android.R.layout.simple_spinner_item, mVeterinariosConsulta);
         }
         // Especificar el diseño que se usará cuando aparece la lista de opciones
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -732,15 +758,17 @@ public class RegistroFormularioActivity extends AppCompatActivity
     }
 
     /**
-     * Este método configura la petición que se hace al servidor para obtener las {@link Mascota}s
-     * registradas en la base de datos.
+     * Este método configura la petición que se hace al servidor para obtener los datos de una tabla
+     * en la base de datos.
+     *
+     * @param pUrl es la URL del microservicio que se consumirá para obtener los datos solicitados.
      */
-    private void cargarMascotas() {
+    private void cargarWebService(String pUrl) {
         // Configurar la librería Volley que se encarga de interactuar con la base de datos
         mRequestCargar = Volley.newRequestQueue(RegistroFormularioActivity.this);
         // Cargar web service
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
-                Mascota.URL_GET, null, RegistroFormularioActivity.this,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, pUrl,
+                null, RegistroFormularioActivity.this,
                 RegistroFormularioActivity.this);
         mRequestCargar.add(jsonArrayRequest);
     }

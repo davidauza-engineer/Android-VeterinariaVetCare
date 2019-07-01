@@ -115,6 +115,15 @@ public class Veterinario extends Persona {
     }
 
     /**
+     * Constructor para crear un nuevo objeto {@link Veterinario}.
+     *
+     * @param pNombre es el nombre del {@link Veterinario}.
+     */
+    public Veterinario(String pNombre) {
+        super(pNombre);
+    }
+
+    /**
      * Obtener el número de registro profesional del {@link Veterinario}.
      */
     public long getNumeroDeRegistroProfesional() {

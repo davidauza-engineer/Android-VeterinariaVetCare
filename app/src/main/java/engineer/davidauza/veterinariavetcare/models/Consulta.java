@@ -25,9 +25,15 @@ public class Consulta {
     public static final String MOTIVO = "motivo";
 
     /**
-     * Llave para acceder a la patología asociada de la {@link Consulta} en la base de datos.
+     * Llave para acceder a los examenes físicos relacionados con la {@link Consulta} en la base de
+     * datos.
      */
-    public static final String PATOLOGIA_ASOCIADA = "patologiaAsociada";
+    public static final String EXAMENES_FISICOS = "examenesFisicos"; //TODO actualizar backend.
+
+    /**
+     * Llave para acceder al tratamiento asociado a la {@link Consulta} en la base de datos.
+     */
+    public static final String TRATAMIENTO = "tratamiento"; // TODO actualizar backend.
 
     /**
      * Llave para acceder al {@link Veterinario} que realiza la {@link Consulta} en la base de
@@ -36,14 +42,9 @@ public class Consulta {
     public static final String VETERINARIO = "veterinario";
 
     /**
-     * Llave para acceder a los examenes relacionados con la {@link Consulta} en la base de datos.
+     * Llave para acceder a la patología asociada de la {@link Consulta} en la base de datos.
      */
-    public static final String EXAMENES = "examenes";
-
-    /**
-     * Llave para acceder a los tratamientos ordenados en la {@link Consulta} en la base de datos.
-     */
-    public static final String TRATAMIENTOS = "tratamientos";
+    public static final String PATOLOGIA_ASOCIADA = "patologiaAsociada";
 
     /**
      * Llave para acceder a la {@link Mascota} atendida en la {@link Consulta} en la base de datos.
@@ -80,24 +81,24 @@ public class Consulta {
     private String mMotivo;
 
     /**
+     * Los exámenes físicos ordenados en la {@link Consulta}.
+     */
+    private String mExamenesFisicos;
+
+    /**
+     * El tratamiento asociado a la {@link Consulta}.
+     */
+    private String mTratamiento; // TODO debe ser tipo Tratamiento que será una clase con varios atributos
+
+    /**
+     * El {@link Veterinario} que atiende la {@link Consulta}.
+     */
+    private Veterinario mVeterinario;
+
+    /**
      * La patología asociada a la {@link Consulta} realizada. // TODO cambiar tipo a Patologia ó agrupar en estructura de datos con código y nombre. cambiar a mPatologia, tener en cuenta "En la consulta médica se le diagnostica a la mascota cierta patología."
      */
     private String mPatologiaAsociada; // TODO se debe registrar también la enfermedad crónica.
-
-    /**
-     * El {@link Veterinario} que atendió la {@link Consulta}. // TODO cambiar tipo a Veterinario
-     */
-    private String mVeterinario;
-
-    /**
-     * Los exámenes ordenados en la {@link Consulta}.
-     */
-    private String mExamenes; // TODO convertir en array con los distintos tipos de examenes físicos
-
-    /**
-     * Los tratamientos ordenados en la {@link Consulta}.
-     */
-    private String mTratamientos; // TODO debería ser tipo Tratamiento que será una clase con varios atributos
 
     /**
      * La mascota atendida en la {@link Consulta}.
@@ -110,27 +111,27 @@ public class Consulta {
      * @param pCodigo            es el código de la {@link Consulta}.
      * @param pFecha             es la fecha de la {@link Consulta}.
      * @param pMotivo            es el motivo de la {@link Consulta}.
-     * @param pPatologiaAsociada es la patología asociada a la {@link Consulta}.
+     * @param pExamenesFisicos   son los exámenes físicos ordenados en la {@link Consulta}.
+     * @param pTratamiento       es el tratamiento asociado a la {@link Consulta}.
      * @param pVeterinario       es el {@link Veterinario} que atendió la {@link Consulta}.
-     * @param pExamenes          son los exámenes ordenados en la {@link Consulta}.
-     * @param pTratamientos      son los tratamientos ordenados en la {@link Consulta}.
+     * @param pPatologiaAsociada es la patología asociada a la {@link Consulta}.
      * @param pMascotaAtendida   es la {@link Mascota} atendida durante la {@link Consulta}.
      */
     public Consulta(int pCodigo,
                     Date pFecha,
                     String pMotivo,
+                    String pExamenesFisicos,
+                    String pTratamiento,
+                    Veterinario pVeterinario,
                     String pPatologiaAsociada,
-                    String pVeterinario,
-                    String pExamenes,
-                    String pTratamientos,
                     String pMascotaAtendida) {
         mCodigo = pCodigo;
         mFecha = pFecha;
         mMotivo = pMotivo;
-        mPatologiaAsociada = pPatologiaAsociada;
+        mExamenesFisicos = pExamenesFisicos;
+        mTratamiento = pTratamiento;
         mVeterinario = pVeterinario;
-        mExamenes = pExamenes;
-        mTratamientos = pTratamientos;
+        mPatologiaAsociada = pPatologiaAsociada;
         mMascotaAtendida = pMascotaAtendida;
     }
 
@@ -144,7 +145,7 @@ public class Consulta {
      */
     public Consulta(Date pFecha,
                     String pMotivo,
-                    String pVeterinario,
+                    Veterinario pVeterinario,
                     String pMascotaAtendida) {
         mFecha = pFecha;
         mMotivo = pMotivo;
@@ -174,31 +175,31 @@ public class Consulta {
     }
 
     /**
-     * Este método retorna la patología asociada a la {@link Consulta}.
+     * Este método retorna los exámenes físicos ordenados en la {@link Consulta}.
      */
-    public String getPatologiaAsociada() {
-        return mPatologiaAsociada;
+    public String getExamenesFisicos() {
+        return mExamenesFisicos;
+    }
+
+    /**
+     * Este método retorna el tratamiento asociado a la {@link Consulta}.
+     */
+    public String getTratamiento() {
+        return mTratamiento;
     }
 
     /**
      * Este método retorna el {@link Veterinario} que realizó la {@link Consulta}.
      */
-    public String getVeterinario() {
+    public Veterinario getVeterinario() {
         return mVeterinario;
     }
 
     /**
-     * Este método retorna los exámenes ordenados en la {@link Consulta}.
+     * Este método retorna la patología asociada a la {@link Consulta}.
      */
-    public String getExamenes() {
-        return mExamenes;
-    }
-
-    /**
-     * Este método retorna los tratamientos ordenados en la {@link Consulta}.
-     */
-    public String getTratamientos() {
-        return mTratamientos;
+    public String getPatologiaAsociada() {
+        return mPatologiaAsociada;
     }
 
     /**
