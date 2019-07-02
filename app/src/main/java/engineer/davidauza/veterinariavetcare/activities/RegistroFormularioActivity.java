@@ -42,6 +42,7 @@ import engineer.davidauza.veterinariavetcare.models.Dueno;
 import engineer.davidauza.veterinariavetcare.models.Especie;
 import engineer.davidauza.veterinariavetcare.models.Felino;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
+import engineer.davidauza.veterinariavetcare.models.Patologia;
 import engineer.davidauza.veterinariavetcare.models.Roedor;
 import engineer.davidauza.veterinariavetcare.models.Veterinario;
 
@@ -229,6 +230,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 setContentView(R.layout.activity_registro_consulta);
                 cargarWebService(Veterinario.URL_GET);
                 configurarSpinner(R.id.spn_veterinario_consulta);
+                configurarSpinner(R.id.spn_patologia_consulta);
                 break;
             default:
                 finish();
@@ -656,15 +658,25 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 get(spinnerVeterinario.getSelectedItemPosition()));
         EditText veterinarioEditText = findViewById(R.id.txt_veterinario_consulta);
         String veterinario = veterinarioEditText.getText().toString();
-        // Obtener patología asociada.
-        EditText patologiaAsociadaEditText = findViewById(R.id.txt_patologia_asociada_consulta);
-        String patologiaAsociada = patologiaAsociadaEditText.getText().toString();
+        // Obtener patología
+        Spinner spinnerPatologia = findViewById(R.id.spn_patologia_consulta);
+        int posicion = spinnerPatologia.getSelectedItemPosition();
+        if (posicion == 0) {
+            // Si no se ha seleccionado ninguna Patología, seleccionar el índice 1 que lleva a la
+            // Patología Desconocida en el arreglo de Patologías-
+            posicion = 1;
+        } else {
+            // Restar uno para que la selección en la interfaz de usuario coincida con el arreglo de
+            // Patologías
+            posicion -= 1;
+        }
+        Patologia patologia = new Patologia(posicion);
         // Obtener mascotaAtendida
         EditText mascotaAtenidaEditText = findViewById(R.id.txt_mascota_atendida_consulta);
         String mascotaAtendida = mascotaAtenidaEditText.getText().toString();
         // Crear Consulta
         mConsulta = new Consulta(codigo, fecha, motivo, examenesFisicos, tratamiento,
-                veterinarioConsulta, patologiaAsociada, mascotaAtendida);
+                veterinarioConsulta, patologia, mascotaAtendida);
     }
 
     /**
@@ -678,7 +690,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         String fecha = FORMATO.format(mConsulta.getFecha());
         parametros.put(Consulta.FECHA, fecha);
         parametros.put(Consulta.MOTIVO, mConsulta.getMotivo());
-        parametros.put(Consulta.PATOLOGIA_ASOCIADA, mConsulta.getPatologiaAsociada());
+        parametros.put(Consulta.PATOLOGIA, mConsulta.getPatologia().toString());
         parametros.put(Consulta.VETERINARIO, mConsulta.getVeterinario().getNombre());
         parametros.put(Consulta.EXAMENES_FISICOS, mConsulta.getExamenesFisicos());
         parametros.put(Consulta.TRATAMIENTO, mConsulta.getTratamiento());
@@ -750,6 +762,15 @@ public class RegistroFormularioActivity extends AppCompatActivity
             // el Spinner
             adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
                     android.R.layout.simple_spinner_item, mVeterinariosConsulta);
+        } else if (pSpinner == R.id.spn_patologia_consulta) {
+            String[] arregloPatologias = new String[Patologia.NOMBRES.length + 1];
+            arregloPatologias[0] = getString(R.string.registro_consulta_txt_ayuda);
+            System.arraycopy(Patologia.NOMBRES, 0, arregloPatologias, 1,
+                    Patologia.NOMBRES.length);
+            // Creación de ArrayAdapter usando el array de Strings y un diseño por defecto para el
+            // Spinner
+            adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                    android.R.layout.simple_spinner_item, arregloPatologias);
         }
         // Especificar el diseño que se usará cuando aparece la lista de opciones
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
