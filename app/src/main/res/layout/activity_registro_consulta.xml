@@ -45,6 +45,14 @@
 
         <TextView
             style="@style/TextViewsRegistros"
+            android:text="@string/registro_consulta_txt_enfermedad_cronica" />
+
+        <Spinner
+            android:id="@+id/spn_enfermedad_cronica_consulta"
+            style="@style/SpinnersRegistros" />
+
+        <TextView
+            style="@style/TextViewsRegistros"
             android:text="@string/registro_consulta_txt_tratamiento" />
 
         <Spinner

@@ -2,7 +2,6 @@ package engineer.davidauza.veterinariavetcare.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,6 +39,7 @@ import engineer.davidauza.veterinariavetcare.models.Ave;
 import engineer.davidauza.veterinariavetcare.models.Canino;
 import engineer.davidauza.veterinariavetcare.models.Consulta;
 import engineer.davidauza.veterinariavetcare.models.Dueno;
+import engineer.davidauza.veterinariavetcare.models.EnfermedadCronica;
 import engineer.davidauza.veterinariavetcare.models.Especie;
 import engineer.davidauza.veterinariavetcare.models.Felino;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
@@ -235,6 +235,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 configurarSpinner(R.id.spn_veterinario_consulta);
                 configurarSpinner(R.id.spn_patologia_consulta);
                 configurarSpinner(R.id.spn_medicamento_consulta);
+                configurarSpinner(R.id.spn_enfermedad_cronica_consulta);
                 break;
             default:
                 finish();
@@ -653,6 +654,37 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener exámenes físicos
         EditText examenesFisicosEditText = findViewById(R.id.txt_examenes_fisicos_consulta);
         String examenesFisicos = examenesFisicosEditText.getText().toString();
+        // Obtener veterinario que atendió la consulta
+        Spinner spinnerVeterinario = findViewById(R.id.spn_veterinario_consulta);
+        Veterinario veterinarioConsulta = new Veterinario(mVeterinariosConsulta.
+                get(spinnerVeterinario.getSelectedItemPosition()));
+        // Obtener patología
+        Spinner spinnerPatologia = findViewById(R.id.spn_patologia_consulta);
+        int posicion = spinnerPatologia.getSelectedItemPosition();
+        if (posicion == 0) {
+            // Si no se ha seleccionado ninguna Patología, seleccionar el índice 1 que lleva a la
+            // Patología "Desconocida" en el arreglo de Patologías
+            posicion = 1;
+        } else {
+            // Restar uno para que la selección en la interfaz de usuario coincida con el arreglo de
+            // Patologías
+            posicion -= 1;
+        }
+        Patologia patologia = new Patologia(posicion, Patologia.NOMBRES);
+        //Obtener enfermedad crónica
+        Spinner enfermedadCronicaSpinner = findViewById(R.id.spn_enfermedad_cronica_consulta);
+        int posicionEnfermedadCronicaSpinner = enfermedadCronicaSpinner.getSelectedItemPosition();
+        if (posicionEnfermedadCronicaSpinner == 0) {
+            // Si no se ha seleccionado ninguna enfermedad crónica, seleccionar el índice 4 que
+            // lleva a la enfermedad crónica "Desconocida" en el arreglo de enfermedades crónicas
+            posicionEnfermedadCronicaSpinner = 4;
+        } else {
+            // Restar uno para que la selección en la interfaz de usuario coincida con el arreglo de
+            // enfermedades crónicas
+            posicionEnfermedadCronicaSpinner -= 1;
+        }
+        EnfermedadCronica enfermedadCronica =
+                new EnfermedadCronica(posicionEnfermedadCronicaSpinner, EnfermedadCronica.NOMBRES);
         // Obtener tratamiento
         // Obtener medicamento
         Spinner medicamentoSpinner = findViewById(R.id.spn_medicamento_consulta);
@@ -691,31 +723,12 @@ public class RegistroFormularioActivity extends AppCompatActivity
             }
         }
         Tratamiento tratamiento = new Tratamiento(medicamento, dosis, frecuencia, diasTratamiento);
-        // Obtener veterinario que atendió la consulta
-        Spinner spinnerVeterinario = findViewById(R.id.spn_veterinario_consulta);
-        Veterinario veterinarioConsulta = new Veterinario(mVeterinariosConsulta.
-                get(spinnerVeterinario.getSelectedItemPosition()));
-        EditText veterinarioEditText = findViewById(R.id.txt_veterinario_consulta);
-        String veterinario = veterinarioEditText.getText().toString();
-        // Obtener patología
-        Spinner spinnerPatologia = findViewById(R.id.spn_patologia_consulta);
-        int posicion = spinnerPatologia.getSelectedItemPosition();
-        if (posicion == 0) {
-            // Si no se ha seleccionado ninguna Patología, seleccionar el índice 1 que lleva a la
-            // Patología Desconocida en el arreglo de Patologías-
-            posicion = 1;
-        } else {
-            // Restar uno para que la selección en la interfaz de usuario coincida con el arreglo de
-            // Patologías
-            posicion -= 1;
-        }
-        Patologia patologia = new Patologia(posicion);
         // Obtener mascotaAtendida
         EditText mascotaAtenidaEditText = findViewById(R.id.txt_mascota_atendida_consulta);
         String mascotaAtendida = mascotaAtenidaEditText.getText().toString();
         // Crear Consulta
         mConsulta = new Consulta(codigo, fecha, motivo, examenesFisicos, veterinarioConsulta,
-                patologia, tratamiento, mascotaAtendida);
+                patologia, enfermedadCronica, tratamiento, mascotaAtendida);
     }
 
     /**
@@ -729,11 +742,11 @@ public class RegistroFormularioActivity extends AppCompatActivity
         String fecha = FORMATO.format(mConsulta.getFecha());
         parametros.put(Consulta.FECHA, fecha);
         parametros.put(Consulta.MOTIVO, mConsulta.getMotivo());
-        parametros.put(Consulta.PATOLOGIA, mConsulta.getPatologia().toString());
-        parametros.put(Consulta.VETERINARIO, mConsulta.getVeterinario().getNombre());
         parametros.put(Consulta.EXAMENES_FISICOS, mConsulta.getExamenesFisicos());
+        parametros.put(Consulta.VETERINARIO, mConsulta.getVeterinario().getNombre());
+        parametros.put(Consulta.PATOLOGIA, mConsulta.getPatologia().toString());
+        parametros.put(Consulta.ENFERMEDAD_CRONICA, mConsulta.getEnfermedadCronica().toString());
         parametros.put(Consulta.TRATAMIENTO, mConsulta.getTratamiento().toString());
-        Log.e("Tratamiento: ", mConsulta.getTratamiento().toString());
         parametros.put(Consulta.MASCOTA_ATENDIDA, mConsulta.getMascotaAtendida());
         return parametros;
     }
@@ -849,6 +862,15 @@ public class RegistroFormularioActivity extends AppCompatActivity
 
                 }
             });
+        } else if (pSpinner == R.id.spn_enfermedad_cronica_consulta) {
+            String[] arregloEnfermedadesCronicas = new String[EnfermedadCronica.NOMBRES.length + 1];
+            arregloEnfermedadesCronicas[0] = getString(R.string.registro_consulta_txt_ayuda);
+            System.arraycopy(EnfermedadCronica.NOMBRES, 0, arregloEnfermedadesCronicas,
+                    1, EnfermedadCronica.NOMBRES.length);
+            // Creación de ArrayAdapter usando el array de Strings y un diseño por defecto para el
+            // Spinner
+            adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                    android.R.layout.simple_spinner_item, arregloEnfermedadesCronicas);
         }
         // Especificar el diseño que se usará cuando aparece la lista de opciones
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

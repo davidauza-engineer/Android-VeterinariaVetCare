@@ -22,21 +22,22 @@ public class Patologia {
     /**
      * Mapa que almacena el código de la {@link Patologia}, junto con su nombre.
      */
-    private Map<Integer, String> mCodigoEnfermedadMapa;
+    private Map<Integer, String> mCodigoPatologiaMapa;
 
     /**
      * Constructor para crear un nuevo objeto {@link Patologia}.
      *
-     * @param pIndicePatologia es el índice de la {@link Patologia} seleccionada en la interfaz
-     *                         gráfica.
+     * @param pIndicePatologia  es el índice de la {@link Patologia} seleccionada en la interfaz
+     *                          gráfica.
+     * @param pArregloDeNombres es el arreglo de Strings del cual se tomará el nombre.
      */
-    public Patologia(Integer pIndicePatologia) {
-        mCodigoEnfermedadMapa = new HashMap<>();
-        mCodigoEnfermedadMapa.put(pIndicePatologia, NOMBRES[pIndicePatologia]);
+    public Patologia(Integer pIndicePatologia, String[] pArregloDeNombres) {
+        mCodigoPatologiaMapa = new HashMap<>();
+        mCodigoPatologiaMapa.put(pIndicePatologia, pArregloDeNombres[pIndicePatologia]);
     }
 
     @Override
     public String toString() {
-        return Collections.singletonList(mCodigoEnfermedadMapa).toString();
+        return Collections.singletonList(mCodigoPatologiaMapa).toString();
     }
 }

@@ -89,6 +89,7 @@
     <string name="registro_consulta_txt_tratamiento_cantidad_dias">Cantidad de días</string>
     <string name="registro_consulta_txt_veterinario">Veterinario</string>
     <string name="registro_consulta_txt_patologia">Patología</string>
+    <string name="registro_consulta_txt_enfermedad_cronica">Enfermedad Crónica</string>
     <string name="registro_consulta_hint_mascota">Mascota Atendida</string>
     <string name="registro_consulta_btn_registrar">Registrar</string>
     <string name="registro_consulta_toast_exito">La consulta fue registrada exitosamente</string>

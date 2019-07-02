@@ -4,8 +4,8 @@ import java.util.Date;
 
 /**
  * Esta clase representa una {@link Consulta}. Una {@link Consulta} tiene un código, una fecha,
- * un motivo, una patología asociada, un veterinario que la realiza, unos exámenes asociados, unos
- * tratamientos asociados, y una mascota atendida.
+ * un motivo, una patología, un veterinario que la realiza, unos exámenes asociados, un
+ * tratamientinto, una enfermedad crónica y una mascota atendida.
  */
 public class Consulta {
 
@@ -41,6 +41,12 @@ public class Consulta {
      * datos.
      */
     public static final String PATOLOGIA = "patologia"; //TODO actualizar backend.
+
+    /**
+     * Llave para acceder a la {@link EnfermedadCronica} diagnosticada en la {@link Consulta} en la
+     * base de datos.
+     */
+    public static final String ENFERMEDAD_CRONICA = "enfermedadCronica"; // TODO actualizar backend.
 
     /**
      * Llave para acceder al {@link Tratamiento} asociado a la {@link Consulta} en la base de datos.
@@ -97,6 +103,11 @@ public class Consulta {
     private Patologia mPatologia;
 
     /**
+     * La {@link EnfermedadCronica} diagnosticada en la {@link Consulta} realizada.
+     */
+    private EnfermedadCronica mEnfermedadCronica;
+
+    /**
      * El {@link Tratamiento} asociado a la {@link Consulta}.
      */
     private Tratamiento mTratamiento;
@@ -109,14 +120,16 @@ public class Consulta {
     /**
      * Constructor para crear un nuevo objeto {@link Consulta}.
      *
-     * @param pCodigo          es el código de la {@link Consulta}.
-     * @param pFecha           es la fecha de la {@link Consulta}.
-     * @param pMotivo          es el motivo de la {@link Consulta}.
-     * @param pExamenesFisicos son los exámenes físicos ordenados en la {@link Consulta}.
-     * @param pVeterinario     es el {@link Veterinario} que atendió la {@link Consulta}.
-     * @param pPatologia       es la {@link Patologia} diagnosticada en la {@link Consulta}.
-     * @param pTratamiento     es el {@link Tratamiento} asociado a la {@link Consulta}.
-     * @param pMascotaAtendida es la {@link Mascota} atendida durante la {@link Consulta}.
+     * @param pCodigo            es el código de la {@link Consulta}.
+     * @param pFecha             es la fecha de la {@link Consulta}.
+     * @param pMotivo            es el motivo de la {@link Consulta}.
+     * @param pExamenesFisicos   son los exámenes físicos ordenados en la {@link Consulta}.
+     * @param pVeterinario       es el {@link Veterinario} que atendió la {@link Consulta}.
+     * @param pPatologia         es la {@link Patologia} diagnosticada en la {@link Consulta}.
+     * @param pEnfermedadCronica es la {@link EnfermedadCronica} diagnosticada en la
+     *                           {@link Consulta}.
+     * @param pTratamiento       es el {@link Tratamiento} asociado a la {@link Consulta}.
+     * @param pMascotaAtendida   es la {@link Mascota} atendida durante la {@link Consulta}.
      */
     public Consulta(int pCodigo,
                     Date pFecha,
@@ -124,6 +137,7 @@ public class Consulta {
                     String pExamenesFisicos,
                     Veterinario pVeterinario,
                     Patologia pPatologia,
+                    EnfermedadCronica pEnfermedadCronica,
                     Tratamiento pTratamiento,
                     String pMascotaAtendida) {
         mCodigo = pCodigo;
@@ -132,6 +146,7 @@ public class Consulta {
         mExamenesFisicos = pExamenesFisicos;
         mVeterinario = pVeterinario;
         mPatologia = pPatologia;
+        mEnfermedadCronica = pEnfermedadCronica;
         mTratamiento = pTratamiento;
         mMascotaAtendida = pMascotaAtendida;
     }
@@ -194,6 +209,13 @@ public class Consulta {
      */
     public Patologia getPatologia() {
         return mPatologia;
+    }
+
+    /**
+     * Este método retorna la {@link EnfermedadCronica} diagnosticada en la {@link Consulta}.
+     */
+    public EnfermedadCronica getEnfermedadCronica() {
+        return mEnfermedadCronica;
     }
 
     /**
