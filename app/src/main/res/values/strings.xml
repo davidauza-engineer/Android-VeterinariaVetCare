@@ -34,16 +34,12 @@
     <string name="registro_mascota_txt_madre">Madre</string>
     <string name="registro_mascota_txt_especie">Especie</string>
     <string name="registro_mascota_txt_raza">Raza</string>
+    <string name="registro_mascota_txt_dueno">Dueño</string>
     <string name="registro_mascota_hint_nombre_dueno">Nombre Dueño</string>
     <string name="registro_mascota_hint_apellido_dueno">Apellido Dueño</string>
     <string name="registro_mascota_hint_documento_dueno">Número de Documento Dueño</string>
     <string name="registro_mascota_hint_direccion_dueno">Dirección Dueño</string>
     <string name="registro_mascota_hint_telefono_dueno">Teléfono Dueño</string>
-    <string name="registro_mascota_hint_enfermedades">Enfermedades</string>
-    <string name="registro_mascota_hint_consultas">Consultas</string>
-    <string name="registro_mascota_hint_examenes">Exámenes</string>
-    <string name="registro_mascota_hint_tratamientos">Tratamientos</string>
-    <string name="registro_mascota_hint_propietarios">Propietarios</string>
     <string name="registro_mascota_btn_registrar">Registrar</string>
     <string name="registro_mascota_toast_exito">La mascota fue registrada exitosamente</string>
     <string name="registro_mascota_toast_error">Error:</string>

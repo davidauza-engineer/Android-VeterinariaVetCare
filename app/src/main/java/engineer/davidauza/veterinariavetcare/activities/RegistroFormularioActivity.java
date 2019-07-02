@@ -409,24 +409,8 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 raza = Especie.RAZAS[0];
                 break;
         }
-        // Obtener enfermedades
-        EditText enfermedadesEditText = findViewById(R.id.txt_enfermedades_mascota);
-        String enfermedades = enfermedadesEditText.getText().toString();
-        // Obtener consultas
-        EditText consultasEditText = findViewById(R.id.txt_consultas_mascota);
-        String consultas = consultasEditText.getText().toString();
-        // Obtener examenes
-        EditText examentesEditText = findViewById(R.id.txt_examenes_mascota);
-        String examenes = examentesEditText.getText().toString();
-        // Obtener tratamientos
-        EditText tratamientosEditText = findViewById(R.id.txt_tratamientos_mascota);
-        String tratamientos = tratamientosEditText.getText().toString();
-        // Obtener propietarios
-        EditText propietariosEditText = findViewById(R.id.txt_propietarios_mascota);
-        String propietarios = propietariosEditText.getText().toString();
         // Crear mascota
-        mMascota = new Mascota(id, nombre, sexo, fechaDeNacimiento, padre, madre, especie, raza,
-                enfermedades, consultas, examenes, tratamientos, propietarios);
+        mMascota = new Mascota(id, nombre, sexo, fechaDeNacimiento, padre, madre, especie, raza);
         // Crea Dueño y asignárselo a la Mascota.
         mDueno = crearDueno();
         ArrayList<Dueno> duenos = new ArrayList<>();
@@ -457,11 +441,6 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Mascota.RAZA, mMascota.getRaza());
         parametros.put(Mascota.DUENOS, mMascota.getDuenos().toString());
         parametros.put(Mascota.DUENO_ACTUAL, mMascota.getDuenoActual().toString());
-        parametros.put(Mascota.ENFERMEDADES, mMascota.getEnfermedades());
-        parametros.put(Mascota.CONSULTAS, mMascota.getConsultas());
-        parametros.put(Mascota.EXAMENES, mMascota.getExamenes());
-        parametros.put(Mascota.TRATAMIENTOS, mMascota.getTratamientos());
-        parametros.put(Mascota.PROPIETARIOS, mMascota.getPropietarios());
         return parametros;
     }
 
@@ -482,7 +461,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener número de documento
         EditText documentoDuenoEditText = findViewById(R.id.txt_documento_dueno_mascota);
         String documento = documentoDuenoEditText.getText().toString();
-        long numeroDeDocumento = -1;
+        long numeroDeDocumento = 0;
         if (!documento.equals("")) {
             numeroDeDocumento = Long.parseLong(documento);
         }
@@ -492,7 +471,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener teléfono
         EditText telefonoEditText = findViewById(R.id.txt_telefono_dueno_mascota);
         String numeroDeTelefono = telefonoEditText.getText().toString();
-        long telefono = -1;
+        long telefono = 0;
         if (!numeroDeTelefono.equals("")) {
             telefono = Long.parseLong(numeroDeTelefono);
         }

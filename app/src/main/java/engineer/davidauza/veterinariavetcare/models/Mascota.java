@@ -62,36 +62,11 @@ public class Mascota {
     public static final String DUENO_ACTUAL = "duenoActual";
 
     /**
-     * Llave para acceder a las enfermedades de la {@link Mascota} en la base de datos.
-     */
-    public static final String ENFERMEDADES = "enfermedades";
-
-    /**
-     * Llave para acceder a las consultas de la {@link Mascota} en la base de datos.
-     */
-    public static final String CONSULTAS = "consultas";
-
-    /**
-     * Llave para acceder a los exámenes de la {@link Mascota} en la base de datos.
-     */
-    public static final String EXAMENES = "examenes";
-
-    /**
-     * Llave para acceder a los tratamientos de la {@link Mascota} en la base de datos.
-     */
-    public static final String TRATAMIENTOS = "tratamientos";
-
-    /**
-     * Llave para acceder a los propietarios de la {@link Mascota} en la base de datos.
-     */
-    public static final String PROPIETARIOS = "propietarios";
-
-    /**
      * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevas
      * {@link Mascota}s.
      */
     public static final String URL_SET =
-            "https://davidauza-engineer.000webhostapp.com/web_service/set_mascota.php";
+            "https://davidauza-engineer.000webhostapp.com/web_service/set_mascota_final.php";
 
     /**
      * Contiene la URL necesaria para acceder al microservicio que permite consultar las
@@ -151,33 +126,6 @@ public class Mascota {
     private Dueno mDuenoActual;
 
     /**
-     * Las enfermedades que puede haber sufrido la {@link Mascota}.
-     */
-    private String mEnfermedades; // TODO añadir boolean enfermedad crónica ¿Cómo manejo la enfermedad crónica?
-
-    /**
-     * Las consultas a las que ha asistido la {@link Mascota}.
-     */
-    private String mConsultas;
-
-    /**
-     * Los exámenes que se le han practicado a la {@link Mascota}.
-     */
-    private String mExamenes;
-
-    /**
-     * Los tratamientos que se la han practicado a la {@link Mascota}.
-     */
-    private String mTratamientos;
-
-    /**
-     * Los propietarios de la {@link Mascota}.
-     */
-    private String mPropietarios; // TODO cambiar tipo a Propietario[]
-    // TODO añadir miembro propietarioActual "incluso pudierar tener un dueño más de una vez"
-    // TODO "Cada vez que una persona se hace cargo de la mascota se registra la fecha de paso."
-
-    /**
      * Constructor para crear un nuevo objeto {@link Mascota}.
      *
      * @param pId                es el ID de la {@link Mascota}.
@@ -188,14 +136,6 @@ public class Mascota {
      * @param pMadre             es la madre de la {@link Mascota}.
      * @param pEspecie           es la {@link Especie} de la {@link Mascota}.
      * @param pRaza              es la raza de la {@link Mascota}.
-     * @param pEnfermedades      son las enfermedades que puede sufrir la {@link Mascota}.
-     * @param pConsultas         son las consultas a las que puede haber asistido la
-     *                           {@link Mascota}.
-     * @param pExamenes          son los exámenes que se le puede haber practicado a la
-     *                           {@link Mascota}.
-     * @param pTratamientos      son los tratamientos a los que pudo ser sometida la
-     *                           {@link Mascota}.
-     * @param pPropietarios      son los propietarios que ha tenido la {@link Mascota}.
      */
     public Mascota(int pId,
                    String pNombre,
@@ -204,12 +144,7 @@ public class Mascota {
                    Mascota pPadre,
                    Mascota pMadre,
                    Especie pEspecie,
-                   String pRaza,
-                   String pEnfermedades,
-                   String pConsultas,
-                   String pExamenes,
-                   String pTratamientos,
-                   String pPropietarios) {
+                   String pRaza) {
         mId = pId;
         mNombre = pNombre;
         mSexo = pSexo;
@@ -218,11 +153,6 @@ public class Mascota {
         mMadre = pMadre;
         mEspecie = pEspecie;
         mRaza = pRaza;
-        mEnfermedades = pEnfermedades;
-        mConsultas = pConsultas;
-        mExamenes = pExamenes;
-        mTratamientos = pTratamientos;
-        mPropietarios = pPropietarios;
     }
 
     /**
@@ -295,6 +225,13 @@ public class Mascota {
     }
 
     /**
+     * Obtener la {@link Especie} de la {@link Mascota}.
+     */
+    public Especie getEspecie() {
+        return mEspecie;
+    }
+
+    /**
      * Obtener la raza de la {@link Mascota}.
      */
     public String getRaza() {
@@ -309,6 +246,13 @@ public class Mascota {
     }
 
     /**
+     * Obtener el dueño actual de la {@link Mascota}.
+     */
+    public Dueno getDuenoActual() {
+        return mDuenoActual;
+    }
+
+    /**
      * Este método configura los dueños de la  {@link Mascota}.
      *
      * @param pDuenos es la lista de dueños de la {@link Mascota}.
@@ -316,54 +260,5 @@ public class Mascota {
     public void setDuenos(ArrayList<Dueno> pDuenos) {
         mDuenos = pDuenos;
         mDuenoActual = mDuenos.get(mDuenos.size() - 1);
-    }
-
-    /**
-     * Obtener la {@link Especie} de la {@link Mascota}.
-     */
-    public Especie getEspecie() {
-        return mEspecie;
-    }
-
-    /**
-     * Obtener las enfermedades de la {@link Mascota}.
-     */
-    public String getEnfermedades() {
-        return mEnfermedades;
-    }
-
-    /**
-     * Obtener las consultas de la {@link Mascota}.
-     */
-    public String getConsultas() {
-        return mConsultas;
-    }
-
-    /**
-     * Obtener los exámenes de la {@link Mascota}.
-     */
-    public String getExamenes() {
-        return mExamenes;
-    }
-
-    /**
-     * Obtener los tratamientos de la {@link Mascota}.
-     */
-    public String getTratamientos() {
-        return mTratamientos;
-    }
-
-    /**
-     * Obtener los propietarios de la {@link Mascota}.
-     */
-    public String getPropietarios() {
-        return mPropietarios;
-    }
-
-    /**
-     * Obtener el dueño actual de la {@link Mascota}.
-     */
-    public Dueno getDuenoActual() {
-        return mDuenoActual;
     }
 }

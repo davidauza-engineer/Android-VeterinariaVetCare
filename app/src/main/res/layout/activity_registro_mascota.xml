@@ -78,59 +78,38 @@
             android:id="@+id/spn_raza_mascota"
             style="@style/SpinnersRegistros" />
 
+        <TextView
+            style="@style/TextViewsRegistros"
+            android:text="@string/registro_mascota_txt_dueno" />
+
         <EditText
             android:id="@+id/txt_nombre_dueno_mascota"
-            style="@style/EditTextRegistros"
+            style="@style/EditTextDueno"
             android:hint="@string/registro_mascota_hint_nombre_dueno" />
 
         <EditText
             android:id="@+id/txt_apellido_dueno_mascota"
-            style="@style/EditTextRegistros"
+            style="@style/EditTextDueno"
             android:hint="@string/registro_mascota_hint_apellido_dueno" />
 
         <EditText
             android:id="@+id/txt_documento_dueno_mascota"
-            style="@style/EditTextRegistros"
+            style="@style/EditTextDueno"
             android:hint="@string/registro_mascota_hint_documento_dueno"
             android:inputType="number"
             android:maxLength="10" />
 
         <EditText
             android:id="@+id/txt_direccion_dueno_mascota"
-            style="@style/EditTextRegistros"
+            style="@style/EditTextDueno"
             android:hint="@string/registro_mascota_hint_direccion_dueno" />
 
         <EditText
             android:id="@+id/txt_telefono_dueno_mascota"
-            style="@style/EditTextRegistros"
+            style="@style/EditTextDueno"
             android:hint="@string/registro_mascota_hint_telefono_dueno"
             android:inputType="phone"
             android:maxLength="10" />
-
-        <EditText
-            android:id="@+id/txt_enfermedades_mascota"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_mascota_hint_enfermedades" />
-
-        <EditText
-            android:id="@+id/txt_consultas_mascota"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_mascota_hint_consultas" />
-
-        <EditText
-            android:id="@+id/txt_examenes_mascota"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_mascota_hint_examenes" />
-
-        <EditText
-            android:id="@+id/txt_tratamientos_mascota"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_mascota_hint_tratamientos" />
-
-        <EditText
-            android:id="@+id/txt_propietarios_mascota"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_mascota_hint_propietarios" />
 
         <Button
             android:id="@+id/btn_registrar"
