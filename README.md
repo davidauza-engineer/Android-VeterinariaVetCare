@@ -23,3 +23,4 @@ Por último, las mascotas pueden padecer ciertas enfermedades crónicas, las mis
 
 
 El sistema debe permitir el registro y consulta de las acciones indicadas y generar reportes semanales, diarios y mensuales de las consultas a partir de una mascota, una raza, un profesional o una especialidad médica.
+
