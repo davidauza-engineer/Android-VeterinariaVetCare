@@ -12,25 +12,19 @@ public class Veterinario extends Persona {
      * Llave para acceder al número de registro profesional del {@link Veterinario} en la base de
      * datos.
      */
-    public static final String NUMERO_DE_REGISTRO_PROFESIONAL = "numeroDeRegistroProfesional"; //TODO cambio backend
+    public static final String NUMERO_DE_REGISTRO_PROFESIONAL = "numeroDeRegistroProfesional";
 
     /**
      * Llave para acceder a las especialidades médicas del {@link Veterinario} en la base de datos.
      */
-    public static final String ESPECIALIDADES_MEDICAS = "especialidadesMedicas"; //TODO cambio backend
-
-    /**
-     * Llave para acceder al número de consultas realizadas por el {@link Veterinario} en la base de
-     * datos.
-     */
-    public static final String CONSULTAS_REALIZADAS = "consultasRealizadas";
+    public static final String ESPECIALIDADES_MEDICAS = "especialidadesMedicas";
 
     /**
      * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevos
      * {@link Veterinario}s.
      */
     public static final String URL_SET =
-            "https://davidauza-engineer.000webhostapp.com/web_service/set_veterinario.php";
+            "https://davidauza-engineer.000webhostapp.com/web_service/set_veterinario_final.php";
 
     /**
      * Contiene la URL necesaria para acceder al microservicio que permite consultar los
@@ -58,11 +52,6 @@ public class Veterinario extends Persona {
     private ArrayList<String> mEspecialidadesMedicas;
 
     /**
-     * El número de consultas realizadas por el {@link Veterinario};
-     */
-    private String mConsultasRelizadas;
-
-    /**
      * Constructor para crear un nuevo objeto {@link Veterinario}.
      *
      * @param pId                          es el ID único para el {@link Veterinario}.
@@ -75,8 +64,6 @@ public class Veterinario extends Persona {
      *                                     {@link Veterinario}.
      * @param pEspecialidadesMedicas       es la lista de especialidades médicas que puede poseer el
      *                                     {@link Veterinario}.
-     * @param pConsultasRealizadas         es el total de consultas realizadas por el
-     *                                     {@link Veterinario}.
      */
     public Veterinario(int pId,
                        String pNombre,
@@ -85,12 +72,10 @@ public class Veterinario extends Persona {
                        String pDireccion,
                        long pTelefono,
                        long pNumeroDeRegistroProfesional,
-                       ArrayList<String> pEspecialidadesMedicas,
-                       String pConsultasRealizadas) {
+                       ArrayList<String> pEspecialidadesMedicas) {
         super(pId, pNombre, pApellido, pNumeroDeIdentidad, pDireccion, pTelefono);
         mNumeroDeRegistroProfesional = pNumeroDeRegistroProfesional;
         mEspecialidadesMedicas = pEspecialidadesMedicas;
-        mConsultasRelizadas = pConsultasRealizadas;
     }
 
     /**
@@ -101,17 +86,13 @@ public class Veterinario extends Persona {
      *                                     {@link Veterinario}.
      * @param pEspecialidadesMedicas       es la lista de especialidades médicas que puede poseer el
      *                                     {@link Veterinario}.
-     * @param pConsultasRealizadas         es el total de consultas realizadas por el
-     *                                     {@link Veterinario}.
      */
     public Veterinario(String pNombre,
                        long pNumeroDeRegistroProfesional,
-                       ArrayList<String> pEspecialidadesMedicas,
-                       String pConsultasRealizadas) {
+                       ArrayList<String> pEspecialidadesMedicas) {
         super(pNombre);
         mNumeroDeRegistroProfesional = pNumeroDeRegistroProfesional;
         mEspecialidadesMedicas = pEspecialidadesMedicas;
-        mConsultasRelizadas = pConsultasRealizadas;
     }
 
     /**
@@ -135,12 +116,5 @@ public class Veterinario extends Persona {
      */
     public ArrayList<String> getEspecialidadesMedicas() {
         return mEspecialidadesMedicas;
-    }
-
-    /**
-     * Obtener el total de consultas realizadas por el {@link Veterinario}.
-     */
-    public String getConsultasRelizadas() {
-        return mConsultasRelizadas;
     }
 }

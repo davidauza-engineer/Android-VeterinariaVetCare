@@ -59,8 +59,8 @@ public class VeterinarioAdapter extends RecyclerView.Adapter<VeterinarioAdapter.
                 setText(Long.toString(veterinarioActual.getNumeroDeRegistroProfesional()));
         myViewHolder.mEspecialidadVeterinario.
                 setText(veterinarioActual.getEspecialidadesMedicas().toString());
-        myViewHolder.mConsultasRealizadasVeterinario.
-                setText(veterinarioActual.getConsultasRelizadas());
+        // TODO arreglar
+        myViewHolder.mConsultasRealizadasVeterinario.setText("POR ARREGLAR!!!");
     }
 
     /**

@@ -499,7 +499,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener el número de documento del Veterinario
         EditText numeroDeDocumentoEditText = findViewById(R.id.txt_numero_documento_veterinario);
         String numeroIdentidad = numeroDeDocumentoEditText.getText().toString();
-        long numeroDeDocumento = -1;
+        long numeroDeDocumento = 0;
         if (!numeroIdentidad.equals("")) {
             numeroDeDocumento = Long.parseLong(numeroIdentidad);
         }
@@ -509,7 +509,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener teléfono Veterinario
         EditText telefonoEditText = findViewById(R.id.txt_telefono_veterinario);
         String numeroTelefono = telefonoEditText.getText().toString();
-        long telefono = -1;
+        long telefono = 0;
         if (!numeroTelefono.equals("")) {
             telefono = Long.parseLong(numeroTelefono);
         }
@@ -517,7 +517,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         EditText registroProfesionalEditText =
                 findViewById(R.id.txt_registro_profesional_veterinario);
         String registroProfesional = registroProfesionalEditText.getText().toString();
-        long numeroDeRegistroProfesional = -1;
+        long numeroDeRegistroProfesional = 0;
         if (!registroProfesional.equals("")) {
             numeroDeRegistroProfesional = Long.parseLong(registroProfesional);
         }
@@ -543,13 +543,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 }
             }
         }
-        // Obtener cosultas realizadas por el Veterinario
-        EditText consultasRealizadasEditText =
-                findViewById(R.id.txt_consultas_realizadas_veterinario);
-        String consultasRealizadas = consultasRealizadasEditText.getText().toString();
         // Crear Veterinario
         mVeterinario = new Veterinario(id, nombre, apellido, numeroDeDocumento, direccion,
-                telefono, numeroDeRegistroProfesional, especialidades, consultasRealizadas);
+                telefono, numeroDeRegistroProfesional, especialidades);
     }
 
     /**
@@ -560,6 +556,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         Map<String, String> parametros = new HashMap<>();
         parametros.put(Veterinario.ID, Integer.toString(mVeterinario.getId()));
         parametros.put(Veterinario.NOMBRE, mVeterinario.getNombre());
+        parametros.put(Veterinario.APELLIDO, mVeterinario.getApellido());
         parametros.put(Veterinario.NUMERO_DE_DOCUMENTO,
                 Long.toString(mVeterinario.getNumeroDeDocumento()));
         parametros.put(Veterinario.DIRECCION, mVeterinario.getDireccion());
@@ -568,7 +565,6 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 Long.toString(mVeterinario.getNumeroDeRegistroProfesional()));
         parametros.put(Veterinario.ESPECIALIDADES_MEDICAS,
                 mVeterinario.getEspecialidadesMedicas().toString());
-        parametros.put(Veterinario.CONSULTAS_REALIZADAS, mVeterinario.getConsultasRelizadas());
         return parametros;
     }
 

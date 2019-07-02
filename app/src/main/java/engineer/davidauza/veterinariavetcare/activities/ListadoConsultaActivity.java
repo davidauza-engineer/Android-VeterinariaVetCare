@@ -170,10 +170,8 @@ public class ListadoConsultaActivity extends AppCompatActivity
                                 }
                             }
                         }
-                        String consultasRealizadas =
-                                jsonObject.optString("consultasRealizadas");
                         mVeterinariosArrayList.add(new Veterinario(nombreVeterinario,
-                                numeroDeRegistroProfesional, especialidades, consultasRealizadas));
+                                numeroDeRegistroProfesional, especialidades));
                         break;
                     // Si están consultando las consultas
                     case 2:

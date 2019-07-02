@@ -24,7 +24,7 @@ public class Persona {
     /**
      * Llave para acceder al número de documento de la {@link Persona} en la base de datos.
      */
-    public static final String NUMERO_DE_DOCUMENTO = "numeroDeDocumento"; // TODO cambio Backend
+    public static final String NUMERO_DE_DOCUMENTO = "numeroDeDocumento";
 
     /**
      * Llave para acceder a la dirección de la {@link Persona} en la base de datos.

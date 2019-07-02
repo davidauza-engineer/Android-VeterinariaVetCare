@@ -53,16 +53,6 @@
             android:id="@+id/spn_especialidad_veterinario"
             style="@style/SpinnersRegistros" />
 
-        <EditText
-            android:id="@+id/txt_especialidad_veterinario"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_txt_especialidades" />
-
-        <EditText
-            android:id="@+id/txt_consultas_realizadas_veterinario"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_veterinario_hint_consultas" />
-
         <Button
             android:id="@+id/btn_registrar"
             style="@style/BotonesRegistrar"
