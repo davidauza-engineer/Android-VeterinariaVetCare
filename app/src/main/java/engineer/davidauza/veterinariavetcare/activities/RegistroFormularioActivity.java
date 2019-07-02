@@ -60,8 +60,6 @@ public class RegistroFormularioActivity extends AppCompatActivity
 
     private RequestQueue mRequestRegistrar;
 
-    private RequestQueue mRequestCargar;
-
     /**
      * El ArrayList que almacena el nombre de las {@link Mascota}s macho (potencialmente padres)
      * almacenadas en la base de datos.
@@ -73,6 +71,11 @@ public class RegistroFormularioActivity extends AppCompatActivity
      * almacenadas en la base de datos.
      */
     private ArrayList<String> mMascotasMadre = new ArrayList<>();
+
+    /**
+     * El ArrayList que almacena el nombre de las {@link Mascota}s almacenadas en la base de datos.
+     */
+    private ArrayList<String> mMascotasTodas = new ArrayList<>();
 
     /**
      * El ArrayList que almacenará las razas según la especie seleccionada por el usuario.
@@ -148,9 +151,10 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 // Si se está en la interfaz de registro de mascotas
                 if (mRegistroSeleccionadoSpinner == 0) {
                     String sexoMascota = jsonObject.optString(Mascota.SEXO);
-                    // Si las mascotas obtenidas de la base de datos son machos, añadirlos a la lista de
-                    // padres. Si son hembras, a la lista de madres.
-                    if (sexoMascota.equals(getString(R.string.registro_mascota_txt_sexo_masculino))) {
+                    // Si las mascotas obtenidas de la base de datos son machos, añadirlos a la
+                    // lista de padres. Si son hembras, a la lista de madres.
+                    if (sexoMascota.
+                            equals(getString(R.string.registro_mascota_txt_sexo_masculino))) {
                         mMascotasPadre.add(jsonObject.optString(Mascota.NOMBRE));
                     } else if (sexoMascota.
                             equals(getString(R.string.registro_mascota_txt_sexo_femenino))) {
@@ -231,7 +235,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 break;
             case 2:
                 setContentView(R.layout.activity_registro_consulta);
+                configurarWebServiceMascotaConsulta();
                 cargarWebService(Veterinario.URL_GET);
+                configurarSpinner(R.id.spn_mascota_atendida_consulta);
                 configurarSpinner(R.id.spn_veterinario_consulta);
                 configurarSpinner(R.id.spn_patologia_consulta);
                 configurarSpinner(R.id.spn_medicamento_consulta);
@@ -646,6 +652,10 @@ public class RegistroFormularioActivity extends AppCompatActivity
     private void crearConsulta() {
         // Crear ID para la consulta
         int codigo = (int) (Math.random() * 1_000_000);
+        // Obtener mascota atendida
+        Spinner spinnerMascota = findViewById(R.id.spn_mascota_atendida_consulta);
+        int posicionMascota = spinnerMascota.getSelectedItemPosition();
+        Mascota mascotaAtendida = new Mascota(mMascotasTodas.get(posicionMascota));
         // Obtener fecha
         Date fecha = obtenerFecha(R.id.dte_fecha);
         // Obtener motivo
@@ -723,12 +733,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
             }
         }
         Tratamiento tratamiento = new Tratamiento(medicamento, dosis, frecuencia, diasTratamiento);
-        // Obtener mascotaAtendida
-        EditText mascotaAtenidaEditText = findViewById(R.id.txt_mascota_atendida_consulta);
-        String mascotaAtendida = mascotaAtenidaEditText.getText().toString();
         // Crear Consulta
-        mConsulta = new Consulta(codigo, fecha, motivo, examenesFisicos, veterinarioConsulta,
-                patologia, enfermedadCronica, tratamiento, mascotaAtendida);
+        mConsulta = new Consulta(codigo, mascotaAtendida, fecha, motivo, examenesFisicos, veterinarioConsulta,
+                patologia, enfermedadCronica, tratamiento);
     }
 
     /**
@@ -747,7 +754,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Consulta.PATOLOGIA, mConsulta.getPatologia().toString());
         parametros.put(Consulta.ENFERMEDAD_CRONICA, mConsulta.getEnfermedadCronica().toString());
         parametros.put(Consulta.TRATAMIENTO, mConsulta.getTratamiento().toString());
-        parametros.put(Consulta.MASCOTA_ATENDIDA, mConsulta.getMascotaAtendida());
+        parametros.put(Consulta.MASCOTA_ATENDIDA, mConsulta.getMascotaAtendida().getNombre());
         return parametros;
     }
 
@@ -807,6 +814,13 @@ public class RegistroFormularioActivity extends AppCompatActivity
             // el Spinner
             adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
                     android.R.layout.simple_spinner_item, mRazas);
+        } else if (pSpinner == R.id.spn_mascota_atendida_consulta) {
+            mMascotasTodas.add(getString(R.string.registro_consulta_txt_ayuda));
+            mMascotasTodas.add(getString(R.string.registro_consulta_txt_mascota_defecto));
+            // Creación de ArrayAdapter usando el ArrayList de Strings y un diseño por defecto para
+            // el Spinner
+            adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                    android.R.layout.simple_spinner_item, mMascotasTodas);
         } else if (pSpinner == R.id.spn_veterinario_consulta) {
             mVeterinariosConsulta.add(getString(R.string.registro_consulta_txt_ayuda));
             mVeterinariosConsulta.
@@ -886,7 +900,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
      */
     private void cargarWebService(String pUrl) {
         // Configurar la librería Volley que se encarga de interactuar con la base de datos
-        mRequestCargar = Volley.newRequestQueue(RegistroFormularioActivity.this);
+        RequestQueue mRequestCargar = Volley.newRequestQueue(RegistroFormularioActivity.this);
         // Cargar web service
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, pUrl,
                 null, RegistroFormularioActivity.this,
@@ -936,5 +950,33 @@ public class RegistroFormularioActivity extends AppCompatActivity
         } else if (posicion == 0) {
             mSpinnerRaza.setEnabled(false);
         }
+    }
+
+    /**
+     * Este método configura la petición que se hace al servidor para obtener los datos de las
+     * {@link Mascota}s registradas en la base de datos, para ser cargadas al momento de registrar
+     * una {@link Consulta}.
+     */
+    private void configurarWebServiceMascotaConsulta() {
+        // Configurar la librería Volley que se encarga de interactuar con la base de datos
+        RequestQueue requestCargar =
+                Volley.newRequestQueue(RegistroFormularioActivity.this);
+        // Cargar web service
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                Mascota.URL_GET, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        String mascota = jsonObject.optString(Mascota.NOMBRE);
+                        mMascotasTodas.add(mascota);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, RegistroFormularioActivity.this);
+        requestCargar.add(jsonArrayRequest);
     }
 }

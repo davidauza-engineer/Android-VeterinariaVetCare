@@ -11,6 +11,14 @@
 
         <TextView
             style="@style/TextViewsRegistros"
+            android:text="@string/registro_consulta_txt_mascota" />
+
+        <Spinner
+            android:id="@+id/spn_mascota_atendida_consulta"
+            style="@style/SpinnersRegistros" />
+
+        <TextView
+            style="@style/TextViewsRegistros"
             android:text="@string/registro_consulta_txt_fecha" />
 
         <DatePicker
@@ -95,7 +103,7 @@
         <EditText
             android:id="@+id/txt_mascota_atendida_consulta"
             style="@style/EditTextRegistros"
-            android:hint="@string/registro_consulta_hint_mascota" />
+            android:hint="@string/registro_consulta_txt_mascota" />
 
         <Button
             android:id="@+id/btn_registrar"

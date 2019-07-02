@@ -15,6 +15,11 @@ public class Consulta {
     public static final String CODIGO = "codigo"; // TODO Actualizar en el backend
 
     /**
+     * Llave para acceder a la {@link Mascota} atendida en la {@link Consulta} en la base de datos.
+     */
+    public static final String MASCOTA_ATENDIDA = "mascotaAtendida";
+
+    /**
      * Llave para acceder a la fecha de la {@link Consulta} en la base de datos.
      */
     public static final String FECHA = "fecha";
@@ -54,11 +59,6 @@ public class Consulta {
     public static final String TRATAMIENTO = "tratamiento"; // TODO actualizar backend.
 
     /**
-     * Llave para acceder a la {@link Mascota} atendida en la {@link Consulta} en la base de datos.
-     */
-    public static final String MASCOTA_ATENDIDA = "mascotaAtendida";
-
-    /**
      * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevas
      * {@link Consulta}s.
      */
@@ -76,6 +76,11 @@ public class Consulta {
      * Código que identifica la {@link Consulta}.
      */
     private int mCodigo;
+
+    /**
+     * La {@link Mascota} atendida en la {@link Consulta}.
+     */
+    private Mascota mMascotaAtendida;
 
     /**
      * La fecha de la {@link Consulta}.
@@ -113,14 +118,10 @@ public class Consulta {
     private Tratamiento mTratamiento;
 
     /**
-     * La {@link Mascota} atendida en la {@link Consulta}.
-     */
-    private String mMascotaAtendida;
-
-    /**
      * Constructor para crear un nuevo objeto {@link Consulta}.
      *
      * @param pCodigo            es el código de la {@link Consulta}.
+     * @param pMascotaAtendida   es la {@link Mascota} atendida durante la {@link Consulta}.
      * @param pFecha             es la fecha de la {@link Consulta}.
      * @param pMotivo            es el motivo de la {@link Consulta}.
      * @param pExamenesFisicos   son los exámenes físicos ordenados en la {@link Consulta}.
@@ -129,18 +130,18 @@ public class Consulta {
      * @param pEnfermedadCronica es la {@link EnfermedadCronica} diagnosticada en la
      *                           {@link Consulta}.
      * @param pTratamiento       es el {@link Tratamiento} asociado a la {@link Consulta}.
-     * @param pMascotaAtendida   es la {@link Mascota} atendida durante la {@link Consulta}.
      */
     public Consulta(int pCodigo,
+                    Mascota pMascotaAtendida,
                     Date pFecha,
                     String pMotivo,
                     String pExamenesFisicos,
                     Veterinario pVeterinario,
                     Patologia pPatologia,
                     EnfermedadCronica pEnfermedadCronica,
-                    Tratamiento pTratamiento,
-                    String pMascotaAtendida) {
+                    Tratamiento pTratamiento) {
         mCodigo = pCodigo;
+        mMascotaAtendida = pMascotaAtendida;
         mFecha = pFecha;
         mMotivo = pMotivo;
         mExamenesFisicos = pExamenesFisicos;
@@ -148,7 +149,6 @@ public class Consulta {
         mPatologia = pPatologia;
         mEnfermedadCronica = pEnfermedadCronica;
         mTratamiento = pTratamiento;
-        mMascotaAtendida = pMascotaAtendida;
     }
 
     /**
@@ -162,7 +162,7 @@ public class Consulta {
     public Consulta(Date pFecha,
                     String pMotivo,
                     Veterinario pVeterinario,
-                    String pMascotaAtendida) {
+                    Mascota pMascotaAtendida) {
         mFecha = pFecha;
         mMotivo = pMotivo;
         mVeterinario = pVeterinario;
@@ -174,6 +174,13 @@ public class Consulta {
      */
     public int getCodigo() {
         return mCodigo;
+    }
+
+    /**
+     * Este método retorna la {@link Mascota} atendida en la {@link Consulta}.
+     */
+    public Mascota getMascotaAtendida() {
+        return mMascotaAtendida;
     }
 
     /**
@@ -223,12 +230,5 @@ public class Consulta {
      */
     public Tratamiento getTratamiento() {
         return mTratamiento;
-    }
-
-    /**
-     * Este método retorna la {@link Mascota} atendida en la {@link Consulta}.
-     */
-    public String getMascotaAtendida() {
-        return mMascotaAtendida;
     }
 }

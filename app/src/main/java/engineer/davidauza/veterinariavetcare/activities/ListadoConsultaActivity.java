@@ -182,7 +182,9 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         String motivo = jsonObject.optString("motivo");
                         String veterinario = jsonObject.optString("veterinario");
                         Veterinario veterinarioConsulta = new Veterinario(veterinario);
-                        String mascotaAtendida = jsonObject.optString("mascotaAtendida");
+                        String mascotaAtendidaString =
+                                jsonObject.optString("mascotaAtendida");
+                        Mascota mascotaAtendida = new Mascota(mascotaAtendidaString);
                         mConsultaArrayList.add(new Consulta(fecha, motivo, veterinarioConsulta,
                                 mascotaAtendida));
                         break;

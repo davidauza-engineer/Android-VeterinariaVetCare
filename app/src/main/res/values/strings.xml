@@ -80,6 +80,7 @@
 
     <!-- Strings para activity_registro_consulta.xml Inicio -->
     <string name="registro_consulta_txt_titulo">Registro Consulta</string>
+    <string name="registro_consulta_txt_mascota">Mascota Atendida</string>
     <string name="registro_consulta_txt_fecha">Fecha</string>
     <string name="registro_consulta_hint_motivo">Motivo</string>
     <string name="registro_consulta_hint_examenes_fisicos">Exámenes Físicos</string>
@@ -90,12 +91,12 @@
     <string name="registro_consulta_txt_veterinario">Veterinario</string>
     <string name="registro_consulta_txt_patologia">Patología</string>
     <string name="registro_consulta_txt_enfermedad_cronica">Enfermedad Crónica</string>
-    <string name="registro_consulta_hint_mascota">Mascota Atendida</string>
     <string name="registro_consulta_btn_registrar">Registrar</string>
     <string name="registro_consulta_toast_exito">La consulta fue registrada exitosamente</string>
     <string name="registro_consulta_toast_error">Error:</string>
     <string name="registro_consulta_txt_ayuda">Selecciona la opción correcta</string>
     <string name="registro_consulta_txt_ayuda_medicamento">Selecciona el Medicamento</string>
+    <string name="registro_consulta_txt_mascota_defecto">Desconocida</string>
     <string name="registro_consulta_txt_veterinario_defecto">Desconocido</string>
     <!-- Strings para activity_registro_consulta.xml Fin -->
 
