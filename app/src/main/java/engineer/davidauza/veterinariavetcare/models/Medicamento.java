@@ -31,13 +31,29 @@ public class Medicamento {
     private Map<Integer, String> mCodigoMedicamentoMapa;
 
     /**
+     * Almacena el valor del índice del {@link Medicamento} creado. Este índice es a su vez el
+     * código del {@link Medicamento}.
+     */
+    private int mIndice;
+
+    /**
      * Constructor para crear un nuevo objeto {@link Medicamento}.
      *
-     * @param pIndiceMedicamento
+     * @param pIndiceMedicamento es el índice del {@link Medicamento} donde se buscará el nombre del
+     *                           {@link Medicamento} en el arreglo NOMBRES.
      */
     public Medicamento(Integer pIndiceMedicamento) {
+        mIndice = pIndiceMedicamento;
         mCodigoMedicamentoMapa = new HashMap<>();
-        mCodigoMedicamentoMapa.put(pIndiceMedicamento, NOMBRES[pIndiceMedicamento]);
+        mCodigoMedicamentoMapa.put(mIndice, NOMBRES[pIndiceMedicamento]);
+    }
+
+    /**
+     * Retorna el valor del índice en el arreglo NOMBRES, que a su vez es el código del
+     * {@link Medicamento}, donde se encuentra el nombre del {@link Medicamento}.
+     */
+    public int getIndice() {
+        return mIndice;
     }
 
     @Override

@@ -26,6 +26,15 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <!-- Estilo para los EditText correspondientes al Tratamiento en activity_registro_consulta.xml
+        -->
+    <style name="EditTextTratamientos" parent="EditTextRegistros">
+        <item name="android:layout_marginLeft">@dimen/margen_medio</item>
+        <item name="android:layout_marginRight">@dimen/margen_estandar</item>
+        <item name="android:inputType">number</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
     <!-- Estilo para los RadioButton de activity_registro_mascota.xml -->
     <style name="RadioButtonRegistro">
         <item name="android:layout_width">wrap_content</item>

@@ -31,11 +31,6 @@ public class Consulta {
     public static final String EXAMENES_FISICOS = "examenesFisicos"; //TODO actualizar backend.
 
     /**
-     * Llave para acceder al tratamiento asociado a la {@link Consulta} en la base de datos.
-     */
-    public static final String TRATAMIENTO = "tratamiento"; // TODO actualizar backend.
-
-    /**
      * Llave para acceder al {@link Veterinario} que realiza la {@link Consulta} en la base de
      * datos.
      */
@@ -46,6 +41,11 @@ public class Consulta {
      * datos.
      */
     public static final String PATOLOGIA = "patologia"; //TODO actualizar backend.
+
+    /**
+     * Llave para acceder al {@link Tratamiento} asociado a la {@link Consulta} en la base de datos.
+     */
+    public static final String TRATAMIENTO = "tratamiento"; // TODO actualizar backend.
 
     /**
      * Llave para acceder a la {@link Mascota} atendida en la {@link Consulta} en la base de datos.
@@ -87,11 +87,6 @@ public class Consulta {
     private String mExamenesFisicos;
 
     /**
-     * El tratamiento asociado a la {@link Consulta}.
-     */
-    private String mTratamiento; // TODO debe ser tipo Tratamiento que será una clase con varios atributos
-
-    /**
      * El {@link Veterinario} que atiende la {@link Consulta}.
      */
     private Veterinario mVeterinario;
@@ -100,6 +95,11 @@ public class Consulta {
      * La {@link Patologia} diagnosticada en la {@link Consulta} realizada.
      */
     private Patologia mPatologia;
+
+    /**
+     * El {@link Tratamiento} asociado a la {@link Consulta}.
+     */
+    private Tratamiento mTratamiento;
 
     /**
      * La {@link Mascota} atendida en la {@link Consulta}.
@@ -113,26 +113,26 @@ public class Consulta {
      * @param pFecha           es la fecha de la {@link Consulta}.
      * @param pMotivo          es el motivo de la {@link Consulta}.
      * @param pExamenesFisicos son los exámenes físicos ordenados en la {@link Consulta}.
-     * @param pTratamiento     es el tratamiento asociado a la {@link Consulta}.
      * @param pVeterinario     es el {@link Veterinario} que atendió la {@link Consulta}.
      * @param pPatologia       es la {@link Patologia} diagnosticada en la {@link Consulta}.
+     * @param pTratamiento     es el {@link Tratamiento} asociado a la {@link Consulta}.
      * @param pMascotaAtendida es la {@link Mascota} atendida durante la {@link Consulta}.
      */
     public Consulta(int pCodigo,
                     Date pFecha,
                     String pMotivo,
                     String pExamenesFisicos,
-                    String pTratamiento,
                     Veterinario pVeterinario,
                     Patologia pPatologia,
+                    Tratamiento pTratamiento,
                     String pMascotaAtendida) {
         mCodigo = pCodigo;
         mFecha = pFecha;
         mMotivo = pMotivo;
         mExamenesFisicos = pExamenesFisicos;
-        mTratamiento = pTratamiento;
         mVeterinario = pVeterinario;
         mPatologia = pPatologia;
+        mTratamiento = pTratamiento;
         mMascotaAtendida = pMascotaAtendida;
     }
 
@@ -183,13 +183,6 @@ public class Consulta {
     }
 
     /**
-     * Este método retorna el tratamiento asociado a la {@link Consulta}.
-     */
-    public String getTratamiento() {
-        return mTratamiento;
-    }
-
-    /**
      * Este método retorna el {@link Veterinario} que realizó la {@link Consulta}.
      */
     public Veterinario getVeterinario() {
@@ -201,6 +194,13 @@ public class Consulta {
      */
     public Patologia getPatologia() {
         return mPatologia;
+    }
+
+    /**
+     * Este método retorna el {@link Tratamiento} asociado a la {@link Consulta}.
+     */
+    public Tratamiento getTratamiento() {
+        return mTratamiento;
     }
 
     /**

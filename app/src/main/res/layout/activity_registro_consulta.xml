@@ -27,11 +27,6 @@
             style="@style/EditTextRegistros"
             android:hint="@string/registro_consulta_hint_examenes_fisicos" />
 
-        <EditText
-            android:id="@+id/txt_tratamiento_consulta"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_consulta_hint_tratamiento" />
-
         <TextView
             style="@style/TextViewsRegistros"
             android:text="@string/registro_consulta_txt_veterinario" />
@@ -47,6 +42,37 @@
         <Spinner
             android:id="@+id/spn_patologia_consulta"
             style="@style/SpinnersRegistros" />
+
+        <TextView
+            style="@style/TextViewsRegistros"
+            android:text="@string/registro_consulta_txt_tratamiento" />
+
+        <Spinner
+            android:id="@+id/spn_medicamento_consulta"
+            style="@style/SpinnersRegistros" />
+
+        <EditText
+            android:id="@+id/txt_dosis_consulta"
+            style="@style/EditTextTratamientos"
+            android:hint="@string/registro_consulta_txt_tratamiento_dosis"
+            android:maxLength="4" />
+
+        <EditText
+            android:id="@+id/txt_frecuencia_consulta"
+            style="@style/EditTextTratamientos"
+            android:hint="@string/registro_consulta_txt_tratamiento_frecuencia"
+            android:maxLength="2" />
+
+        <EditText
+            android:id="@+id/txt_cantidad_dias_consulta"
+            style="@style/EditTextTratamientos"
+            android:hint="@string/registro_consulta_txt_tratamiento_cantidad_dias"
+            android:maxLength="3" />
+
+        <EditText
+            android:id="@+id/txt_tratamiento_consulta"
+            style="@style/EditTextRegistros"
+            android:hint="@string/registro_consulta_txt_tratamiento" />
 
         <EditText
             android:id="@+id/txt_patologia_asociada_consulta"

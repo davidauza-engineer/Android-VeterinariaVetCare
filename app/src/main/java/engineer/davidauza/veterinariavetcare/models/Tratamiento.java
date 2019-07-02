@@ -61,7 +61,20 @@ public class Tratamiento {
     /**
      * Retorna la cantidad de días especificada para el {@link Tratamiento}.
      */
-    public byte getmCantidadDeDias() {
+    public byte getCantidadDeDias() {
         return mCantidadDeDias;
+    }
+
+    @Override
+    public String toString() {
+        int indice = getMedicamento().getIndice();
+        if (indice == 22) {
+            return Medicamento.NOMBRES[22];
+        } else {
+            return "Medicamento: " + Medicamento.NOMBRES[indice] +
+                    "\nDosis en mg: " + getDosisMg() +
+                    "\nFrecuencia en horas: " + getFrecuenciaHoras() +
+                    "\nCantidad de días: " + getCantidadDeDias();
+        }
     }
 }

@@ -2,6 +2,7 @@ package engineer.davidauza.veterinariavetcare.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,8 +43,10 @@ import engineer.davidauza.veterinariavetcare.models.Dueno;
 import engineer.davidauza.veterinariavetcare.models.Especie;
 import engineer.davidauza.veterinariavetcare.models.Felino;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
+import engineer.davidauza.veterinariavetcare.models.Medicamento;
 import engineer.davidauza.veterinariavetcare.models.Patologia;
 import engineer.davidauza.veterinariavetcare.models.Roedor;
+import engineer.davidauza.veterinariavetcare.models.Tratamiento;
 import engineer.davidauza.veterinariavetcare.models.Veterinario;
 
 /**
@@ -231,6 +234,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
                 cargarWebService(Veterinario.URL_GET);
                 configurarSpinner(R.id.spn_veterinario_consulta);
                 configurarSpinner(R.id.spn_patologia_consulta);
+                configurarSpinner(R.id.spn_medicamento_consulta);
                 break;
             default:
                 finish();
@@ -650,8 +654,43 @@ public class RegistroFormularioActivity extends AppCompatActivity
         EditText examenesFisicosEditText = findViewById(R.id.txt_examenes_fisicos_consulta);
         String examenesFisicos = examenesFisicosEditText.getText().toString();
         // Obtener tratamiento
-        EditText tratamientoEditText = findViewById(R.id.txt_tratamiento_consulta);
-        String tratamiento = tratamientoEditText.getText().toString();
+        // Obtener medicamento
+        Spinner medicamentoSpinner = findViewById(R.id.spn_medicamento_consulta);
+        int posicionMedicamentoSeleccionado = medicamentoSpinner.getSelectedItemPosition();
+        if (posicionMedicamentoSeleccionado == 0) {
+            posicionMedicamentoSeleccionado = 22;
+        } else {
+            posicionMedicamentoSeleccionado -= 1;
+        }
+        Medicamento medicamento = new Medicamento(posicionMedicamentoSeleccionado);
+        // Obtener dosis en mg
+        EditText dosisEditText = findViewById(R.id.txt_dosis_consulta);
+        byte dosis = 0;
+        if (dosisEditText.getVisibility() == View.VISIBLE) {
+            String dosisString = dosisEditText.getText().toString();
+            if (!dosisString.equals("")) {
+                dosis = Byte.parseByte(dosisString);
+            }
+        }
+        // Obtener frecuencia en horas
+        EditText frecuenciaEditText = findViewById(R.id.txt_frecuencia_consulta);
+        byte frecuencia = 0;
+        if (frecuenciaEditText.getVisibility() == View.VISIBLE) {
+            String frecuenciaString = frecuenciaEditText.getText().toString();
+            if (!frecuenciaString.equals("")) {
+                frecuencia = Byte.parseByte(frecuenciaString);
+            }
+        }
+        // Obtener cantid de días del Tratamiento
+        EditText diasEditText = findViewById(R.id.txt_cantidad_dias_consulta);
+        byte diasTratamiento = 0;
+        if (diasEditText.getVisibility() == View.VISIBLE) {
+            String diasString = diasEditText.getText().toString();
+            if (!diasString.equals("")) {
+                diasTratamiento = Byte.parseByte(diasString);
+            }
+        }
+        Tratamiento tratamiento = new Tratamiento(medicamento, dosis, frecuencia, diasTratamiento);
         // Obtener veterinario que atendió la consulta
         Spinner spinnerVeterinario = findViewById(R.id.spn_veterinario_consulta);
         Veterinario veterinarioConsulta = new Veterinario(mVeterinariosConsulta.
@@ -675,8 +714,8 @@ public class RegistroFormularioActivity extends AppCompatActivity
         EditText mascotaAtenidaEditText = findViewById(R.id.txt_mascota_atendida_consulta);
         String mascotaAtendida = mascotaAtenidaEditText.getText().toString();
         // Crear Consulta
-        mConsulta = new Consulta(codigo, fecha, motivo, examenesFisicos, tratamiento,
-                veterinarioConsulta, patologia, mascotaAtendida);
+        mConsulta = new Consulta(codigo, fecha, motivo, examenesFisicos, veterinarioConsulta,
+                patologia, tratamiento, mascotaAtendida);
     }
 
     /**
@@ -693,7 +732,8 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Consulta.PATOLOGIA, mConsulta.getPatologia().toString());
         parametros.put(Consulta.VETERINARIO, mConsulta.getVeterinario().getNombre());
         parametros.put(Consulta.EXAMENES_FISICOS, mConsulta.getExamenesFisicos());
-        parametros.put(Consulta.TRATAMIENTO, mConsulta.getTratamiento());
+        parametros.put(Consulta.TRATAMIENTO, mConsulta.getTratamiento().toString());
+        Log.e("Tratamiento: ", mConsulta.getTratamiento().toString());
         parametros.put(Consulta.MASCOTA_ATENDIDA, mConsulta.getMascotaAtendida());
         return parametros;
     }
@@ -771,6 +811,44 @@ public class RegistroFormularioActivity extends AppCompatActivity
             // Spinner
             adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
                     android.R.layout.simple_spinner_item, arregloPatologias);
+        } else if (pSpinner == R.id.spn_medicamento_consulta) {
+            String[] arregloMedicamentos = new String[Medicamento.NOMBRES.length + 1];
+            arregloMedicamentos[0] = getString(R.string.registro_consulta_txt_ayuda_medicamento);
+            System.arraycopy(Medicamento.NOMBRES, 0, arregloMedicamentos, 1,
+                    Medicamento.NOMBRES.length);
+            // Creación de ArrayAdapter usando el array de Strings y un diseño por defecto para el
+            // Spinner
+            adaptador = new ArrayAdapter<>(RegistroFormularioActivity.this,
+                    android.R.layout.simple_spinner_item, arregloMedicamentos);
+            // Configurar escucha para esconder o mostrar los campos del Tratamiento según se escoja
+            // o no un Medicamento.
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                           long id) {
+                    EditText dosisEditText = findViewById(R.id.txt_dosis_consulta);
+                    EditText frecuenciaEditText = findViewById(R.id.txt_frecuencia_consulta);
+                    EditText diasEditText = findViewById(R.id.txt_cantidad_dias_consulta);
+                    if (position == 0 || position == 23) {
+                        if (dosisEditText.getVisibility() == View.VISIBLE) {
+                            dosisEditText.setVisibility(View.GONE);
+                            frecuenciaEditText.setVisibility(View.GONE);
+                            diasEditText.setVisibility(View.GONE);
+                        }
+                    } else {
+                        if (dosisEditText.getVisibility() == View.GONE) {
+                            dosisEditText.setVisibility(View.VISIBLE);
+                            frecuenciaEditText.setVisibility(View.VISIBLE);
+                            diasEditText.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
         // Especificar el diseño que se usará cuando aparece la lista de opciones
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
