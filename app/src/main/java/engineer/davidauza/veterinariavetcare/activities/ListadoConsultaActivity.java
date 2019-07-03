@@ -29,10 +29,13 @@ import engineer.davidauza.veterinariavetcare.models.Ave;
 import engineer.davidauza.veterinariavetcare.models.Canino;
 import engineer.davidauza.veterinariavetcare.models.Consulta;
 import engineer.davidauza.veterinariavetcare.models.Dueno;
+import engineer.davidauza.veterinariavetcare.models.EnfermedadCronica;
 import engineer.davidauza.veterinariavetcare.models.Especie;
 import engineer.davidauza.veterinariavetcare.models.Felino;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
+import engineer.davidauza.veterinariavetcare.models.Patologia;
 import engineer.davidauza.veterinariavetcare.models.Roedor;
+import engineer.davidauza.veterinariavetcare.models.Tratamiento;
 import engineer.davidauza.veterinariavetcare.models.Veterinario;
 
 /**
@@ -202,16 +205,28 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         break;
                     // Si están consultando las consultas
                     case 2:
-                        String fechaString = jsonObject.optString("fecha");
-                        Date fecha = construirFecha(fechaString);
-                        String motivo = jsonObject.optString("motivo");
-                        String veterinario = jsonObject.optString("veterinario");
-                        Veterinario veterinarioConsulta = new Veterinario(veterinario);
+                        String codigoString = jsonObject.optString(Consulta.CODIGO);
+                        int codigo = Integer.parseInt(codigoString);
                         String mascotaAtendidaString =
-                                jsonObject.optString("mascotaAtendida");
+                                jsonObject.optString(Consulta.MASCOTA_ATENDIDA);
                         Mascota mascotaAtendida = new Mascota(mascotaAtendidaString);
-                        mConsultaArrayList.add(new Consulta(fecha, motivo, veterinarioConsulta,
-                                mascotaAtendida));
+                        String fechaString = jsonObject.optString(Consulta.FECHA);
+                        Date fecha = construirFecha(fechaString);
+                        String motivo = jsonObject.optString(Consulta.MOTIVO);
+                        String examenesFisicos = jsonObject.optString(Consulta.EXAMENES_FISICOS);
+                        String veterinarioString = jsonObject.optString(Consulta.VETERINARIO);
+                        Veterinario veterinario = new Veterinario(veterinarioString);
+                        String patologiaString = jsonObject.optString(Consulta.PATOLOGIA);
+                        Patologia patologia = new Patologia(patologiaString);
+                        String enfermedadCronicaString =
+                                jsonObject.optString(Consulta.ENFERMEDAD_CRONICA);
+                        EnfermedadCronica enfermedadCronica =
+                                new EnfermedadCronica(enfermedadCronicaString);
+                        String tratamientoString = jsonObject.optString(Consulta.TRATAMIENTO);
+                        Tratamiento tratamiento = new Tratamiento(tratamientoString);
+                        mConsultaArrayList.add(new Consulta(codigo, mascotaAtendida, fecha, motivo,
+                                examenesFisicos, veterinario, patologia, enfermedadCronica,
+                                tratamiento));
                         break;
                 }
             }

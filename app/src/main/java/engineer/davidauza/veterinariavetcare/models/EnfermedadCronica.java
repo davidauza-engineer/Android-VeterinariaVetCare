@@ -23,4 +23,14 @@ public class EnfermedadCronica extends Patologia {
     public EnfermedadCronica(Integer pIndiceEnfermedadCronica, String[] pArregloDeNombres) {
         super(pIndiceEnfermedadCronica, pArregloDeNombres);
     }
+
+    /**
+     * Constructor para crear un nuevo objeto {@link EnfermedadCronica}.
+     *
+     * @param pDescripcionEnfermedadCronica es la descripción de la {@link EnfermedadCronica} en
+     *                                      forma de String.
+     */
+    public EnfermedadCronica(String pDescripcionEnfermedadCronica) {
+        super(pDescripcionEnfermedadCronica);
+    }
 }

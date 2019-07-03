@@ -27,6 +27,20 @@ public class Tratamiento {
      */
     private byte mCantidadDeDias;
 
+    /**
+     * Es la descripción del {@link Tratamiento} en forma de String.
+     */
+    private String mDescripcion;
+
+    /**
+     * Constructor para crear un nuevo objeto {@link Tratamiento}.
+     *
+     * @param pMedicamento     es el {@link Medicamento} recetado en la {@link Consulta}.
+     * @param pDosisMg         es la dosis del {@link Medicamento} recetado en la {@link Consulta}.
+     * @param pFrecuenciaHoras es la frecuencia en horas que se debe tomar el {@link Medicamento}.
+     * @param pCantidadDeDias  es la cantidad de días en los que el {@link Tratamiento} debe ser
+     *                         aplicado.
+     */
     public Tratamiento(Medicamento pMedicamento,
                        byte pDosisMg,
                        byte pFrecuenciaHoras,
@@ -35,6 +49,15 @@ public class Tratamiento {
         mDosisMg = pDosisMg;
         mFrecuenciaHoras = pFrecuenciaHoras;
         mCantidadDeDias = pCantidadDeDias;
+    }
+
+    /**
+     * Constructor para crear un nuevo objeto {@link Tratamiento}.
+     *
+     * @param pDescripcion es la descripción del {@link Tratamiento} en forma de String.
+     */
+    public Tratamiento(String pDescripcion) {
+        mDescripcion = pDescripcion;
     }
 
     /**
@@ -63,6 +86,13 @@ public class Tratamiento {
      */
     public byte getCantidadDeDias() {
         return mCantidadDeDias;
+    }
+
+    /**
+     * Retorna la descripción del {@link Tratamiento} en forma de String.
+     */
+    public String getDescripcion() {
+        return mDescripcion;
     }
 
     @Override

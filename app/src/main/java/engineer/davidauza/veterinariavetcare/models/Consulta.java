@@ -152,24 +152,6 @@ public class Consulta {
     }
 
     /**
-     * Constructor para crear un nuevo objeto {@link Consulta}.
-     *
-     * @param pFecha           es la fecha de la {@link Consulta}.
-     * @param pMotivo          es el motivo de la {@link Consulta}.
-     * @param pVeterinario     es el {@link Veterinario} que atendió la {@link Consulta}.
-     * @param pMascotaAtendida es la {@link Mascota} atendida durante la {@link Consulta}.
-     */
-    public Consulta(Date pFecha,
-                    String pMotivo,
-                    Veterinario pVeterinario,
-                    Mascota pMascotaAtendida) {
-        mFecha = pFecha;
-        mMotivo = pMotivo;
-        mVeterinario = pVeterinario;
-        mMascotaAtendida = pMascotaAtendida;
-    }
-
-    /**
      * Este método retorna el código de la {@link Consulta}.
      */
     public int getCodigo() {

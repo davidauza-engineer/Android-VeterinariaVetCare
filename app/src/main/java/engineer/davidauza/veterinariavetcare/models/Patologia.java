@@ -25,6 +25,11 @@ public class Patologia {
     private Map<Integer, String> mCodigoPatologiaMapa;
 
     /**
+     * String que almacena la {@link Patologia} como String.
+     */
+    private String mDescripcion;
+
+    /**
      * Constructor para crear un nuevo objeto {@link Patologia}.
      *
      * @param pIndicePatologia  es el índice de la {@link Patologia} seleccionada en la interfaz
@@ -34,6 +39,22 @@ public class Patologia {
     public Patologia(Integer pIndicePatologia, String[] pArregloDeNombres) {
         mCodigoPatologiaMapa = new HashMap<>();
         mCodigoPatologiaMapa.put(pIndicePatologia, pArregloDeNombres[pIndicePatologia]);
+    }
+
+    /**
+     * Constructor para crear un nuevo objeto {@link Patologia}.
+     *
+     * @param pDescripcion es la descripción de la {@link Patologia} en forma de String.
+     */
+    public Patologia(String pDescripcion) {
+        mDescripcion = pDescripcion;
+    }
+
+    /**
+     * Retorna la descripción de la {@link Patologia} en forma de String.
+     */
+    public String getDescripcion() {
+        return mDescripcion;
     }
 
     @Override

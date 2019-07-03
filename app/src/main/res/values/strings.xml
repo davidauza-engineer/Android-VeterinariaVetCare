@@ -127,10 +127,15 @@
 
 
     <!-- Strings para item_consulta.xml Inicio -->
+    <string name="item_consulta_txt_codigo">Código:</string>
+    <string name="item_consulta_txt_mascota">Mascota Atendida:</string>
     <string name="item_consulta_txt_fecha">Fecha:</string>
     <string name="item_consulta_txt_motivo">Motivo:</string>
+    <string name="item_consulta_txt_examenes">Exámenes Físicos:</string>
     <string name="item_consulta_txt_veterinario">Veterinario:</string>
-    <string name="item_consulta_txt_mascota_atendida">Mascota Atendida:</string>
+    <string name="item_consulta_txt_patologia">Patología:</string>
+    <string name="item_consulta_txt_enfermedad_cronica">Enfermedad Crónica:</string>
+    <string name="item_consulta_txt_tratamiento">Tratamiento:</string>
     <!-- Strings para item_veterinario.xml Fin -->
 
 

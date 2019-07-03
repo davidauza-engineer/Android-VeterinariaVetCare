@@ -7,13 +7,39 @@
 
         <TextView
             style="@style/TituloItems"
+            android:text="@string/item_consulta_txt_codigo" />
+
+        <TextView
+            android:id="@+id/txt_codigo_consulta"
+            style="@style/TituloItems"
+            android:layout_marginLeft="@dimen/margen_medio"
+            tools:text="999999" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
+            android:text="@string/item_consulta_txt_mascota" />
+
+        <TextView
+            android:id="@+id/txt_mascota_atendida_consulta"
+            style="@style/TextoContenidoItems"
+            tools:text="Luke Skywalker" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
             android:text="@string/item_consulta_txt_fecha" />
 
         <TextView
             android:id="@+id/txt_fecha_consulta"
-            style="@style/TituloItems"
-            android:layout_marginLeft="@dimen/margen_medio"
-            tools:text="14/6/2019" />
+            style="@style/TextoContenidoItems"
+            tools:text="02/07/2019" />
 
     </LinearLayout>
 
@@ -26,7 +52,20 @@
         <TextView
             android:id="@+id/txt_motivo_consulta"
             style="@style/TextoContenidoItems"
-            tools:text="Chequeo general" />
+            tools:text="Chequeo General" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
+            android:text="@string/item_consulta_txt_examenes" />
+
+        <TextView
+            android:id="@+id/txt_examenes_consulta"
+            style="@style/TextoContenidoItems"
+            tools:text="Cuadro Hemático" />
 
     </LinearLayout>
 
@@ -39,7 +78,7 @@
         <TextView
             android:id="@+id/txt_veterinario_consulta"
             style="@style/TextoContenidoItems"
-            tools:text="David R. Auza" />
+            tools:text="David Auza" />
 
     </LinearLayout>
 
@@ -47,12 +86,38 @@
 
         <TextView
             style="@style/TextoAyudaItems"
-            android:text="@string/item_consulta_txt_mascota_atendida" />
+            android:text="@string/item_consulta_txt_patologia" />
 
         <TextView
-            android:id="@+id/txt_mascota_atendida_consulta"
+            android:id="@+id/txt_patologia_consulta"
             style="@style/TextoContenidoItems"
-            tools:text="Luke Skywalker" />
+            tools:text="Brucelosis" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
+            android:text="@string/item_consulta_txt_enfermedad_cronica" />
+
+        <TextView
+            android:id="@+id/txt_enfermedad_cronica_consulta"
+            style="@style/TextoContenidoItems"
+            tools:text="Brucelosis" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
+            android:text="@string/item_consulta_txt_tratamiento" />
+
+        <TextView
+            android:id="@+id/txt_tratamiento_consulta"
+            style="@style/TextoContenidoItems"
+            tools:text="Ninguno" />
 
     </LinearLayout>
 
