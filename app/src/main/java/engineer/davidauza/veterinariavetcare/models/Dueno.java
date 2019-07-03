@@ -48,6 +48,15 @@ public class Dueno extends Persona {
         mMascotaFechaMapa.put(llaveMascota, fechaRegistro);
     }
 
+    /**
+     * Constructor para crear un nuevo objeto {@link Dueno}.
+     *
+     * @param pNombre es el nombre del {@link Dueno}.
+     */
+    public Dueno(String pNombre) {
+        super(pNombre);
+    }
+
     @Override
     public String toString() {
         return "ID: " + getId() +

@@ -159,18 +159,30 @@ public class Mascota {
      * Constructor para crear un nuevo objeto {@link Mascota}.
      *
      * @param pNombre            es el nombre de la {@link Mascota}.
-     * @param pFechaDeNacimiento es la fecha de nacimiento de la {@link Mascota}.
      * @param pSexo              es el sexo de la {@link Mascota}.
+     * @param pFechaDeNacimiento es la fecha de nacimiento de la {@link Mascota}.
+     * @param pPadre             es el padre de la {@link Mascota}.
+     * @param pMadre             es la madre de la {@link Mascota}.
      * @param pEspecie           es la {@link Especie} de la {@link Mascota}.
+     * @param pRaza              es la raza de la {@link Mascota}.
+     * @param pDuenoActual       es el {@link Dueno} actual de la {@link Mascota}.
      */
     public Mascota(String pNombre,
-                   Date pFechaDeNacimiento,
                    boolean pSexo,
-                   Especie pEspecie) {
+                   Date pFechaDeNacimiento,
+                   Mascota pPadre,
+                   Mascota pMadre,
+                   Especie pEspecie,
+                   String pRaza,
+                   Dueno pDuenoActual) {
         mNombre = pNombre;
-        mFechaDeNacimiento = pFechaDeNacimiento;
         mSexo = pSexo;
+        mFechaDeNacimiento = pFechaDeNacimiento;
+        mPadre = pPadre;
+        mMadre = pMadre;
         mEspecie = pEspecie;
+        mRaza = pRaza;
+        mDuenoActual = pDuenoActual;
     }
 
     /**

@@ -21,6 +21,19 @@
 
         <TextView
             style="@style/TextoAyudaItems"
+            android:text="@string/item_mascota_txt_sexo" />
+
+        <TextView
+            android:id="@+id/txt_sexo_mascota"
+            style="@style/TextoContenidoItems"
+            tools:text="Masculino" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
             android:text="@string/item_mascota_txt_fecha_de_nacimiento" />
 
         <TextView
@@ -34,17 +47,29 @@
 
         <TextView
             style="@style/TextoAyudaItems"
-            android:text="@string/item_mascota_txt_sexo" />
+            android:text="@string/item_mascota_txt_padre" />
 
         <TextView
-            android:id="@+id/txt_sexo_mascota"
+            android:id="@+id/txt_padre_mascota"
             style="@style/TextoContenidoItems"
-            tools:text="Masculino" />
+            tools:text="Anakin Skywalker" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
+            android:text="@string/item_mascota_txt_madre" />
+
+        <TextView
+            android:id="@+id/txt_madre_mascota"
+            style="@style/TextoContenidoItems"
+            tools:text="Padmé Amidala" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
 
         <TextView
             style="@style/TextoAyudaItems"
@@ -54,6 +79,32 @@
             android:id="@+id/txt_especie_mascota"
             style="@style/TextoContenidoItems"
             tools:text="Canino" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
+            android:text="@string/item_mascota_txt_raza" />
+
+        <TextView
+            android:id="@+id/txt_raza_mascota"
+            style="@style/TextoContenidoItems"
+            tools:text="Springer Spaniel" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearLayoutsHorizontalesItems">
+
+        <TextView
+            style="@style/TextoAyudaItems"
+            android:text="@string/item_mascota_txt_dueno_actual" />
+
+        <TextView
+            android:id="@+id/txt_dueno_actual_mascota"
+            style="@style/TextoContenidoItems"
+            tools:text="David Auza" />
 
     </LinearLayout>
 

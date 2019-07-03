@@ -28,6 +28,7 @@ import engineer.davidauza.veterinariavetcare.adapters.VeterinarioAdapter;
 import engineer.davidauza.veterinariavetcare.models.Ave;
 import engineer.davidauza.veterinariavetcare.models.Canino;
 import engineer.davidauza.veterinariavetcare.models.Consulta;
+import engineer.davidauza.veterinariavetcare.models.Dueno;
 import engineer.davidauza.veterinariavetcare.models.Especie;
 import engineer.davidauza.veterinariavetcare.models.Felino;
 import engineer.davidauza.veterinariavetcare.models.Mascota;
@@ -102,16 +103,20 @@ public class ListadoConsultaActivity extends AppCompatActivity
                 switch (mConsultaSeleccionadaSpinner) {
                     // Si se están consultando las mascotas
                     case 0:
-                        String nombreMascota = jsonObject.optString("nombre");
-                        String fechaDeNacimientoString =
-                                jsonObject.optString("fechaDeNacimiento");
-                        Date fechaDeNacimiento = construirFecha(fechaDeNacimientoString);
-                        String sexoString = jsonObject.optString("sexo");
+                        String nombreMascota = jsonObject.optString(Mascota.NOMBRE);
+                        String sexoString = jsonObject.optString(Mascota.SEXO);
                         boolean sexo = false;
                         if (sexoString.
                                 equals(getString(R.string.registro_mascota_txt_sexo_masculino))) {
                             sexo = true;
                         }
+                        String fechaDeNacimientoString =
+                                jsonObject.optString(Mascota.FECHA_DE_NACIMIENTO);
+                        Date fechaDeNacimiento = construirFecha(fechaDeNacimientoString);
+                        String padreString = jsonObject.optString(Mascota.PADRE);
+                        Mascota padre = new Mascota(padreString);
+                        String madreString = jsonObject.optString(Mascota.MADRE);
+                        Mascota madre = new Mascota(madreString);
                         String especieString = jsonObject.optString("especie");
                         Especie especie = null;
                         switch (especieString) {
@@ -131,8 +136,12 @@ public class ListadoConsultaActivity extends AppCompatActivity
                                 especie = new Especie();
                                 break;
                         }
-                        mMascotasArrayList.add(new Mascota(nombreMascota, fechaDeNacimiento,
-                                sexo, especie));
+                        String raza = jsonObject.optString(Mascota.RAZA);
+                        String duenoActualString = jsonObject.optString(Mascota.DUENO_ACTUAL);
+                        Dueno duenoActual = new Dueno(duenoActualString);
+                        String historialDuenos = jsonObject.getString(Mascota.DUENOS);
+                        mMascotasArrayList.add(new Mascota(nombreMascota, sexo, fechaDeNacimiento,
+                                padre, madre, especie, raza, duenoActual));
                         break;
                     // Si se están consultando los veterinarios
                     case 1:

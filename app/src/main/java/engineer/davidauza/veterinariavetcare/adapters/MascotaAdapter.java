@@ -67,15 +67,19 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MyViewHo
 
         // Reemplazar el contenido del View con dicho elemento
         myViewHolder.mNombreMascota.setText(mascotaActual.getNombre());
-        // Dar formato a la fecha
-        String fechaDeNacimiento = FORMATO.format(mascotaActual.getFechaDeNacimiento());
-        myViewHolder.mFechaDeNacimientoMascota.setText(fechaDeNacimiento);
         String sexo = mContexto.getString(R.string.registro_mascota_txt_sexo_femenino);
         if (mascotaActual.getSexo()) {
             sexo = mContexto.getString(R.string.registro_mascota_txt_sexo_masculino);
         }
         myViewHolder.mSexoMascota.setText(sexo);
+        // Dar formato a la fecha
+        String fechaDeNacimiento = FORMATO.format(mascotaActual.getFechaDeNacimiento());
+        myViewHolder.mFechaDeNacimientoMascota.setText(fechaDeNacimiento);
+        myViewHolder.mPadreMascota.setText(mascotaActual.getPadre().getNombre());
+        myViewHolder.mMadreMascota.setText(mascotaActual.getMadre().getNombre());
         myViewHolder.mEspecieMascota.setText(mascotaActual.getEspecie().getNombre());
+        myViewHolder.mRazaMascota.setText(mascotaActual.getRaza());
+        myViewHolder.mDuenoActualMascota.setText(mascotaActual.getDuenoActual().getNombre());
     }
 
     /**
@@ -102,27 +106,51 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.MyViewHo
         public TextView mNombreMascota;
 
         /**
+         * El TextView que muestra el sexo de la {@link Mascota}.
+         */
+        public TextView mSexoMascota;
+
+        /**
          * El TextView que muestra la fecha de nacimiento de la {@link Mascota}.
          */
         public TextView mFechaDeNacimientoMascota;
 
         /**
-         * El TextView que muestra el sexo de la {@link Mascota}.
+         * El TextView que muestra el padre de la {@link Mascota}.
          */
-        public TextView mSexoMascota;
+        public TextView mPadreMascota;
+
+        /**
+         * El TextView que muestra la madre de la {@link Mascota}.
+         */
+        public TextView mMadreMascota;
 
         /**
          * El TextView que muestra la especie de la {@link Mascota}.
          */
         public TextView mEspecieMascota;
 
+        /**
+         * El TextView que muestra la raza de la {@link Mascota}.
+         */
+        public TextView mRazaMascota;
+
+        /**
+         * El TextView que muestra el dueño actual de la {@link Mascota}.
+         */
+        public TextView mDuenoActualMascota;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
             mNombreMascota = itemView.findViewById(R.id.txt_nombre_mascota);
-            mFechaDeNacimientoMascota = itemView.findViewById(R.id.txt_fecha_de_nacimiento_mascota);
             mSexoMascota = itemView.findViewById(R.id.txt_sexo_mascota);
+            mFechaDeNacimientoMascota = itemView.findViewById(R.id.txt_fecha_de_nacimiento_mascota);
+            mPadreMascota = itemView.findViewById(R.id.txt_padre_mascota);
+            mMadreMascota = itemView.findViewById(R.id.txt_madre_mascota);
             mEspecieMascota = itemView.findViewById(R.id.txt_especie_mascota);
+            mRazaMascota = itemView.findViewById(R.id.txt_raza_mascota);
+            mDuenoActualMascota = itemView.findViewById(R.id.txt_dueno_actual_mascota);
         }
     }
 }

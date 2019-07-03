@@ -106,7 +106,11 @@
     <string name="item_mascota_txt_nombre">Nombre:</string>
     <string name="item_mascota_txt_sexo">Sexo:</string>
     <string name="item_mascota_txt_fecha_de_nacimiento">Fecha de Nacimiento:</string>
+    <string name="item_mascota_txt_padre">Padre:</string>
+    <string name="item_mascota_txt_madre">Madre:</string>
     <string name="item_mascota_txt_especie">Especie:</string>
+    <string name="item_mascota_txt_raza">Raza:</string>
+    <string name="item_mascota_txt_dueno_actual">Dueño Actual:</string>
     <!-- Strings para item_mascota.xml Fin -->
 
 
