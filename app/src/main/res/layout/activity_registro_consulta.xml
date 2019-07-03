@@ -11,6 +11,7 @@
 
         <TextView
             style="@style/TextViewsRegistros"
+            android:layout_marginTop="@dimen/margen_doble"
             android:text="@string/registro_consulta_txt_mascota" />
 
         <Spinner
@@ -84,26 +85,6 @@
             style="@style/EditTextTratamientos"
             android:hint="@string/registro_consulta_txt_tratamiento_cantidad_dias"
             android:maxLength="3" />
-
-        <EditText
-            android:id="@+id/txt_tratamiento_consulta"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_consulta_txt_tratamiento" />
-
-        <EditText
-            android:id="@+id/txt_patologia_asociada_consulta"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_consulta_txt_patologia" />
-
-        <EditText
-            android:id="@+id/txt_veterinario_consulta"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_consulta_txt_veterinario" />
-
-        <EditText
-            android:id="@+id/txt_mascota_atendida_consulta"
-            style="@style/EditTextRegistros"
-            android:hint="@string/registro_consulta_txt_mascota" />
 
         <Button
             android:id="@+id/btn_registrar"

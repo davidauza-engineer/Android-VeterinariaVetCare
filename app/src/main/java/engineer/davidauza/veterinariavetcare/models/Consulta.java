@@ -12,7 +12,7 @@ public class Consulta {
     /**
      * Llave para acceder al cógigo de la {@link Consulta} en la base de datos.
      */
-    public static final String CODIGO = "codigo"; // TODO Actualizar en el backend
+    public static final String CODIGO = "codigo";
 
     /**
      * Llave para acceder a la {@link Mascota} atendida en la {@link Consulta} en la base de datos.
@@ -33,7 +33,7 @@ public class Consulta {
      * Llave para acceder a los examenes físicos relacionados con la {@link Consulta} en la base de
      * datos.
      */
-    public static final String EXAMENES_FISICOS = "examenesFisicos"; //TODO actualizar backend.
+    public static final String EXAMENES_FISICOS = "examenesFisicos";
 
     /**
      * Llave para acceder al {@link Veterinario} que realiza la {@link Consulta} en la base de
@@ -45,25 +45,25 @@ public class Consulta {
      * Llave para acceder a la {@link Patologia} diagnosticada en la {@link Consulta} en la base de
      * datos.
      */
-    public static final String PATOLOGIA = "patologia"; //TODO actualizar backend.
+    public static final String PATOLOGIA = "patologia";
 
     /**
      * Llave para acceder a la {@link EnfermedadCronica} diagnosticada en la {@link Consulta} en la
      * base de datos.
      */
-    public static final String ENFERMEDAD_CRONICA = "enfermedadCronica"; // TODO actualizar backend.
+    public static final String ENFERMEDAD_CRONICA = "enfermedadCronica";
 
     /**
      * Llave para acceder al {@link Tratamiento} asociado a la {@link Consulta} en la base de datos.
      */
-    public static final String TRATAMIENTO = "tratamiento"; // TODO actualizar backend.
+    public static final String TRATAMIENTO = "tratamiento";
 
     /**
      * Contiene la URL necesaria para acceder al microservicio que permite registrar nuevas
      * {@link Consulta}s.
      */
     public static final String URL_SET =
-            "https://davidauza-engineer.000webhostapp.com/web_service/set_consulta.php";
+            "https://davidauza-engineer.000webhostapp.com/web_service/set_consulta_final.php";
 
     /**
      * Contiene la URL necesaria para acceder al microservicio que permite consultar las

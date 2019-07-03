@@ -109,11 +109,6 @@ public class RegistroFormularioActivity extends AppCompatActivity
     private Consulta mConsulta;
 
     /**
-     * Esta variable almacena el objeto {@link Dueno} que será registrado en la base de datos.
-     */
-    private Dueno mDueno;
-
-    /**
      * Esta variable almacena la posición seleccionada en el Spinner en activity_seleccionn.xml.
      * 0 indica que se cargue la interfaz gráfica para registrar una {@link Mascota}.
      * 1 indica que se cargue la interfaz gráfica para registrar un {@link Veterinario}.
@@ -412,9 +407,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Crear mascota
         mMascota = new Mascota(id, nombre, sexo, fechaDeNacimiento, padre, madre, especie, raza);
         // Crea Dueño y asignárselo a la Mascota.
-        mDueno = crearDueno();
+        Dueno dueno = crearDueno();
         ArrayList<Dueno> duenos = new ArrayList<>();
-        duenos.add(mDueno);
+        duenos.add(dueno);
         mMascota.setDuenos(duenos);
     }
 
@@ -630,6 +625,11 @@ public class RegistroFormularioActivity extends AppCompatActivity
         // Obtener mascota atendida
         Spinner spinnerMascota = findViewById(R.id.spn_mascota_atendida_consulta);
         int posicionMascota = spinnerMascota.getSelectedItemPosition();
+        // Si el usuario no ha seleccionado ninguna de las mascotas registradas, registrar la opción
+        // "Desconocida".
+        if (posicionMascota == 0) {
+            posicionMascota = 1;
+        }
         Mascota mascotaAtendida = new Mascota(mMascotasTodas.get(posicionMascota));
         // Obtener fecha
         Date fecha = obtenerFecha(R.id.dte_fecha);
@@ -641,8 +641,13 @@ public class RegistroFormularioActivity extends AppCompatActivity
         String examenesFisicos = examenesFisicosEditText.getText().toString();
         // Obtener veterinario que atendió la consulta
         Spinner spinnerVeterinario = findViewById(R.id.spn_veterinario_consulta);
-        Veterinario veterinarioConsulta = new Veterinario(mVeterinariosConsulta.
-                get(spinnerVeterinario.getSelectedItemPosition()));
+        int posicionVeterinario = spinnerVeterinario.getSelectedItemPosition();
+        // Si el usuario no ha seleccionado ningún Veterinario, selecionar la opción "Desconocido"
+        if (posicionVeterinario == 0) {
+            posicionVeterinario = 1;
+        }
+        Veterinario veterinarioConsulta =
+                new Veterinario(mVeterinariosConsulta.get(posicionVeterinario));
         // Obtener patología
         Spinner spinnerPatologia = findViewById(R.id.spn_patologia_consulta);
         int posicion = spinnerPatologia.getSelectedItemPosition();
@@ -720,6 +725,7 @@ public class RegistroFormularioActivity extends AppCompatActivity
     private Map<String, String> crearParametrosConsulta() {
         Map<String, String> parametros = new HashMap<>();
         parametros.put(Consulta.CODIGO, Integer.toString(mConsulta.getCodigo()));
+        parametros.put(Consulta.MASCOTA_ATENDIDA, mConsulta.getMascotaAtendida().getNombre());
         // Dar formato a la fecha
         String fecha = FORMATO.format(mConsulta.getFecha());
         parametros.put(Consulta.FECHA, fecha);
@@ -729,7 +735,6 @@ public class RegistroFormularioActivity extends AppCompatActivity
         parametros.put(Consulta.PATOLOGIA, mConsulta.getPatologia().toString());
         parametros.put(Consulta.ENFERMEDAD_CRONICA, mConsulta.getEnfermedadCronica().toString());
         parametros.put(Consulta.TRATAMIENTO, mConsulta.getTratamiento().toString());
-        parametros.put(Consulta.MASCOTA_ATENDIDA, mConsulta.getMascotaAtendida().getNombre());
         return parametros;
     }
 
