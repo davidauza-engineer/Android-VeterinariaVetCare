@@ -70,7 +70,7 @@ public class Consulta {
      * {@link Consulta}s registradas.
      */
     public static final String URL_GET =
-            "https://davidauza-engineer.000webhostapp.com/web_service/get_consulta.php";
+            "https://davidauza-engineer.000webhostapp.com/web_service/get_consulta_final.php";
 
     /**
      * Código que identifica la {@link Consulta}.

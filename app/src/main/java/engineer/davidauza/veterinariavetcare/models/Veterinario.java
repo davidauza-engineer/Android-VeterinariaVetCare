@@ -31,7 +31,7 @@ public class Veterinario extends Persona {
      * {@link Veterinario}s registrados.
      */
     public static final String URL_GET =
-            "https://davidauza-engineer.000webhostapp.com/web_service/get_veterinario.php";
+            "https://davidauza-engineer.000webhostapp.com/web_service/get_veterinario_final.php";
 
     /**
      * Arreglo de Strings que contiene las posibles especialidades médicas que un

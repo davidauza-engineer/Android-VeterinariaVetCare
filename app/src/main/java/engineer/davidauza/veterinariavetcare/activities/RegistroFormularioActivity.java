@@ -157,8 +157,9 @@ public class RegistroFormularioActivity extends AppCompatActivity
                     }
                     // Si se está en la interfaz de registro de consultas
                 } else if (mRegistroSeleccionadoSpinner == 2) {
-                    String veterinario = jsonObject.optString(Veterinario.NOMBRE);
-                    mVeterinariosConsulta.add(veterinario);
+                    String veterinarioNombre = jsonObject.optString(Veterinario.NOMBRE);
+                    String veterinarioApellido = jsonObject.optString(Veterinario.APELLIDO);
+                    mVeterinariosConsulta.add(veterinarioNombre + " " + veterinarioApellido);
                 }
             }
         } catch (JSONException e) {

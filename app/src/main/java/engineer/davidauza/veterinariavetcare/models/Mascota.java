@@ -73,7 +73,7 @@ public class Mascota {
      * {@link Mascota}s registradas.
      */
     public static final String URL_GET =
-            "https://davidauza-engineer.000webhostapp.com/web_service/get_mascota.php";
+            "https://davidauza-engineer.000webhostapp.com/web_service/get_mascota_final.php";
 
     /**
      * El ID único para cada {@link Mascota}.
