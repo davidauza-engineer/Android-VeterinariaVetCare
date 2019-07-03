@@ -82,15 +82,21 @@ public class Veterinario extends Persona {
      * Constructor para crear un nuevo objeto {@link Veterinario}.
      *
      * @param pNombre                      es el nombre del {@link Veterinario}.
+     * @param pNumeroDeDocumento           es el número de identidad del {@link Veterinario}.
+     * @param pDireccion                   es la dirección del {@link Veterinario}.
+     * @param pTelefono                    es el teléfono del {@link Veterinario}.
      * @param pNumeroDeRegistroProfesional es el número de registro profesional del
      *                                     {@link Veterinario}.
      * @param pEspecialidadesMedicas       es la lista de especialidades médicas que puede poseer el
      *                                     {@link Veterinario}.
      */
     public Veterinario(String pNombre,
+                       long pNumeroDeDocumento,
+                       String pDireccion,
+                       long pTelefono,
                        long pNumeroDeRegistroProfesional,
                        ArrayList<String> pEspecialidadesMedicas) {
-        super(pNombre);
+        super(pNombre, pNumeroDeDocumento, pDireccion, pTelefono);
         mNumeroDeRegistroProfesional = pNumeroDeRegistroProfesional;
         mEspecialidadesMedicas = pEspecialidadesMedicas;
     }

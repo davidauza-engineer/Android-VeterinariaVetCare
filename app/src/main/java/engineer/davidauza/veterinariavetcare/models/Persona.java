@@ -93,6 +93,24 @@ public class Persona {
     /**
      * Constructor para crear un nuevo objeto {@link Persona}.
      *
+     * @param pNombre            es el nombre de la {@link Persona}.
+     * @param pNumeroDeDocumento es el número de documento de la {@link Persona}.
+     * @param pDireccion         es la dirección de la {@link Persona}.
+     * @param pTelefono          es el teléfono de la {@link Persona}.
+     */
+    public Persona(String pNombre,
+                   long pNumeroDeDocumento,
+                   String pDireccion,
+                   long pTelefono) {
+        mNombre = pNombre;
+        mNumeroDeDocumento = pNumeroDeDocumento;
+        mDireccion = pDireccion;
+        mTelefono = pTelefono;
+    }
+
+    /**
+     * Constructor para crear un nuevo objeto {@link Persona}.
+     *
      * @param pNombre es el nombre de la {@link Persona}.
      */
     public Persona(String pNombre) {

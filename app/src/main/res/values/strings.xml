@@ -116,7 +116,11 @@
 
     <!-- Strings para item_veterinario.xml Inicio -->
     <string name="item_veterinario_txt_nombre">Nombre:</string>
-    <string name="item_veterinario_txt_tarjeta_profesional">Tarjeta Profesional:</string>
+    <string name="item_veterinario_txt_documento">Número de Documento:</string>
+    <string name="item_veterinario_txt_direccion">Dirección:</string>
+    <string name="item_veterinario_txt_telefono">Teléfono:</string>
+    <string name="item_veterinario_txt_registro_profesional">Número de Registro Profesional:
+    </string>
     <string name="item_veterinario_txt_especialidad">Especialidades:</string>
     <string name="item_veterinario_txt_consultas_realizadas">Consultas Realizadas:</string>
     <!-- Strings para item_veterinario.xml Fin -->

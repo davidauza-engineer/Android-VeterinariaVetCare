@@ -55,12 +55,15 @@ public class VeterinarioAdapter extends RecyclerView.Adapter<VeterinarioAdapter.
 
         // Reemplazar el contenido del View con dicho elemento
         myViewHolder.mNombreVeterinario.setText(veterinarioActual.getNombre());
-        myViewHolder.mTarjetaProfesionalVeterinario.
+        myViewHolder.mDocumentoVeterinario.
+                setText(Long.toString(veterinarioActual.getNumeroDeDocumento()));
+        myViewHolder.mDireccionVeterinario.setText(veterinarioActual.getDireccion());
+        myViewHolder.mTelefonoVeterinario.setText(Long.toString(veterinarioActual.getTelefono()));
+        myViewHolder.mNumeroDeRegistroProfesional.
                 setText(Long.toString(veterinarioActual.getNumeroDeRegistroProfesional()));
-        myViewHolder.mEspecialidadVeterinario.
-                setText(veterinarioActual.getEspecialidadesMedicas().toString());
-        // TODO arreglar
-        myViewHolder.mConsultasRealizadasVeterinario.setText("POR ARREGLAR!!!");
+        String especialidades = veterinarioActual.getEspecialidadesMedicas().toString();
+        especialidades = especialidades.replaceAll("[\\[\\]]", "");
+        myViewHolder.mEspecialidadesVeterinario.setText(especialidades);
     }
 
     /**
@@ -88,29 +91,40 @@ public class VeterinarioAdapter extends RecyclerView.Adapter<VeterinarioAdapter.
         public TextView mNombreVeterinario;
 
         /**
-         * El TextView que muestra la tarjeta profesional del {@link Veterinario}.
+         * El TextView que muestra el número de documento del {@link Veterinario}.
          */
-        public TextView mTarjetaProfesionalVeterinario;
+        public TextView mDocumentoVeterinario;
 
         /**
-         * El TextView que muestra la especialidad del {@link Veterinario}.
+         * El TextView que muestra la dirección del {@link Veterinario}.
          */
-        public TextView mEspecialidadVeterinario;
+        public TextView mDireccionVeterinario;
 
         /**
-         * El TextView que muestra las consultas realizadas por el {@link Veterinario}.
+         * El TextView que muestra el teléfono del {@link Veterinario}.
          */
-        public TextView mConsultasRealizadasVeterinario;
+        public TextView mTelefonoVeterinario;
+
+        /**
+         * El TextView que muestra el número de registro profesional del {@link Veterinario}.
+         */
+        public TextView mNumeroDeRegistroProfesional;
+
+        /**
+         * El TextView que muestra las especialidades del {@link Veterinario}.
+         */
+        public TextView mEspecialidadesVeterinario;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
             mNombreVeterinario = itemView.findViewById(R.id.txt_nombre_veterinario);
-            mTarjetaProfesionalVeterinario =
+            mDocumentoVeterinario = itemView.findViewById(R.id.txt_documento_veterinario);
+            mDireccionVeterinario = itemView.findViewById(R.id.txt_direccion_veterinario);
+            mTelefonoVeterinario = itemView.findViewById(R.id.txt_telefono_veterinario);
+            mNumeroDeRegistroProfesional =
                     itemView.findViewById(R.id.txt_registro_profesional_veterinario);
-            mEspecialidadVeterinario = itemView.findViewById(R.id.txt_especialidad_veterinario);
-            mConsultasRealizadasVeterinario =
-                    itemView.findViewById(R.id.txt_consultas_realizadas_veterinario);
+            mEspecialidadesVeterinario = itemView.findViewById(R.id.txt_especialidades_veterinario);
         }
     }
 }

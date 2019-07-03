@@ -145,12 +145,30 @@ public class ListadoConsultaActivity extends AppCompatActivity
                         break;
                     // Si se están consultando los veterinarios
                     case 1:
-                        String nombreVeterinario = jsonObject.optString("nombre");
-                        String registroProfesional = jsonObject.optString("tarjetaProfesional");
-                        long numeroDeRegistroProfesional = Long.parseLong(registroProfesional);
+                        String nombreVeterinario = jsonObject.optString(Veterinario.NOMBRE);
+                        String apellidoVeterinario = jsonObject.optString(Veterinario.APELLIDO);
+                        String nombre = nombreVeterinario + " " + apellidoVeterinario;
+                        String documentoString =
+                                jsonObject.optString(Veterinario.NUMERO_DE_DOCUMENTO);
+                        long numeroDeDocumento = 0;
+                        if (!documentoString.equals("")) {
+                            numeroDeDocumento = Long.parseLong(documentoString);
+                        }
+                        String direccion = jsonObject.optString(Veterinario.DIRECCION);
+                        String telefonoString = jsonObject.optString(Veterinario.TELEFONO);
+                        long telefono = 0;
+                        if (!telefonoString.equals("")) {
+                            telefono = Long.parseLong(telefonoString);
+                        }
+                        String registroProfesional =
+                                jsonObject.optString(Veterinario.NUMERO_DE_REGISTRO_PROFESIONAL);
+                        long numeroDeRegistroProfesional = 0;
+                        if (!registroProfesional.equals("")) {
+                            numeroDeRegistroProfesional = Long.parseLong(registroProfesional);
+                        }
                         // Obtener especialidades
-                        // TODO Actualizar backend
-                        String especialidadesString = jsonObject.optString("especialidad");
+                        String especialidadesString =
+                                jsonObject.optString(Veterinario.ESPECIALIDADES_MEDICAS);
                         especialidadesString += "$";
                         char[] especialidadesArreglo = especialidadesString.toCharArray();
                         boolean unaEspecialidad = true;
@@ -179,8 +197,8 @@ public class ListadoConsultaActivity extends AppCompatActivity
                                 }
                             }
                         }
-                        mVeterinariosArrayList.add(new Veterinario(nombreVeterinario,
-                                numeroDeRegistroProfesional, especialidades));
+                        mVeterinariosArrayList.add(new Veterinario(nombre, numeroDeDocumento,
+                                direccion, telefono, numeroDeRegistroProfesional, especialidades));
                         break;
                     // Si están consultando las consultas
                     case 2:
