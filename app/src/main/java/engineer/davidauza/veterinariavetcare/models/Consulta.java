@@ -10,6 +10,11 @@ import java.util.Date;
 public class Consulta {
 
     /**
+     * Llave para identificar a las {@link Consulta}s.
+     */
+    public static final int KEY = 2;
+
+    /**
      * Llave para acceder al cógigo de la {@link Consulta} en la base de datos.
      */
     public static final String CODIGO = "codigo";

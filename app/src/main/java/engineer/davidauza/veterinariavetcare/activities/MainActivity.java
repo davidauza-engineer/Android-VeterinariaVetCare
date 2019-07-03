@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import engineer.davidauza.veterinariavetcare.R;
+import engineer.davidauza.veterinariavetcare.models.Consulta;
 
 /**
  * Esta Activity es responsable de mostrar la interfaz gráfica principal.
@@ -29,6 +30,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Contiene la referencia hacia el botón consultar.
      */
     private Button mBotonConsultar;
+
+    /**
+     * Contiene la referencia hacia el botón reporte consultas.
+     */
+    private Button mBotonReporteConsultas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,5 +68,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBotonRegistrar.setOnClickListener(this);
         mBotonConsultar = findViewById(R.id.btn_consultar);
         mBotonConsultar.setOnClickListener(this);
+        mBotonReporteConsultas = findViewById(R.id.btn_reporte_consultas);
+        mBotonReporteConsultas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,
+                        ListadoConsultaActivity.class);
+                intent.putExtra(SeleccionActivity.EXTRA_POSICION_SPINNER, Consulta.KEY);
+                startActivity(intent);
+            }
+        });
     }
 }

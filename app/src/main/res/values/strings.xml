@@ -5,7 +5,7 @@
     <string name="app_name">Veterinaria Vet Care</string>
     <string name="main_btn_registro">Registrar</string>
     <string name="main_btn_consulta">Consultar</string>
-    <string name="main_btn_reportes">Reportes</string>
+    <string name="main_btn_reporte_consultas">Reporte Consultas</string>
     <!-- Strings para activity_main.xml Fin -->
 
 
